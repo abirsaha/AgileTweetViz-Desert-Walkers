@@ -1,0 +1,12 @@
+<!doctype html>
+<head>
+<title>All Twits</title>
+</head>
+<body>
+<h2>All Twits</h2>
+<ul>
+    {% for twit in object_list %}
+    <li><a href="/rezept/{{ twit.slug }}/">{{ twit.username }}</a></li>
+    {% endfor %}
+</ul>
+</body>
