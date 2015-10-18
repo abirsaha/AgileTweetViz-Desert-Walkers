@@ -1,0 +1,35 @@
+<div id="home" ng-controller="HomeCtrl">
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Agile TweetVIZ</h1>
+
+            <h2>Real-time tweet visualization engine</h2>
+        </div>
+
+
+        <form style="margin:10%;position: relative">
+            <div class="form-group">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="input-group">
+                            <input type="text" class="form-control " placeholder="# hashtag"/>
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-primary" type="button" ng-click="getTweet()">Get Tweets!</button>
+            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="col-lg-8 col-lg-offset-4">
+                    <label class="radio-inline"><input type="radio" name="optradio">Bar Graph</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">Line Graph</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">Geo Map</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

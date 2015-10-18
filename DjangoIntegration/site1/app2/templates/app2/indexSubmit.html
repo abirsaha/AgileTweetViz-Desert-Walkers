@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+
+<div id="indexSubmit" ng-controller="HomeCtrl">
+     <div class="container">
+        <div class="jumbotron">
+            <h1>Agile TweetVIZ</h1>
+
+            <h2>Real-time tweet visualization engine</h2>
+        </div>
+ <form style="margin:10%;position: relative" action="" method="post">
+        {% csrf_token %}
+        <div class="form-group">
+
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2">
+                        <div class="input-group">
+                            {{form}}
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-primary" id="submit" type="submit" value="Send">Get Tweets!</button>
+            </span>
+                        </div>
+
+                    </div>
+
+                </div>
+                <br>
+
+                <div class="col-lg-8 col-lg-offset-4">
+                    <label class="radio-inline"><input type="radio" name="optradio">Bar Graph</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">Line Graph</label>
+                    <label class="radio-inline"><input type="radio" name="optradio">Geo Map</label>
+                </div>
+            </div>
+        </form>
+
+</div>
+</div>
+{% endblock content %}
