@@ -34,7 +34,7 @@ class Twit(models.Model):
 
     def __unicode__(self):
         return self.text
-		
+
 class Twitjson(models.Model):
 	# CREATE TABLE Raw_JSONs (ID INTEGER PRIMARY KEY ASC, T DATE DEFAULT (datetime('now','localtime')), JSON text);
 	#slug = models.SlugField(unique=True)
@@ -42,21 +42,24 @@ class Twitjson(models.Model):
 	json = models.TextField(u'JSON', blank=True)	
 	def __unicode__(self):
 		return self.time
+
+
 class hashtaginput(models.Model):
-	# CREATE TABLE Raw_JSONs (ID INTEGER PRIMARY KEY ASC, T DATE DEFAULT (datetime('now','localtime')), JSON text);
 	hashtag = models.CharField(blank=True,max_length=200)
 	def __unicode__(self):
 		return self.hashtag
+
+class jsonoutput(models.Model):
+	jsonout = models.TextField()
+	def __unicode__(self):
+		return self.jsonout
 		
 def twitter_parser(string):
 	ACCESS_TOKEN = '3874778652-LoED5AsqqgbUb2PeWCqP9msOykUQuGyUDSWw2l6'
 	ACCESS_SECRET = 'Poof3neY7m5NUgqZUfwLb1NHFNxkEljkm6kKeXoj4G7q3'
 	CONSUMER_KEY = 'slap8gmZmuzsSlfmR2TYroQtp'
 	CONSUMER_SECRET = 'E72rVOBNg20Zq8p3xZMGlAub2s1TlDaVXmBWKhKCJFCuse418u'
-
 	oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
-	
-
 	# Initiate the connection to Twitter Streaming API
 	twitter_stream = TwitterStream(auth=oauth)
 	iterator = twitter_stream.statuses.sample()
@@ -71,14 +74,14 @@ def twitter_parser(string):
 			break
 		kwargs = dict([kv.split('=') for kv in next_results[1:].split("&")]) # Create a dictionary from the query string params
 		search_results = twitter.search.tweets(**kwargs)
-		print len(statuses)
+		#print len(statuses)
 		statuses += search_results['statuses']
 
-	print len(statuses)
-	count =0
-	for tweet in statuses:
-		jsonData = Twitjson(time = count,json = tweet)
-		jsonData.save()
-		count +=1
-		print tweet
+	#print len(statuses)
+	#count =0
+	#for tweet in statuses:
+		#jsonData = Twitjson(time = count,json = tweet)
+		#jsonData.save()
+		#count +=1
+		#print tweet
 	return statuses

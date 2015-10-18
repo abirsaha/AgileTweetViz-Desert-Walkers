@@ -27,5 +27,5 @@ urlpatterns = [
     #url(r'^$', TemplateView.as_view(template_name='base.html')),
 	url(r'^$', 'app2.views.indexSubmit'),
     # url(r'^app2/(?P<slug>[-\w]+)/$', 'app2.views.detail'),
-    #url(r'^$', 'app2.views.index'),
+    url(r'^app2/index/$', 'app2.views.index'),
 ]
