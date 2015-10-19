@@ -1,0 +1,247 @@
+
+/* Setting four equal sized grids for dashboard */
+
+.grid-four { position:fixed; width:100%; height:50% ;-moz-border-radius: 20px;
+    -khtml-border-radius: 20px;
+    -webkit-border-radius: 20px;
+    border-radius: 20px;
+
+    background:white;
+    -webkit-box-shadow:0 0 4em rgb(4,6,5);
+    -moz-box-shadow:0 0 3em rgb(6,7,8);
+    box-shadow:0 0 1em rgb(5,9,2);
+    border:20px solid skyblue;
+    font-family:Verdana, Geneva, sans-serif; overflow: scroll}
+#NW { top:0%;   left:0;    }
+#SE { top:50%; left:0%;    }
+
+
+/* Adding style for tweeter feed */
+
+/*
+.insert-enter {
+    -webkit-transform:scale(0);
+    -webkit-transition-property: all;
+    -webkit-transition-timing-function: ease-out-cubic;
+    -webkit-transition-duration: 400ms;
+}
+.insert-enter.insert-enter-active {
+    -webkit-transform:scale(1);te
+}
+*/
+
+.timeline {
+    list-style: none;
+    padding: 20px 0 20px;
+    position: relative;
+}
+.timeline:before {
+    top: 0;
+    bottom: 0;
+    position: absolute;
+    content: " ";
+    width: 3px;
+    background-color: #CCCCCC;
+    left: 25px;
+    margin-left: -1.5px;
+}
+.timeline > li {
+    padding-left: 50px;
+    margin-bottom: 20px;
+    position: relative;
+    width: 40%
+}
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+.timeline > li:after {
+    clear: both;
+}
+.timeline > li:before,
+.timeline > li:after {
+    content: " ";
+    display: table;
+}
+.timeline > li:after {
+    clear: both;
+}
+.timeline > li > .timeline-panel {
+    width: 250%;
+    float: left;
+    border: 1px solid #d4d4d4;
+    border-radius: 22px;
+    padding: 10px;
+    padding-left: 20px;
+    position: relative;
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+}
+.timeline > li > .timeline-panel:before {
+    position: absolute;
+    top: 26px;
+    left: -15px;
+    display: inline-block;
+}
+.timeline > li > .timeline-panel:after {
+    position: absolute;
+    top: 27px;
+    left: -14px;
+    display: inline-block;
+}
+.timeline > li > .timeline-badge {
+    color: #FFFF99;
+    width: 25px;
+    height: 25px;
+    line-height: 25px;
+    font-size: 1.4em;
+    text-align: center;
+    position: absolute;
+    top: 16px;
+    left: 13px;
+
+    background-color: #666666;
+    z-index: 100;
+    border-top-right-radius: 50%;
+    border-top-left-radius: 50%;
+    border-bottom-right-radius: 50%;
+    border-bottom-left-radius: 50%;
+}
+.timeline > li.timeline-inverted > .timeline-panel {
+    float: left;
+}
+.timeline > li.timeline-inverted > .timeline-panel:before {
+    border-left-width: 0;
+    border-right-width: 15px;
+    right: -15px;
+    right: auto;
+}
+.timeline > li.timeline-inverted > .timeline-panel:after {
+    border-left-width: 0;
+    border-right-width: 14px;
+    left: -14px;
+    right: auto;
+}
+.timeline-badge.primary {
+    background-color: #006699  !important;
+}
+.timeline-badge.up {
+    background-color: #339933 !important;
+}
+.timeline-badge.down {
+    background-color: #CC3333 !important;
+}
+.timeline-badge.neutral {
+    background-color: #999999 !important;
+}
+.timeline-title {
+    margin-top: 0;
+    color: inherit;
+}
+.timeline-body > p,
+.timeline-body > ul {
+    margin-bottom: 0;
+}
+.timeline-body > p + p {
+    margin-top: 5px;
+}
+
+/*  adding style for linear chart directive */
+
+.axis path,
+.axis line{
+    fill: none;
+    stroke:black;
+    shape-rendering:crispEdge;
+}
+
+.axis text{
+    font-family: sans-serif;
+    font-size: 10px;
+}
+
+h1{
+    font-family: sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+}
+.tick
+{
+    stroke-dasharray: 1, 2;
+}
+
+/* adding overlay*/
+
+#overlay-inAbox .wrapper {
+    text-align: center;
+}
+
+
+
+/* More important stuff */
+
+.overlay,
+#overlay-shade {
+    display: none;
+}
+
+#overlay-shade {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background-color: #000;
+}
+
+.overlay {
+    position: fixed;
+    top: 60%;
+    left: 0;
+    width: 450px;
+    min-height: 200px;
+    z-index: 10000;
+    background-color: #fff;
+    border: 10px solid #CFCFCF;
+    color: #fff;
+    box-shadow: 0 0 16px #000;
+} .ie7 .overlay {
+    height: 200px;
+} .overlay .wrapper {
+    padding: 15px 30px 30px;
+}
+
+
+.overlay .toolbar {
+    padding: 8px;
+    line-height: 1;
+    text-align: right;
+    overflow: hidden;
+} .overlay .toolbar a.close {
+    display: inline-block;
+        *display: inline;
+         zoom: 1;
+    padding: 0 8px;
+    font-size: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    line-height: 18px;
+    border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -o-border-radius: 5px;
+    color: #999999;
+    background-color: #515151;
+} .overlay .toolbar a.close span {
+    color: #818181;
+} .overlay .toolbar a.close:hover,
+  .overlay .toolbar a.close:hover span {
+    background-color: #b90900;
+    color: #fff;
+}
+
+
+
+

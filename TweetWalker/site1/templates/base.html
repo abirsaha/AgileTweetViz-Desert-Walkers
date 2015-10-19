@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TweetApp">
+<head>
+    <meta charset="UTF-8">
+    <title>TweetWalker</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<!--
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+-->
+    <script src="/static/lib/angular.min.js"></script>
+    <script src="http://d3js.org/d3.v3.min.js"></script>
+<!--
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular-animate.js"></script>
+-->
+    <script src="/static/lib/ui.router.min.js"></script>
+    <script src="/static/app.js"></script>
+    <script src="/static/js/controllers/HomeController.js"></script>
+    <script src="/static/js/controllers/DashboardController.js"></script>
+    <script src="/static/js/directives/linearchartDirective.js"></script>
+
+    <script src="/static/js/directives/spinner.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+
+</head>
+<body>
+
+ {% block content %}<ui-view>
+</ui-view>{% endblock content %}
+ <!--{% block extra_javascript %}{% endblock extra_javascript %}-->
+<!--<nav class="navbar navbar-default" >
+    <div class="container-fluid">
+        <div class="navbar-header">
+<h2>TweetViz</h2>
+        </div>
+    </div>
+</nav>-->
+
+</body>
+</html>
