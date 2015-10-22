@@ -1,58 +1,55 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-<h2>All Twits</h2>
-
-<div id="dashboard" ng-controller="DashboardCtrl">\
+<nav class="navbar navbar-default" >
+    <div class="container-fluid">
+        <div class="navbar-header">
+<h2>TweetWalker</h2>
+        </div>
+    </div>
+</nav>
+<div id="dashboard" ng-controller="DashboardCtrl" class="container" style="width:100%;">
     <script  type='text/javascript'>
     var back = "{{form|escapejs}}";
     window.data = back
     </script>
-<div class="grid-four" id="NW">
-      <div class="container" >
-        <nav class="navbar navbar-default" >
-            <div class="container-fluid">
-                <div class="navbar-header">
-
-                    <h2>Line Chart Visualization</h2>
-                </div>
-            </div>
-        </nav>
-          <div linear-chart chart-data="salesData" style="position: relative;top:30%;left:5%"></div>
-      </div></div>
-<!--<div class="grid-four" id="NE">
-    {%verbatim%}{{test}}{%endverbatim%}
-</div>
-<div class="grid-four" id="SW"></div>-->
-<div class="grid-four" id="SE">
-    <div class="container" >
-        <nav class="navbar navbar-default" >
-            <div class="container-fluid">
-                <div class="navbar-header">
-                      {%verbatim%}
-                    <h2>Tweet Feeds</h2>
-                </div>
-            </div>
-        </nav>
-        <ul class="timeline">
-
-            <li ng-repeat="tweet in tweets" >
-
-                <div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
-                <div class="timeline-panel">
-                    <div class="timeline-heading">
-                        <h4 class="timeline-title">@ {{tweet.screenname}}</h4>
-                    </div>
-                    <div class="timeline-body">
-                        <p>{{tweet.text}}</p>
-                    </div>
-                </div>
-            </li>
- {%endverbatim%}
-        </ul>
-    </div>
-</div>
-
+	<div class="col-md-1" id="dimensions">
+	</div>
+	<div class="col-md-8">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
+			<li><a data-toggle="tab" href="#barchart">Dual-bar Chart</a></li>
+		</ul>
+		<div class="tab-content">
+			<div id="linechart" class="tab-pane fade in active">
+				<h3>Line Chart Visualization</h3>
+				<br/>
+				<div linear-chart chart-data="salesData" style="position: relative;top:30%;left:5%"></div>
+			</div>
+			<div id="barchart" class="tab-pane fade">
+				<h3>Bar Chart Visualization</h3>
+				<p>Content of Dual-Bar Chart.</p>
+			</div>
+		</div>
+	</div>
+	<div class="col-md-3">
+        {%verbatim%}
+        <h3>Tweet Feeds</h3>
+		<ul class="timeline">
+			<li ng-repeat="tweet in tweets" >
+				<div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
+				<div class="timeline-panel">
+					<div class="timeline-heading">
+						<h6 class="timeline-title">@ {{tweet.screenname}}</h6>
+					</div>
+					<div class="timeline-body">
+						<p>{{tweet.text}}</p>
+					</div>
+				</div>
+			</li>
+			{%endverbatim%}
+		</ul>
+	</div>
 </div>
 
 {% endblock content %}
