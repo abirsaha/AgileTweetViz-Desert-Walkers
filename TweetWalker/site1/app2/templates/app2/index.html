@@ -13,9 +13,15 @@
     var back = "{{form|escapejs}}";
     window.data = back
     </script>
-	<div class="col-md-1" id="dimensions">
+	{%verbatim%}
+	<div class="col-md-1" id="dimensions" style="width: 10%">
+		<span ng-repeat="(key,value) in tweets[0]">
+		<br>
+		<input type="checkbox" class="chk" id = {{key}}><span class="checkboxtext">{{key}}</span></input>
+			<br>
+	</span>
 	</div>
-	<div class="col-md-8">
+	<div class="col-md-8" style="width: 70%">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
 			<li><a data-toggle="tab" href="#barchart">Dual-bar Chart</a></li>
@@ -32,9 +38,8 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-md-3">
-        {%verbatim%}
-        <h3>Tweet Feeds</h3>
+	<div class="col-md-3" style="width: 20%">
+        <h2>Tweet Feeds</h2>
 		<ul class="timeline">
 			<li ng-repeat="tweet in tweets" >
 				<div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
