@@ -37,7 +37,6 @@ class Twit(models.Model):
 
 class Twitjson(models.Model):
     # CREATE TABLE Raw_JSONs (ID INTEGER PRIMARY KEY ASC, T DATE DEFAULT (datetime('now','localtime')), JSON text);
-    #slug = models.SlugField(unique=True)
     time = models.IntegerField(unique=True)
     json = models.TextField(u'JSON', blank=True)
     def __unicode__(self):
@@ -45,7 +44,7 @@ class Twitjson(models.Model):
 
 
 class hashtaginput(models.Model):
-    hashtag = models.CharField(blank=True,max_length=200)
+    hashtag = models.CharField(blank=True, max_length=200)
     def __unicode__(self):
         return self.hashtag
 
@@ -61,8 +60,6 @@ def twitter_parser(string):
     CONSUMER_SECRET = 'E72rVOBNg20Zq8p3xZMGlAub2s1TlDaVXmBWKhKCJFCuse418u'
     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
     # Initiate the connection to Twitter Streaming API
-    twitter_stream = TwitterStream(auth=oauth)
-    iterator = twitter_stream.statuses.sample()
     twitter = Twitter(auth=oauth)
     search_results = twitter.search.tweets(q= string, lang='en', count='100')
 
@@ -78,18 +75,18 @@ def twitter_parser(string):
         statuses += search_results['statuses']
     jsonlist = []
     month = {
-        'Jan' : 1,
-        'Feb' : 2,
-        'Mar' : 3,
-        'Apr' : 4,
-        'May' : 5,
-        'Jun' : 6,
-        'Jul' : 7,
-        'Aug' : 8,
-        'Sep' : 9,
-        'Oct' : 10,
-        'Nov' : 11,
-        'Dec' : 12
+        'Jan': 1,
+        'Feb': 2,
+        'Mar': 3,
+        'Apr': 4,
+        'May': 5,
+        'Jun': 6,
+        'Jul': 7,
+        'Aug': 8,
+        'Sep': 9,
+        'Oct': 10,
+        'Nov': 11,
+        'Dec': 12
     }
     for tweet in statuses:
         data = {}
@@ -103,13 +100,4 @@ def twitter_parser(string):
         data["day"] = date[2]
         data["minutes"] = int(date[3].split(":")[1])
         jsonlist.append(data)
-
-
-    #print len(statuses)
-    #count =0
-    #for tweet in statuses:
-    #jsonData = Twitjson(time = count,json = tweet)
-    #jsonData.save()
-    #count +=1
-    #print tweet
     return json.dumps(jsonlist)
