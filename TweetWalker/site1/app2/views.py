@@ -20,7 +20,7 @@ def index(request):
 	args = {}
 	args.update(csrf(request))
 	args['form'] = form
-	return render(request,'app2/index.html', args)
+	return render(request,'app2/dashboard.html', args)
 
 
 def indexSubmit(request):
@@ -41,4 +41,4 @@ def indexSubmit(request):
 	args = {}
 	args.update(csrf(request))
 	args['form'] = form
-	return render(request,'app2/indexSubmit.html', args)
+	return render(request,'app2/home.html', args)
