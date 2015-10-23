@@ -5,10 +5,10 @@ tweetApp.directive('linearChart', function($parse, $window){
         link: function(scope, elem, attrs){
 
             //setting values for initial dimensions of svg element
-            var margin = {top:10, right: 0, bottom: 10, left: 52};
-            var padding = 20;
-            width = $("#linechart")[0].offsetWidth-padding,
-                height = $("#linechart")[0].offsetHeight-2*padding;
+            var margin = {top:10, right: 50, bottom: 25, left: 50};
+            var padding = 0;
+            width = $("#linechart")[0].offsetWidth,
+                height = $("#linechart")[0].offsetHeight;
 
             //fetching data to plot here in chartData, it uses camel case
             // for angularJS so we get plotData in chartData(or chart-data)
@@ -31,14 +31,23 @@ tweetApp.directive('linearChart', function($parse, $window){
                 .attr('height', height)
                 .attr('id', 'lchart');
 
-            //var a=$('#linechart');
-            //console.log("w and h is:",elem.height,elem.width);
-            //console.log("value is",a)
-            //console.log("window is",$('#viz'))
-
             //dynamic rendering for chart for any change in values
             scope.$watchCollection(exp, function(newVal, oldVal){
                 dataToPlot=newVal;
+                redrawLineChart();
+            });
+
+            //checking for resize on window element if it happens then draw
+            // the new graph using same aspect ratio call redrawLineChart()
+            angular.element($window).on('resize',function(){
+                var the_chart = $("#lchart"),
+                    aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
+                    container = the_chart.parent();
+                var targetWidth = (container[0].offsetWidth);
+                console.log("new width is",the_chart);
+                console.log("new width is",the_chart[0]);
+                the_chart.attr("width", targetWidth);
+                the_chart.attr("height", Math.round(targetWidth / aspect));
                 redrawLineChart();
             });
 
@@ -51,12 +60,12 @@ tweetApp.directive('linearChart', function($parse, $window){
 
                 xScale = d3.scale.linear()
                     .domain([dataToPlot[0].x, dataToPlot[dataToPlot.length-1].x])
-                    .range([margin.left + padding, rawSvg.attr("width") - 2*padding]);
+                    .range([0, $("#lchart").attr("width") - margin.right -margin.left]);
                 yScale = d3.scale.linear()
                     .domain([0, d3.max(dataToPlot, function (d) {
                         return d.y;
                     })])
-                    .range([rawSvg.attr("height") - padding, margin.bottom]);
+                    .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
 
                 //draw x axis
                 xAxisGen = d3.svg.axis()
@@ -88,26 +97,25 @@ tweetApp.directive('linearChart', function($parse, $window){
                 // parameters to text
                 svg.append("svg:g")
                         .attr("class", "x axis")
-                        .attr("transform", "translate(0,"+ parseInt(rawSvg.attr('height') - padding) +")")
+                        .attr("transform", "translate("+margin.left+","+ parseInt($("#lchart").attr('height')-margin.bottom) +")")
                         .call(xAxisGen)
                     .append("text")
-                        .attr("x", parseInt(rawSvg.attr('width'))-parseInt(padding))
+                        .attr("x", margin.left+margin.right)
                         //.attr("dx", ".71em")
-                        .attr("y",-5)
-                        .style("text-anchor", "end")
-                        .text(attrs.xaxisLabel);
+                        .attr("y",margin.bottom)
+                        .style("text-anchor", "middle")
+                        .text("-- "+attrs.xaxisLabel+" -->");
 
 
                 svg.append("svg:g")
                         .attr("class", "y axis")
-                        .attr("transform", "translate(70,0)")
+                        .attr("transform", "translate("+margin.left+","+margin.top+")")
                         .call(yAxisGen)
                     .append("text")
                         .attr("transform", "rotate(-90)")
                         .attr("y", 10)
-                        //.attr("dy", ".71em")
                         .style("text-anchor", "end")
-                        .text(attrs.yaxisLabel);
+                        .text("-- "+attrs.yaxisLabel+"-->");
 
                 svg.append("svg:path")
                     .attr({
@@ -116,17 +124,26 @@ tweetApp.directive('linearChart', function($parse, $window){
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass
-                    });
+                    })
+                    .attr("transform", "translate("+margin.left+","+margin.top+")");
             }
 
             function redrawLineChart() {
 
+                //reseting new chart parameters
                 setChartParameters();
 
+                //regenerating y axis by selecting it and then by calling
+                // the function on it
                 svg.selectAll("g.y.axis").call(yAxisGen);
 
-                svg.selectAll("g.x.axis").call(xAxisGen);
+                //regenerating x axis by selecting it and then by calling
+                // the function on it also re transforming it
+                svg.selectAll("g.x.axis")
+                    .attr("transform", "translate("+margin.left+","+ parseInt($("#lchart").attr('height')-margin.bottom) +")")
+                    .call(xAxisGen);
 
+                //regenerating the line plot for the graph
                 svg.selectAll("."+pathClass)
                     .attr({
                         d: lineFun(dataToPlot)
@@ -134,19 +151,8 @@ tweetApp.directive('linearChart', function($parse, $window){
             }
 
 
-            function resize_linechart(){
-                var the_chart = $("#lchart"),
-                    aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
-                    container = the_chart.parent();
-                var targetWidth = (container[0].offsetWidth);
-                //console.log("new width is",the_chart);
-                //console.log("new width is",container[0].offsetHeight);
-                the_chart.attr("width", targetWidth);
-                the_chart.attr("height", Math.round(targetWidth / aspect));
-            };
 
             drawLineChart();
-            //resize_linechart();
         }
     };
 });

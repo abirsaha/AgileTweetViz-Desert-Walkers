@@ -14,14 +14,14 @@
         window.data = back
     </script>
     {%verbatim%}
-    <div class="col-md-1" id="dimensions" style="width: 10%">
+    <div class="col-md-1" id="dimensions">
 		<span ng-repeat="(key,value) in tweets[0]">
 		<br>
 		<input type="checkbox" class="chk" id={{key}}><span class="checkboxtext">{{key}}</span></input>
             <br>
 	</span>
     </div>
-    <div class="col-md-8" id = "viz" style="width: 70%">
+    <div class="col-md-8" id = "viz">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Dual-bar Chart</a></li>
@@ -40,7 +40,7 @@
             </div>
         </div>
     </div>
-    <div class="col-md-3" style="width: 20%">
+    <div class="col-md-3">
         <h2>Tweet Feeds</h2>
         <ul class="timeline">
             <li ng-repeat="tweet in tweets">
