@@ -21,7 +21,7 @@
             <br>
 	</span>
     </div>
-    <div class="col-md-8" style="width: 70%">
+    <div class="col-md-8" id = "viz" style="width: 70%">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Dual-bar Chart</a></li>
@@ -31,7 +31,7 @@
                 <h3>Line Chart Visualization</h3>
                 <br/>
 
-                <div linear-chart chart-data="plotData" style="position: relative;top:30%;left:5%"></div>
+                <div linear-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%"></div>
             </div>
             <div id="barchart" class="tab-pane fade">
                 <h3>Bar Chart Visualization</h3>

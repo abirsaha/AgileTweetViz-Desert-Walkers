@@ -3,19 +3,22 @@ tweetApp.directive('linearChart', function($parse, $window){
         restrict:'EA',
         template:"<svg></svg>",
         link: function(scope, elem, attrs){
+
             //setting values for initial dimensions of svg element
-            var margin = {top:10, right: 0, bottom: 10, left: 52},
-                width = 850, height = 200;
+            var margin = {top:10, right: 0, bottom: 10, left: 52};
             var padding = 20;
+            width = $("#linechart")[0].offsetWidth-padding,
+                height = $("#linechart")[0].offsetHeight-2*padding;
+
             //fetching data to plot here in chartData, it uses camel case
             // for angularJS so we get plotData in chartData(or chart-data)
-
             var exp = $parse(attrs.chartData);
             var dataToPlot=exp(scope);
+
             //defining axis variables
             var pathClass="path";
-
             var xScale, yScale, xAxisGen, yAxisGen, lineFun;
+
             //getting d3 window in d3
             var d3 = $window.d3;
 
@@ -28,10 +31,10 @@ tweetApp.directive('linearChart', function($parse, $window){
                 .attr('height', height)
                 .attr('id', 'lchart');
 
-            var a=$('#linechart');
-            console.log("w and h is:",elem.height,elem.width);
-            console.log("value is",a)
-            console.log("window is",$('#viz'))
+            //var a=$('#linechart');
+            //console.log("w and h is:",elem.height,elem.width);
+            //console.log("value is",a)
+            //console.log("window is",$('#viz'))
 
             //dynamic rendering for chart for any change in values
             scope.$watchCollection(exp, function(newVal, oldVal){
@@ -131,15 +134,16 @@ tweetApp.directive('linearChart', function($parse, $window){
             }
 
 
-            //function resize_linechart(){
-            //    var the_chart = $("#linechart"),
-            //        aspect = the_chart.offsetWidth / the_chart.offsetHeight,
-            //        container = the_chart.parent();
-            //    var targetWidth = (container.offsetWidth);
-            //    console.log("new width is",container);
-            //    the_chart.attr("width", targetWidth);
-            //    the_chart.attr("height", Math.round(targetWidth / aspect));
-            //};
+            function resize_linechart(){
+                var the_chart = $("#lchart"),
+                    aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
+                    container = the_chart.parent();
+                var targetWidth = (container[0].offsetWidth);
+                //console.log("new width is",the_chart);
+                //console.log("new width is",container[0].offsetHeight);
+                the_chart.attr("width", targetWidth);
+                the_chart.attr("height", Math.round(targetWidth / aspect));
+            };
 
             drawLineChart();
             //resize_linechart();
