@@ -54,12 +54,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="linearchartDirective.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="linearchartDirective.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5311615">
-              <caret line="145" column="27" selection-start-line="141" selection-start-column="25" selection-end-line="145" selection-end-column="27" />
-              <folding />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="98" column="37" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+              <folding>
+                <element signature="e#1957#2380#0" expanded="false" />
+                <element signature="e#2425#3788#0" expanded="false" />
+                <element signature="e#3827#5903#0" expanded="false" />
+                <element signature="e#5944#6978#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,11 +79,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="style.css" pinned="false" current-in-tab="false">
+      <file leaf-file-name="style.css" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="256" column="22" selection-start-line="256" selection-start-column="22" selection-end-line="256" selection-end-column="22" />
+            <state vertical-scroll-proportion="0.723796">
+              <caret line="258" column="17" selection-start-line="258" selection-start-column="17" selection-end-line="258" selection-end-column="17" />
               <folding />
             </state>
           </provider>
@@ -87,8 +92,8 @@
       <file leaf-file-name="base.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/templates/base.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
+            <state vertical-scroll-proportion="-21.875">
+              <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
               <folding />
             </state>
           </provider>
@@ -122,10 +127,10 @@
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/resize.js" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/resizecontroller.js" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" />
-        <option value="$PROJECT_DIR$/TweetWalker/site1/templates/base.html" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html" />
-        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js" />
+        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css" />
+        <option value="$PROJECT_DIR$/TweetWalker/site1/templates/base.html" />
       </list>
     </option>
   </component>
@@ -528,7 +533,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="settings.editor.selected.configurable" value="terminal" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -591,9 +596,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="440" y="23" width="1000" height="803" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.235" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.235" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -653,7 +658,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="118" column="0" selection-start-line="118" selection-start-column="0" selection-end-line="118" selection-end-column="0" />
-          <folding />
+          <folding>
+            <element signature="e#1957#2380#0" expanded="false" />
+            <element signature="e#2425#3788#0" expanded="false" />
+            <element signature="e#3827#5903#0" expanded="false" />
+            <element signature="e#5944#6978#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -695,14 +705,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/templates/base.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-23.375">
@@ -738,18 +740,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css">
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="256" column="22" selection-start-line="256" selection-start-column="22" selection-end-line="256" selection-end-column="22" />
+          <caret line="98" column="37" selection-start-line="98" selection-start-column="37" selection-end-line="98" selection-end-column="37" />
+          <folding>
+            <element signature="e#1957#2380#0" expanded="false" />
+            <element signature="e#2425#3788#0" expanded="false" />
+            <element signature="e#3827#5903#0" expanded="false" />
+            <element signature="e#5944#6978#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/templates/base.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-21.875">
+          <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5311615">
-          <caret line="145" column="27" selection-start-line="141" selection-start-column="25" selection-end-line="145" selection-end-column="27" />
+        <state vertical-scroll-proportion="0.723796">
+          <caret line="258" column="17" selection-start-line="258" selection-start-column="17" selection-end-line="258" selection-end-column="17" />
           <folding />
         </state>
       </provider>

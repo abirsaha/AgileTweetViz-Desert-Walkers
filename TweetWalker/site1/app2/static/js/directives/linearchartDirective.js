@@ -24,6 +24,13 @@ tweetApp.directive('linearChart', function($parse, $window){
             var exp = $parse(attrs.chartData);
             var dataToPlot=exp(scope);
 
+            //making d3.tip function for d3-tip
+            var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .html(function(d) {
+                    return  d.x+","+ d.y;
+                });
+
             //setting values for initial dimensions of svg element
             //taking rawSvg in d3 context
             var svg = d3.select(rawSvg[0])
@@ -31,9 +38,8 @@ tweetApp.directive('linearChart', function($parse, $window){
                 .attr('height', height)
                 .attr('id', 'lchart');
 
-            var div = svg.append("div")
-                .attr("class", "tooltip")
-                .style("opacity", 0);
+            //calling tip to append it to svg element
+            svg.call(tip);
 
             //dynamic rendering for chart for any change in values
             scope.$watchCollection(exp, function(newVal, oldVal){
@@ -48,12 +54,11 @@ tweetApp.directive('linearChart', function($parse, $window){
                     aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
                     container = the_chart.parent();
                 var targetWidth = (container[0].offsetWidth);
-                //console.log("new width is",the_chart);
-                //console.log("new width is",the_chart[0]);
                 the_chart.attr("width", targetWidth);
                 the_chart.attr("height", Math.round(targetWidth / aspect));
                 redrawLineChart();
             });
+
             function setChartParameters(){
 
                 //.scale to set scaling for the axis
@@ -69,6 +74,7 @@ tweetApp.directive('linearChart', function($parse, $window){
                         return d.y;
                     })])
                     .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
+
                 //draw x axis
                 xAxisGen = d3.svg.axis()
                     .scale(xScale)
@@ -78,27 +84,23 @@ tweetApp.directive('linearChart', function($parse, $window){
                 yAxisGen = d3.svg.axis()
                     .scale(yScale)
                     .orient("left");
+
                 //draw the line
                 lineFun = d3.svg.line()
                     .x(function (d) {
-                        //console.log("x is", d.x)
                         return xScale(d.x)+50;
                     })
                     .y(function (d) {
-                        //console.log("y is", d.y)
                         return yScale(d.y)+10;
                     })
                     .interpolate("linear");
             }
 
-            //var x = d3.scale(xScale).linear.range([0, width]);
-            //var y = d3.scale().linear().range([height, 0]);
-
             function drawLineChart() {
                 //call setChartParameters() function to set variables with values
                 setChartParameters();
 
-                //append svg:g i.e. svg graph to element svg
+                //append svg:g i.e. svg graph element to svg
                 // next 2 .attr addinging x axis to graph followed by calling xAxisGen
                 // to created x axis, appended text to axis following are setting
                 // parameters to text
@@ -108,11 +110,9 @@ tweetApp.directive('linearChart', function($parse, $window){
                         .call(xAxisGen)
                     .append("text")
                         .attr("x", margin.left+margin.right)
-                        //.attr("dx", ".71em")
                         .attr("y",margin.bottom)
                         .style("text-anchor", "middle")
                         .text("-- "+attrs.xaxisLabel+" -->");
-
 
                 svg.append("svg:g")
                         .attr("class", "y axis")
@@ -139,21 +139,8 @@ tweetApp.directive('linearChart', function($parse, $window){
                     .append("circle").attr("r",5)
                     .attr("cx", function(d){return xScale(d.x)+50})
                     .attr("cy",function(d){return yScale(d.y)+10})
-                    .on("mouseover", function(d) {
-                        console.log("values of d are:", d.x, d.y);
-                        div.transition()
-                            .duration(500)
-                            .style("opacity", 2);
-                        div	.html(d.x + "<br/>"  + d.y)
-                            .style("display","block")
-                            .style("left", function(d){return 500} + "px")
-                            .style("top", function(d){return 100} + "px");
-                    })
-                    .on("mouseout", function(d) {
-                        div.transition()
-                            .duration(500)
-                            .style("opacity", 0);
-                    });
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
             }
 
             function redrawLineChart() {
