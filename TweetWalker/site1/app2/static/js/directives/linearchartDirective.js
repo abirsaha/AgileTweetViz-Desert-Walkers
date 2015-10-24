@@ -3,7 +3,7 @@
  * Created by Abir on 10/15/15.
  */
 tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window){
->>>>>>> Stashed changes
+
     return{
         restrict:'EA',
         template:"<svg></svg>",
