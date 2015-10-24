@@ -124,7 +124,7 @@
 .timeline > li.timeline-inverted > .timeline-panel:before {
     border-left-width: 0;
     border-right-width: 15px;
-    right: -15px;
+    /*right: -15px;*/
     right: auto;
 }
 .timeline > li.timeline-inverted > .timeline-panel:after {
@@ -262,4 +262,12 @@ h1{
     border-radius: 2px;
 }
 
+/*bar styling*/
+.bar {
+    fill: steelblue;
+}
+
+.bar:hover {
+    fill: brown;
+}
 

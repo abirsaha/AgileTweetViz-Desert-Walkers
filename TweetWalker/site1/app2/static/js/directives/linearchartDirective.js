@@ -8,7 +8,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
         restrict:'EA',
         template:"<svg></svg>",
         link: function(scope, elem, attrs){
-            var margin = {top:10, right: 50, bottom: 25, left: 50};
+            var margin = {top:10, right: 50, bottom: 25, left: 60};
             var padding = 0;
             width = $("#linechart")[0].offsetWidth,
                 height = $("#linechart")[0].offsetHeight;
@@ -33,7 +33,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
-                    return  d.x+","+ d.y;
+                    return  attrs.xaxisLabel+": "+d.x+",<br>"+attrs.yaxisLabel+": "+ d.y;
                 });
 
             //setting values for initial dimensions of svg element
@@ -93,10 +93,10 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 //draw the line
                 lineFun = d3.svg.line()
                     .x(function (d) {
-                        return xScale(d.x)+50;
+                        return xScale(d.x)+margin.left;
                     })
                     .y(function (d) {
-                        return yScale(d.y)+10;
+                        return yScale(d.y)+margin.top;
                     })
                     .interpolate("linear");
             }
@@ -125,7 +125,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         .call(yAxisGen)
                     .append("text")
                         .attr("transform", "rotate(-90)")
-                        .attr("y", 10)
+                        .attr("y", margin.top)
                         .style("text-anchor", "end")
                         .text("-- "+attrs.yaxisLabel+"-->");
 
@@ -142,8 +142,9 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .data(dataToPlot)
                     .enter()
                     .append("circle").attr("r",5)
-                    .attr("cx", function(d){return xScale(d.x)+50})
-                    .attr("cy",function(d){return yScale(d.y)+10})
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
             }
@@ -165,8 +166,8 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
 
                 //regenerate dots on line chart
                 svg.selectAll("circle")
-                    .attr("cx", function(d){return xScale(d.x)+50})
-                    .attr("cy",function(d){return yScale(d.y)+10});
+                    .attr("cx", function(d){return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top});
 
                 //regenerate line on line chart
                 svg.selectAll("."+pathClass)

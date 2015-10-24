@@ -50,9 +50,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     $scope.plotData  = make_2d_Data($scope.tweets, "minutes", "value");
 
-
-
-
     /* $interval(function(){
      var x=$scope.yData.length+1;
      var y= Math.round(Math.random() * 100);

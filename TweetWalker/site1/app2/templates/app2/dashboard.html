@@ -16,15 +16,15 @@
     {%verbatim%}
     <div class="col-md-1" id="dimensions">
 		<span ng-repeat="(key,value) in tweets[0]">
-		<br>
-		<input type="checkbox" class="chk" id={{key}}><span class="checkboxtext">{{key}}</span></input>
             <br>
-	</span>
+            <input type="checkbox" class="chk" id={{key}}><span class="checkboxtext">{{key}}</span></input>
+            <br>
+        </span>
     </div>
     <div class="col-md-8" id = "viz">
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
-            <li><a data-toggle="tab" href="#barchart">Dual-bar Chart</a></li>
+            <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -35,8 +35,10 @@
             </div>
             <div id="barchart" class="tab-pane fade">
                 <h3>Bar Chart Visualization</h3>
+                <br/>
+                <div bar-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
-                <p>Content of Dual-Bar Chart.</p>
+                <p>{{"Content of Bar Chart."}}</p>
             </div>
         </div>
     </div>
