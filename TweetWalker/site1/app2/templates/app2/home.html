@@ -1,44 +1,55 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
+<link rel="stylesheet" href="/static/css/banner.css">
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        particleground(document.getElementById('particles'), {
+            dotColor: '#5cbdaa',
+            lineColor: '#5cbdaa'
+        });
+        var intro = document.getElementById('intro');
+        intro.style.marginTop = - intro.offsetHeight / 2 + 'px';
+    }, false);
 
-<div id="indexSubmit" ng-controller="HomeCtrl">
-     <div class="container">
-        <div class="jumbotron">
-            <h1>Tweet Walker</h1>
 
-            <h2>Real-time tweet visualization engine</h2>
-        </div>
- <form style="margin:15%;position: relative" action="" method="post"  >
+</script>
+<div id="particles" ng-controller="HomeCtrl">
+
+
+             <div id="intro">
+
+                 <h1>Tweet Walker</h1>
+<form style="margin:10%;position: relative" action="" method="post"  >
 
         {% csrf_token %}
         <div class="form-group">
-
+            {%verbatim%}
                 <div class="row">
                     <div class="col-lg-8 col-lg-offset-2">
-                        {%verbatim%}
+
                         <div class="input-group">
-                            <input type="text" class="form-control " name="hashtagInput" id="hashtagInput" ng-model="hashtag" placeholder="# hashtag" required/>
+                            <input type="text" class="form-control input-lg" name="hashtagInput" id="hashtagInput" ng-model="hashtag" placeholder="# hashtag" required/>
 
 
-            <span class="input-group-btn">
+                            <span class="input-group-btn" style="position:relative;height:50%;">
 
-                <button class="btn btn-default btn-primary" id="submit" type="submit" value="Send" >Get Tweets!</button>
-                {%endverbatim%}
-            </span>
+                                <button class="btn btn-default btn-primary btn-lg" id="submit" type="submit" value="Send" >Get Tweets!</button>
+
+                            </span>
                         </div>
-
+                        {%endverbatim%}
                     </div>
 
                 </div>
-                <br>
- <div class="row">
+
+    <!-- <div class="row">
                 <div class="col-lg-6 col-lg-offset-3">
                     <label class="radio-inline"><input type="radio" name="optradio">Bar Graph</label>
                     <label class="radio-inline"><input type="radio" name="optradio">Line Graph</label>
                     <label class="radio-inline"><input type="radio" name="optradio">Geo Map</label>
                 </div>
-     </div>
+     </div>-->
             </div>
         <!-- <div id="overlay-inAbox" class="overlay">
     <div class="toolbar"><a class="close" href="#"><span>x</span> close</a></div>
@@ -50,7 +61,6 @@
     </div>
 </div>-->
         </form>
-
 
 
 </div>
