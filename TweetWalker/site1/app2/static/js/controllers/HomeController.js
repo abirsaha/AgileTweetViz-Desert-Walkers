@@ -4,7 +4,7 @@
 
 tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
 
-
+    $scope.hashtag;
     /* Adding spinner on home page for rendering on active server call*/
 
     $scope.openOverlay = function (olEl) {
@@ -63,6 +63,23 @@ tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
      // e.preventDefault();
      });
      */
+    $scope.disabled = true;
 
+
+
+    $scope.$watch('hashtag',function(newVal){
+        if(newVal != "" && newVal != undefined){
+            $scope.disabled = false;
+
+        }
+        else{
+            $scope.disabled = true;
+        }
+    });
+
+    //$scope.$apply();
+   /* if($scope.hashtag != ""){
+        $scope.disabled = false;
+    }*/
 
 }]);
