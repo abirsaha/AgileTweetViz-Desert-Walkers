@@ -9,6 +9,8 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     /* Converting chart Data in to 2D data */
 
     var make_2d_Data = function (data, xCol, yCol) {
+        //console.log("in make data");
+        //console.log("data is", data);
 
         var temp = [];
 
@@ -40,6 +42,18 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
                     this.push({"x": tempX, "y": tempY});
                     tempY = 0;
                     tempX = d.x;
+                }
+                if(i==(temp.length-1)){
+                    if (this.length<1){
+                        this.push({"x": tempX-2, "y": 0});
+                        this.push({"x": tempX-1, "y": 0});
+                        this.push({"x": tempX, "y": tempY});
+                        this.push({"x": tempX+1, "y": 0})
+                        this.push({"x": tempX+2, "y": 0});
+                    }
+                    else{
+                        this.push({"x": tempX, "y": tempY})
+                    }
                 }
             },retValue)
         }

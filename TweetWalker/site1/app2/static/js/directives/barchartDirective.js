@@ -31,7 +31,7 @@ tweetApp.directive('barChart', function($parse, $window){
                 return a.y - b.y;
             });
             var barwidth = function (w){
-                return (width-tbarpadding-margin.left-margin.right)/dataToPlot[dataToPlot.length-1].x;
+                return (width-tbarpadding-margin.left-margin.right)/(dataToPlot.length-1);
             }
             //ratio = a.max();
             //console.log("ratio is",ratio[ratio.length-1],height);
@@ -142,11 +142,14 @@ tweetApp.directive('barChart', function($parse, $window){
                     .enter()
                     .append("rect")
                     .attr("class", barClass)
-                    .attr("x",function(d){
+                    .attr("x",function(d,i){
+                        //console.log("d and i are:", d,i);
                         //console.log("xxxxxxx",dataToPlot.length,margin.left+(tbarpadding/dataToPlot.length)*d.x);
-                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*d.x;})
+                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*i;})
                     .attr("width", barwidth($('#bchart').attr('width')))
-                    .attr("y",function(d){return height-margin.bottom-(ratio* d.y);})
+                    .attr("y",function(d){
+                        return height-margin.bottom-(ratio* d.y);
+                    })
                     .attr("height", function(d){
                         //console.log("in func",ratio* d.y);
                         return ratio* d.y;})

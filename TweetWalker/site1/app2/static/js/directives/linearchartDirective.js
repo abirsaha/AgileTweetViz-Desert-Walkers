@@ -10,8 +10,8 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
         link: function(scope, elem, attrs){
             var margin = {top:10, right: 50, bottom: 25, left: 60};
             var padding = 0;
-            width = $("#linechart")[0].offsetWidth,
-                height = $("#linechart")[0].offsetHeight;
+            width = $("#viz")[0].offsetWidth,
+                height = $("#viz")[0].offsetHeight-123;
 
             //defining axis variables
             var pathClass="path";
@@ -55,12 +55,18 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             //checking for resize on window element if it happens then draw
             // the new graph using same aspect ratio call redrawLineChart()
             angular.element($window).on('resize',function(){
-                var the_chart = $("#lchart"),
-                    aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
-                    container = the_chart.parent();
+                console.log("in window scope to resize");
+                var the_chart = $("#viz"),
+                    //aspect = the_chart[0].offsetWidth / (the_chart[0].offsetHeight),
+                    container = the_chart;
                 var targetWidth = (container[0].offsetWidth);
-                the_chart.attr("width", targetWidth);
-                the_chart.attr("height", Math.round(targetWidth / aspect));
+                var new_chart = $("#lchart");
+                new_chart.attr("width", targetWidth);
+                //console.log("in resize", the_chart[0].offsetHeight);
+                //console.log("lchart is:",$("#lchart").attr("height"));
+                //new_chart.attr("height", the_chart[0].offsetHeight-123);
+                //console.log("in resize", the_chart[0].offsetHeight);
+                //console.log("lchart is:",$("#lchart").attr("height"));
                 redrawLineChart();
             });
 
@@ -69,16 +75,16 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 //.scale to set scaling for the axis
                 // .linear tell the linear behaviour of the axis
                 // .domain sets min and max value along the axis
-                // .range to set width or height of the axis plotted
+                 // .range to set width or height of the axis plotted
                 xScale = d3.scale.linear()
                     .domain([dataToPlot[0].x, dataToPlot[dataToPlot.length-1].x])
-                    .range([0, $("#lchart").attr("width") - margin.right -margin.left]);
+                    .range([0, $("#viz")[0].offsetWidth - margin.right -margin.left]);
 
                 yScale = d3.scale.linear()
                     .domain([0, d3.max(dataToPlot, function (d) {
                         return d.y;
                     })])
-                    .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
+                    .range([$("#viz")[0].offsetHeight-123-margin.bottom-margin.top, 0]);
 
                 //draw x axis
                 xAxisGen = d3.svg.axis()
@@ -111,7 +117,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 // parameters to text
                 svg.append("svg:g")
                         .attr("class", "x axis")
-                        .attr("transform", "translate("+margin.left+","+ parseInt($("#lchart").attr('height')-margin.bottom) +")")
+                        .attr("transform", "translate("+margin.left+","+ parseInt($("#viz")[0].offsetHeight-123-margin.bottom) +")")
                         .call(xAxisGen)
                     .append("text")
                         .attr("x", margin.left+margin.right)
@@ -161,7 +167,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 //regenerating x axis by selecting it and then by calling
                 // the function on it also re transforming it
                 svg.selectAll("g.x.axis")
-                    .attr("transform", "translate("+margin.left+","+ parseInt($("#lchart").attr('height')-margin.bottom) +")")
+                    .attr("transform", "translate("+margin.left+","+ parseInt($("#viz")[0].offsetHeight-123-margin.bottom) +")")
                     .call(xAxisGen);
 
                 //regenerate dots on line chart
