@@ -2,13 +2,13 @@
  * Created by Abir on 10/13/15.
  */
 
-tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function ($scope,$http,$state,$location) {
+tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
 
     $scope.hashtag;
     /* Adding spinner on home page for rendering on active server call*/
 
-    var openOverlay = function (olEl) {
-    console.log('adad');
+    $scope.openOverlay = function (olEl) {
+
         var overLay = $(olEl);
 
         if ($('#overlay-shade').length == 0)
@@ -57,11 +57,12 @@ tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function
 
 
     // Usage
-   /*   angular.element('#submit').on('click',function(e) {
+    /*  angular.element('#submit').bind('click',function(e) {
      console.log("inside submit")
      $scope.openOverlay('#overlay-inAbox');
      // e.preventDefault();
-     });*/
+     });
+     */
     $scope.disabled = true;
 
 
@@ -76,43 +77,9 @@ tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function
         }
     });
 
-angular.element('#submit').on('click', function () {
-    openOverlay('#overlay-inAbox');
-});
-
-    $scope.addItem = function() {
-        console.log('Inside item');
-
-        var csrftoken = $.cookie('csrftoken');
-
-        function csrfSafeMethod(method) {
-            // these HTTP methods do not require CSRF protection
-            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
-        }
-        $.ajaxSetup({
-            beforeSend: function(xhr, settings) {
-                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
-                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
-                }
-            }
-        });
-
-        $.ajax({
-            type: 'POST',
-            url: '',
-            data: {'hashtagInput':$scope.hashtag},
-            success: function (data) {
-
-
-             //  $state.transitionTo('dashboard');
-            },
-            error: function(data) {
-
-            }
-        });
-        return false;
-
-
-    };
+    //$scope.$apply();
+   /* if($scope.hashtag != ""){
+        $scope.disabled = false;
+    }*/
 
 }]);
