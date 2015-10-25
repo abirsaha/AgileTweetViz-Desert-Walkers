@@ -13,6 +13,8 @@
     }, false);
 
 
+
+
 </script>
 <div id="particles" ng-controller="HomeCtrl">
 
@@ -20,7 +22,7 @@
              <div id="intro">
 
                  <h1>Tweet Walker</h1>
-<form style="margin:10%;position: relative" action="" method="post"  >
+<form style="margin:10%;position: relative" action="" method="post" >
 
         {% csrf_token %}
         <div class="form-group">
@@ -29,7 +31,7 @@
                     <div class="col-lg-8 col-lg-offset-2">
 
                         <div class="input-group">
-                            <input type="text" class="form-control input-lg" name="hashtagInput" id="hashtagInput" ng-model="hashtag" placeholder="# hashtag" required/>
+                            <input type="text" class="form-control input-lg" name="hashtagInput" id="hashtagInput" ng-model="hashtag" placeholder="# enter hashtag" required/>
 
 
                             <span class="input-group-btn" style="position:relative;height:50%;">
@@ -51,15 +53,17 @@
                 </div>
      </div>-->
             </div>
-        <!-- <div id="overlay-inAbox" class="overlay">
-    <div class="toolbar"><a class="close" href="#"><span>x</span> close</a></div>
-    <div class="wrapper">
+   <div id="overlay-inAbox" class="overlay" >
+   <!-- <div class="toolbar"><a class="close" href="#"><span>x</span> close</a></div>-->
+    <div class="wrapper1">
 
         <img src="/static/img/spinner.gif"/>
         <br>
-        <span>Fetching tweets</span>
+        <span style="color:black">Fetching tweets from twitter</span>
+        <br>
+        <img src="/static/img/twitter1.png">
     </div>
-</div>-->
+</div>
         </form>
 
 

@@ -11,16 +11,18 @@ from models import twitter_parser
 from forms import twitterForm
 from forms import indexForm
 from django.core.context_processors import csrf
+import simplejson as json
 
 
 def index(request):
 	# form = indexForm(initial={'jsonout': x})
+	print "in index"
 	form = x
 	twits = Twit.objects.all()
 	args = {}
 	args.update(csrf(request))
 	args['form'] = form
-	return HttpResponse('app2/dashboard.html')
+	return render(request,'app2/dashboard.html', args)
 
 
 def indexSubmit(request):
@@ -28,17 +30,13 @@ def indexSubmit(request):
     if request.POST:
         form = twitterForm(request.POST)
         if form.is_valid():
-		    string = request.POST['hashtagInput']
-		    global x
-		    x = twitter_parser(string)
-		    return HttpResponseRedirect('app2/index')
-		    # search = request.POST.get("search")
-		    #print search
-		    #global x
-    		#x = twitter_parser(search)
+            string = request.POST['hashtagInput']
+            global x
+            x = twitter_parser(string)
+        return HttpResponseRedirect('app2/index')
     else:
         form = twitterForm()
-	args = {}
-	args.update(csrf(request))
-	args['form'] = form
-	return render(request,'app2/home.html', args)
+        args = {}
+        args.update(csrf(request))
+        args['form'] = form
+        return render(request,'app2/home.html', args)

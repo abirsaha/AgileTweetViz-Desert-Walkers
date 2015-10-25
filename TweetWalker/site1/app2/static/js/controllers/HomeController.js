@@ -2,13 +2,13 @@
  * Created by Abir on 10/13/15.
  */
 
-tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
+tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function ($scope,$http,$state,$location) {
 
     $scope.hashtag;
     /* Adding spinner on home page for rendering on active server call*/
 
-    $scope.openOverlay = function (olEl) {
-
+    var openOverlay = function (olEl) {
+    console.log('adad');
         var overLay = $(olEl);
 
         if ($('#overlay-shade').length == 0)
@@ -40,7 +40,7 @@ tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
 
     /* Method for closing the overlay window*/
 
-    /*$scope.closeOverlay=function() {
+   var closeOverlay=function() {
      $('.overlay').animate({
      top : '-=300',
      opacity : 0
@@ -48,21 +48,20 @@ tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
      $('#overlay-shade').fadeOut(300);
      $(this).css('display','none');
      });
-     }
+     };
 
-     angular.element('#overlay-shade, .overlay a').click(function(e) {
+   /*  angular.element('#overlay-shade, .overlay a').click(function(e) {
      $scope.closeOverlay();
      if ($(this).attr('href') == '#') e.preventDefault();
      });*/
 
 
     // Usage
-    /*  angular.element('#submit').bind('click',function(e) {
+   /*   angular.element('#submit').on('click',function(e) {
      console.log("inside submit")
      $scope.openOverlay('#overlay-inAbox');
      // e.preventDefault();
-     });
-     */
+     });*/
     $scope.disabled = true;
 
 
@@ -77,9 +76,42 @@ tweetApp.controller('HomeCtrl', ['$scope', function ($scope) {
         }
     });
 
-    //$scope.$apply();
-   /* if($scope.hashtag != ""){
-        $scope.disabled = false;
-    }*/
+angular.element('#submit').on('click', function () {
+    openOverlay('#overlay-inAbox');
+});
+/*
+    $scope.addItem = function() {
+        console.log('Inside item');
 
+        var csrftoken = $.cookie('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+        jQuery.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        jQuery.ajax({
+            type: 'POST',
+            url: '',
+            data: {'hashtagInput':$scope.hashtag},
+            dataType: "json",
+            success: function (data) {
+
+            },
+            error: function(data) {
+
+            }
+        });
+        return true;
+
+
+    };
+*/
 }]);
