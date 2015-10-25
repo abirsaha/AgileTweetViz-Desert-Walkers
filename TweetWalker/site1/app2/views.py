@@ -15,6 +15,7 @@ from django.core.context_processors import csrf
 
 def index(request):
 	# form = indexForm(initial={'jsonout': x})
+	print "in index"
 	form = x
 	twits = Twit.objects.all()
 	args = {}
@@ -25,20 +26,18 @@ def index(request):
 
 def indexSubmit(request):
     print "in indexsumbmit"
-    if request.POST:
-        form = twitterForm(request.POST)
-        if form.is_valid():
-		    string = request.POST['hashtagInput']
-		    global x
-		    x = twitter_parser(string)
-		    return HttpResponseRedirect('app2/index')
-		    # search = request.POST.get("search")
-		    #print search
-		    #global x
-    		#x = twitter_parser(search)
+    if request.is_ajax() :
+        print "in ajax"
+        if request.POST:
+            form = twitterForm(request.POST)
+            if form.is_valid():
+                string = request.POST['hashtagInput']
+                global x
+                x = twitter_parser(string)
+            return HttpResponseRedirect('app2/index')
     else:
         form = twitterForm()
-	args = {}
-	args.update(csrf(request))
-	args['form'] = form
-	return render(request,'app2/home.html', args)
+        args = {}
+        args.update(csrf(request))
+        args['form'] = form
+        return render(request,'app2/home.html', args)

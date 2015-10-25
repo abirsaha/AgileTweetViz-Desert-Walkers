@@ -206,12 +206,14 @@ h1{
     background-color: #000;
 }
 
+
+
 .overlay {
     position: fixed;
-    top: 60%;
+    top: 70%;
     left: 0;
     width: 450px;
-    min-height: 200px;
+    min-height: 300px;
     z-index: 10000;
     background-color: #fff;
     border: 10px solid #CFCFCF;
@@ -219,7 +221,7 @@ h1{
     box-shadow: 0 0 16px #000;
 } .ie7 .overlay {
     height: 200px;
-} .overlay .wrapper {
+} .overlay .wrapper1 {
     padding: 15px 30px 30px;
 }
 
