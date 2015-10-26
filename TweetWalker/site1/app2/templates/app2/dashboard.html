@@ -25,6 +25,7 @@
         <ul class="nav nav-tabs">
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
+            <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -39,6 +40,12 @@
                 <div bar-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
                 <p>{{"Content of Bar Chart."}}</p>
+            </div>
+            <div id="piechart" class="tab-pane fade">
+                <h3>Pie Chart Visualization</h3>
+                <br/>
+                <div pie-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+
             </div>
         </div>
     </div>
