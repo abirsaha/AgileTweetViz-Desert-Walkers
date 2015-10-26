@@ -12,6 +12,7 @@ tweetApp.directive('barChart', function($parse, $window){
                 height = $("#viz")[0].offsetHeight;
             //defining path and axis variables
             var barClass="bar";
+            var aspect = 1;
             var xScale, yScale, xAxisGen, yAxisGen, barFun;
 
             //getting d3 window in d3
@@ -31,8 +32,9 @@ tweetApp.directive('barChart', function($parse, $window){
                 return a.y - b.y;
             });
             var barwidth = function (w){
+                //console.log("width is",(width-tbarpadding-margin.left-margin.right)/(dataToPlot.length-1));
                 return (width-tbarpadding-margin.left-margin.right)/(dataToPlot.length-1);
-            }
+            };
             //ratio = a.max();
             //console.log("ratio is",ratio[ratio.length-1],height);
             ratio = (height-margin.top-margin.bottom)/ratio[ratio.length-1].y;
@@ -63,15 +65,26 @@ tweetApp.directive('barChart', function($parse, $window){
 
             //checking for resize on window element if it happens then draw
             // the new graph using same aspect ratio call redrawBarChart()
-            //angular.element($window).on('resize',function(){
-            //    var the_chart = $("#bchart"),
-            //        aspect = the_chart[0].offsetWidth / the_chart[0].offsetHeight,
-            //        container = the_chart.parent();
-            //    var targetWidth = (container[0].offsetWidth);
-            //    the_chart.attr("width", targetWidth);
-            //    the_chart.attr("height", Math.round(targetWidth / aspect));
-            //    redrawBarChart();
-            //});
+            angular.element($window).on('resize',function(){
+                //console.log("just entered",$("#viz")[0].offsetHeight);
+                var the_chart = $("#bchart");
+                aspect = $("#bchart").attr("width")/$("#bchart").attr("height");
+                var container = $("#viz");
+                var targetWidth = (container[0].offsetWidth);
+                //console.log("prev width is", the_chart.attr("height"),container[0].offsetHeight);
+                //console.log("aspect is", aspect);
+                the_chart.attr("width", targetWidth);
+                the_chart.attr("height", Math.round(targetWidth / aspect));
+                //console.log("new width is", the_chart.attr("height"),container[0].offsetHeight);
+                width = $("#viz")[0].offsetWidth,
+                    height = $("#viz")[0].offsetHeight;
+                ratio = a.sort(function (a, b) {
+                    return a.y - b.y;
+                });
+                ratio = ($("#bchart").attr("height")-margin.top-margin.bottom)/ratio[ratio.length-1].y;
+                console.log("in resize ratio is",ratio);
+                redrawBarChart();
+            });
 
             function setChartParameters(){
 
@@ -113,6 +126,7 @@ tweetApp.directive('barChart', function($parse, $window){
             function drawBarChart() {
                 //call setChartParameters() function to set variables with values
                 setChartParameters();
+                console.log("ini is",$("#viz")[0].offsetHeight);
 
                 //append svg:g i.e. svg graph element to svg
                 // next 2 .attr addinging x axis to graph followed by calling xAxisGen
@@ -167,6 +181,7 @@ tweetApp.directive('barChart', function($parse, $window){
 
                 //reseting new chart parameters
                 setChartParameters();
+                console.log("in redraw", ratio);
 
                 //regenerating y axis by selecting it and then by calling
                 // the function on it
@@ -178,16 +193,34 @@ tweetApp.directive('barChart', function($parse, $window){
                     .attr("transform", "translate("+margin.left+","+ parseInt($("#bchart").attr('height')-margin.bottom) +")")
                     .call(xAxisGen);
 
+                svg.selectAll(".bar")
+                    .data(dataToPlot)
+                    //.enter()
+                    //.append("rect")
+                    //.attr("class", barClass)
+                    .attr("x",function(d,i){
+                        //console.log("d and i are:", d,i);
+                        //console.log("xxxxxxx",dataToPlot.length,margin.left+(tbarpadding/dataToPlot.length)*d.x);
+                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*i;})
+                    .attr("width", barwidth($('#bchart').attr('width')))
+                    .attr("y",function(d){
+                        //console.log("y is:",height,ratio* d.y);
+                        return $("#bchart").attr("height")-margin.bottom-(ratio* d.y);
+                    })
+                    .attr("height", function(d){
+                        //console.log("in func",aspect);
+                        return ratio* d.y;})
+
                 //regenerate dots on line chart
-                svg.selectAll("circle")
-                    .attr("cx", function(d){return xScale(d.x)+50})
-                    .attr("cy",function(d){return yScale(d.y)+10});
+                //svg.selectAll("circle")
+                //    .attr("cx", function(d){return xScale(d.x)+50})
+                //    .attr("cy",function(d){return yScale(d.y)+10});
 
                 //regenerate line on line chart
-                svg.selectAll("."+barClass)
-                    .attr({
-                        //d: barFun(dataToPlot)
-                    });
+                //svg.selectAll("."+barClass)
+                //    .attr({
+                //        //d: barFun(dataToPlot)
+                //    });
             }
 
             drawBarChart();

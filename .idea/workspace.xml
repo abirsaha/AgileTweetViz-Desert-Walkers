@@ -2,12 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5e3a8242-92c8-4add-be5f-290aef2e5bfb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/templates/base.html" afterPath="$PROJECT_DIR$/TweetWalker/site1/templates/base.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="AgileTweetViz-Desert-Walkers.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,18 +27,18 @@
       <file leaf-file-name="home.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/home.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.25">
+            <state vertical-scroll-proportion="0.0">
               <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="true">
+      <file leaf-file-name="dashboard.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.45014662">
-              <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+            <state vertical-scroll-proportion="-6.875">
+              <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
               <folding>
                 <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
@@ -62,11 +58,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="barchartDirective.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="barchartDirective.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.925926">
-              <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.7223796">
+              <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
               <folding>
                 <element signature="e#0#44#0" expanded="false" />
               </folding>
@@ -77,8 +73,8 @@
       <file leaf-file-name="linearchartDirective.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.7777777">
-              <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="62" column="83" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="83" />
               <folding />
             </state>
           </provider>
@@ -113,10 +109,10 @@
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/resizecontroller.js" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/css/style.css" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/templates/base.html" />
-        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js" />
-        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" />
         <option value="$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html" />
+        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js" />
+        <option value="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js" />
       </list>
     </option>
   </component>
@@ -293,6 +289,62 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TweetWalker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TweetWalker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="static" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -353,14 +405,44 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="AgileTweetViz-Desert-Walkers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TweetWalker" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="site1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app2" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="static" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="css" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="Scratches" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -427,9 +509,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1000" height="803" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.208" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -458,6 +540,60 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#44#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/HomeController.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="22" selection-start-line="26" selection-start-column="22" selection-end-line="26" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/home.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -498,7 +634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8128" column="2" selection-start-line="8128" selection-start-column="2" selection-end-line="8128" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -506,7 +641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -514,7 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="10" selection-start-line="35" selection-start-column="10" selection-end-line="35" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -522,7 +655,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -566,7 +698,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="26" column="47" selection-start-line="26" selection-start-column="47" selection-end-line="26" selection-end-column="47" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -574,7 +705,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -596,7 +726,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08498584">
           <caret line="4" column="45" selection-start-line="4" selection-start-column="45" selection-end-line="4" selection-end-column="45" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -604,13 +733,12 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48387095">
           <caret line="22" column="35" selection-start-line="22" selection-start-column="35" selection-end-line="22" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/home.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.25">
+        <state vertical-scroll-proportion="0.0">
           <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
         </state>
@@ -620,7 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.8232695">
           <caret line="271" column="1" selection-start-line="271" selection-start-column="1" selection-end-line="271" selection-end-column="1" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -628,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="8128" column="2" selection-start-line="8128" selection-start-column="2" selection-end-line="8128" selection-end-column="2" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -640,20 +766,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.7777777">
-          <caret line="57" column="41" selection-start-line="57" selection-start-column="41" selection-end-line="57" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.925926">
-          <caret line="146" column="31" selection-start-line="146" selection-start-column="31" selection-end-line="146" selection-end-column="31" />
+        <state vertical-scroll-proportion="-6.875">
+          <caret line="11" column="35" selection-start-line="11" selection-start-column="35" selection-end-line="11" selection-end-column="35" />
           <folding>
-            <element signature="e#0#44#0" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -666,14 +786,20 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/templates/app2/dashboard.html">
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/linearchartDirective.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.45014662">
-          <caret line="24" column="26" selection-start-line="24" selection-start-column="26" selection-end-line="24" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="83" selection-start-line="62" selection-start-column="29" selection-end-line="62" selection-end-column="83" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7223796">
+          <caret line="87" column="0" selection-start-line="87" selection-start-column="0" selection-end-line="87" selection-end-column="0" />
           <folding>
-            <element signature="n#style#0;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#0;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#0;n#div#1;n#div#0;n#div#1;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#0#44#0" expanded="false" />
           </folding>
         </state>
       </provider>
