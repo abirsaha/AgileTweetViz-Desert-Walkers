@@ -61,7 +61,7 @@ def twitter_parser(string):
     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
     # Initiate the connection to Twitter Streaming API
     twitter = Twitter(auth=oauth)
-    search_results = twitter.search.tweets(q= string, lang='en', count='100')
+    search_results = twitter.search.tweets(q= string, count='100')
 
     statuses = search_results['statuses']
     while len(statuses) < 300:
@@ -99,5 +99,6 @@ def twitter_parser(string):
         data["month"] = month[date[1]]
         data["day"] = date[2]
         data["minutes"] = int(date[3].split(":")[1])
+        data["lang"] = tweet["lang"]
         jsonlist.append(data)
     return json.dumps(jsonlist)
