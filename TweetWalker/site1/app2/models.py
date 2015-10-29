@@ -53,6 +53,52 @@ class jsonoutput(models.Model):
     def __unicode__(self):
         return self.jsonout
 
+
+# needs to be removed from final deliverable
+def data_analysis(statuses):
+    lang = {}
+    time_zone = {}
+    follower_count = {"0-50": 0, "50-100": 0, "100-150": 0, "150-200": 0, "200-250": 0, "greater than 250": 0}
+    retweet_count = {"0-50": 0, "50-100": 0, "100-150": 0, "150-200": 0, "200-250": 0, "greater than 250": 0}
+    hashtag_count = {}
+
+    for tweet in statuses:
+        if tweet["lang"] in lang:
+            lang[tweet["lang"]] += 1
+        else:
+            lang[tweet["lang"]] = 1
+
+        if tweet["user"]["time_zone"] in location:
+            time_zone[tweet["user"]["time_zone"]] += 1
+        else:
+            time_zone[tweet["user"]["time_zone"]] = 1
+
+        for i in range(50, 300, 50):
+            if tweet["user"]["followers_count"] < i:
+                follower_count[str(i-50) + "-" + str(i)] += 1
+                break
+            if tweet["retweet_count"] < i:
+                retweet_count[str(i-50) + "-" + str(i)] += 1
+                break
+
+        if tweet["user"]["followers_count"] > 250:
+            follower_count["greater than 250"] += 1
+        if tweet["retweet_count"] > 250:
+            retweet_count["greater than 250"] += 1
+
+        if len(tweet["entities"]["hashtags"]) in hashtag_count:
+            hashtag_count[len(tweet["entities"]["hashtags"])] += 1
+        else:
+            hashtag_count[len(tweet["entities"]["hashtags"])] = 1
+
+        # Getting junk data from location. Therefore, cannot be used for visualization
+        print "Lang: " + str(lang)
+        print "Time Zone: " + str(time_zone)
+        print "Followers Count Range: " + str(follower_count)
+        print "Retweet Count Range: " + str(retweet_count)
+        print "HashTag Count:" + str(hashtag_count)
+
+
 def twitter_parser(string):
     ACCESS_TOKEN = '3874778652-LoED5AsqqgbUb2PeWCqP9msOykUQuGyUDSWw2l6'
     ACCESS_SECRET = 'Poof3neY7m5NUgqZUfwLb1NHFNxkEljkm6kKeXoj4G7q3'
@@ -88,6 +134,8 @@ def twitter_parser(string):
         'Nov': 11,
         'Dec': 12
     }
+    # Can be called when analysing data
+    # data_analysis(statuses)
     for tweet in statuses:
         data = {}
         data["screenname"] = tweet["user"]["screen_name"]

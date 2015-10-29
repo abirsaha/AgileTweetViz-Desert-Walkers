@@ -39,8 +39,10 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             }
 
             var data = [];
+            var totalcount = 0;
                 for (key in dict){
                     if (dict.hasOwnProperty(key)) {
+                        totalcount += dict[key];
                         data.push({"x": key, "y": dict[key]})
                     }
                 }
@@ -53,6 +55,15 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                 radius = Math.min(width, height) / 2;
             var rawsvg = elem.find("svg");
             var color = d3.scale.category20();
+            var tip = d3.tip()
+                        .attr('class', 'd3-tip')
+                        .html(function(d) {
+                        var percentage = (d.data.y/totalcount)*100;
+                        var txt = "<p>Language: " + d.data.x + "<br>" +
+                                "Count: " + d.data.y + "<br>" +
+                                "Percentage: " + percentage.toPrecision(3) + "%<p>";
+                        return txt;
+                });
             var arc = d3.svg.arc()
                         .outerRadius(radius - 10)
                         .innerRadius(0);
@@ -68,15 +79,21 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         .data(pie(data))
                         .enter().append("g")
                             .attr("class", "arc");
+
             g.append("path")
                 .attr("d", arc)
-                .style("fill", function(d) { return color(d.data.x); });
-
+                .style("fill", function(d) { return color(d.data.x); })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
             g.append("text")
                 .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
                 .attr("dy", ".35em")
                 .style("text-anchor", "middle")
-                .text(function(d) { return d.data.x; });
+                .text(function(d) { return d.data.x; })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
+            svg.call(tip)
+
         }
 
     }
