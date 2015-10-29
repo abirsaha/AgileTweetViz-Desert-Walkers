@@ -64,6 +64,35 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     $scope.plotData  = make_2d_Data($scope.tweets, "minutes", "value");
 
+    var check_counter = 0;
+    var clickedele = [];
+    $scope.checking = function(ele){
+        var cond = clickedele.indexOf(ele);
+        if(cond>=0){
+            check_counter = check_counter-1;
+            clickedele.splice(cond, 1);
+        }
+        else{
+            check_counter = check_counter+1;
+            clickedele.push(ele);
+        }
+        console.log("in checking",ele,check_counter,cond,clickedele);
+        if (check_counter==2){
+            $.each($scope.tweets[0],function(k,value){
+                if(clickedele.indexOf(k)<0){
+                    $("#" + k).attr("disabled",true);
+                }
+            });
+        }
+        else{
+            $.each($scope.tweets[0],function(k,value){
+                if(clickedele.indexOf(k)<0){
+                    $("#" + k).attr("disabled",false);
+                }
+            });
+        }
+    };
+
     /* $interval(function(){
      var x=$scope.yData.length+1;
      var y= Math.round(Math.random() * 100);

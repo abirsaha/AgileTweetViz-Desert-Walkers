@@ -55,22 +55,13 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             //checking for resize on window element if it happens then draw
             // the new graph using same aspect ratio call redrawLineChart()
             angular.element($window).on('resize',function(){
-                //console.log("in window scope to resize");
                 var the_chart = $("#viz"),
-                    //aspect = the_chart[0].offsetWidth / (the_chart[0].offsetHeight),
                     container = the_chart;
-                //console.log("in resize",$("#lchart").attr("height"),$("#lchart").attr("width"));
                 var aspect = $("#lchart").attr("width")/$("#lchart").attr("height");
-                //console.log("aspect is",aspect);
                 var targetWidth = (container[0].offsetWidth);
                 var new_chart = $("#lchart");
                 new_chart.attr("width", targetWidth);
-                //console.log("lchart ki height",$("#lchart").attr("height"));
-                //console.log("in resize", the_chart[0].offsetHeight);
-                //console.log("lchart is:",$("#lchart").attr("height"));
                 new_chart.attr("height", targetWidth/aspect);
-                //console.log("in resize", new_chart.attr("height"));
-                //console.log("lchart is:",$("#lchart").attr("height"));
                 redrawLineChart();
             });
 

@@ -17,9 +17,10 @@
     <div class="col-md-1" id="dimensions">
 		<span ng-repeat="(key,value) in tweets[0]">
             <br>
-            <input type="checkbox" class="chk" id={{key}}><span class="checkboxtext">{{key}}</span></input>
+            <input type="checkbox" class="chk" id={{key}} ng-click="checking(key)"><span class="checkboxtext">{{key}}</span></input>
             <br>
         </span>
+        <button>Get Visualization</button>
     </div>
     <div class="col-md-8" id = "viz">
         <ul class="nav nav-tabs">
