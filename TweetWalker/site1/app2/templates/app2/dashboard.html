@@ -27,6 +27,7 @@
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
             <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
+            <li><a data-toggle="tab" href="#genchart">Gender Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -46,6 +47,12 @@
                 <h3>Pie Chart Visualization</h3>
                 <br/>
                 <div pie-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+
+            </div>
+            <div id="genchart" class="tab-pane fade">
+                <h3>Gender Chart Visualization</h3>
+                <br/>
+                <div gen-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
 
             </div>
         </div>
