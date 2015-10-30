@@ -18,8 +18,8 @@ def get_sentiment(text):
     blob = TextBlob(text)
     from_lang = blob.detect_language()
     try:
-        if from_lang != "en":
-            blob = blob.translate(to="en")
+        if from_lang != "en" and from_lang is not None:
+            blob = blob.translate(from_lang, to="en")
     except:
         a="Translation error"
     sentiment_polarity, sentiment_subjectivity = blob.sentences[0].sentiment
