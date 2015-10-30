@@ -13,27 +13,32 @@ def gender_features(word):
     featdict['first_letter'] = word[0]
     return featdict
 
-def gender_classifier(actor):
+class Gender(object):
     """
         Take name as input using BayerClassifier return the
         most probable tag(male/female)
     """
-    
-    labeled_names = ([(name, 'male') for name in names.words('male.txt')] +
-    [(name, 'female') for name in names.words('female.txt')])
-    random.shuffle(labeled_names)
-    featuresets = [(gender_features(n), gender) for (n, gender) in labeled_names]
-    train_set = featuresets
-    #print train_set[0]
-    #Training data for the BayerClassifier
-    classifier = nltk.NaiveBayesClassifier.train(train_set) 	
-    #print classifier.show_most_informative_features(100)
-    return classifier.classify(gender_features(actor))
+
+    def __init__(self):
+        super(Gender, self).__init__()        
+        labeled_names = ([(name, 'male') for name in names.words('male.txt')] +
+        [(name, 'female') for name in names.words('female.txt')])
+        random.shuffle(labeled_names)
+        featuresets = [(gender_features(n), gender) for (n, gender) in labeled_names]
+        train_set = featuresets
+        #print train_set[0]
+        #Training data for the BayerClassifier
+        self.classifier = nltk.NaiveBayesClassifier.train(train_set) 	
+     
+    def get(self,name):
+        return self.classifier.classify(gender_features(name))
+
   
 def main():
     #pass unsupervised data to, find male and female
-    x = gender_classifier('Jyotinder')
-    print x
+    x = Gender()
+    y = x.get('Jyotinder')
+    print y
 
 if __name__ == '__main__':
     main()
