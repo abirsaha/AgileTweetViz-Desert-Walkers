@@ -92,7 +92,17 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             });
         }
     };
+    // Adding data for radial component
+    $scope.gauge = {
+        name: 'Positive Tweets',
+        opacity: 0.55,
+        value: 65,
+        text: 'Sentiment Analysis'
+    };
 
+     $interval(function(){
+    $scope.gauge.value= Math.round(Math.random()*100);
+     }, 5000);
     /* $interval(function(){
      var x=$scope.yData.length+1;
      var y= Math.round(Math.random() * 100);

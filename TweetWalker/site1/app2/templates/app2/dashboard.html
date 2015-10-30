@@ -20,7 +20,9 @@
             <input type="checkbox" class="chk" id={{key}} ng-click="checking(key)"><span class="checkboxtext">{{key}}</span></input>
             <br>
         </span>
-        <button>Get Visualization</button>
+        <button class="btn btn-default btn-primary btn-lg">Get Visualization</button>
+
+
     </div>
     <div class="col-md-8" id = "viz">
         <ul class="nav nav-tabs">
@@ -49,7 +51,12 @@
 
             </div>
         </div>
+        <div style="width: 25%;left:50%;position: relative">
+
+            <sentiment-directive id="gauge1" config="gauge"></sentiment-directive>
+        </div>
     </div>
+
     <div class="col-md-3">
         <h2>Tweet Feeds</h2>
         <ul class="timeline">
@@ -67,6 +74,7 @@
             {%endverbatim%}
         </ul>
     </div>
+
 </div>
 
 {% endblock content %}
