@@ -4,6 +4,7 @@ from twitter import *
 import simplejson as json
 from datetime import datetime
 import uuid
+from sentiment import get_sentiment
 
 
 
@@ -142,6 +143,7 @@ def twitter_parser(string):
         data["date"] = tweet["created_at"]
         data["value"] = tweet["user"]["statuses_count"]
         data["text"] = tweet["text"]
+        data["sentiment"] = get_sentiment(tweet["text"])
         date = tweet["created_at"].split()
         data["year"] = date[len(date)-1]
         data["month"] = month[date[1]]
