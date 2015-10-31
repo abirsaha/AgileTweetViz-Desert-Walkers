@@ -19,6 +19,8 @@
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
             <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
+            <li><a data-toggle="tab" href="#gchart">Gender Chart</a></li>
+
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -79,11 +81,28 @@
                 <div pie-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
             </div>
+<<<<<<< Updated upstream
 
         </div>
         <div style="width: 25%;">
 
             <sentiment-directive id="gauge1" config="gauge"></sentiment-directive>
+=======
+            <div id="gchart" class="tab-pane fade">
+                <h3>Line Chart Visualization for Gender</h3>
+                <!--<h5>Choose Dimension</h5>-->
+                <!--<div ng-repeat="pieKey in pie_tweets" class="checkboxtext">-->
+                    <!--<input type="checkbox" class="chk" id="{{pieKey}}_pie" ng-click="check_pie(pieKey)">{{pieKey}}</input>-->
+                <!--</div>-->
+                <!--<br/>-->
+                <!--<br/>-->
+                <!--<button>Get Visualization</button>-->
+                <br/>
+                <br/>
+                <div gen-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+
+            </div>
+>>>>>>> Stashed changes
         </div>
     </div>
     <div class="col-md-3">
