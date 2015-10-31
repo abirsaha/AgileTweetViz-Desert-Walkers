@@ -16,16 +16,16 @@ def get_sentiment(text):
     :return: Polarity of the sentiment as 0(neutral), 1(positive), or 2(negative)
     """
     blob = TextBlob(text)
-    from_lang = blob.detect_language()
-    try:
-        if from_lang != "en" and from_lang is not None:
-            blob = blob.translate(from_lang, to="en")
-    except:
-        a="Translation error"
+    # from_lang = blob.detect_language()
+    # try:
+    #     if from_lang != "en" and from_lang is not None:
+    #         blob = blob.translate(from_lang, to="en")
+    # except:
+    #     a="Translation error"
     sentiment_polarity, sentiment_subjectivity = blob.sentences[0].sentiment
-    if sentiment_polarity > 0.2:
+    if sentiment_polarity > 0:
         return 1
-    elif sentiment_polarity < -0.2:
+    elif sentiment_polarity < 0:
         return 2
     else:
         return 0
