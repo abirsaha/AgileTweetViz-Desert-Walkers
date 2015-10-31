@@ -50,8 +50,8 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             console.log("in directive");
             var margin = {top:10, right: 50, bottom: 25, left: 60};
             var padding = 0;
-            var width = 500,
-                height = 500,
+            var width = $("#viz")[0].offsetWidth,
+                height = $("#viz")[0].offsetHeight,
                 radius = Math.min(width, height) / 2;
             var rawsvg = elem.find("svg");
             var color = d3.scale.category20();
@@ -74,7 +74,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         .attr("width", width)
                         .attr("height", height)
                         .append("g")
-                            .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+                            .attr("transform", "translate(" + width / (width/height) + "," + height / 2 + ")");
             var g = svg.selectAll(".arc")
                         .data(pie(data))
                         .enter().append("g")
