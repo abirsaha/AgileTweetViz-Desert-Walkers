@@ -66,7 +66,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                 });
             var arc = d3.svg.arc()
                         .outerRadius(radius - 10)
-                        .innerRadius(0);
+                        .innerRadius(3 * radius/5);
             var pie = d3.layout.pie()
                         .sort(null)
                         .value(function(d) { return d.y; });
@@ -85,6 +85,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                 .style("fill", function(d) { return color(d.data.x); })
                 .on('mouseover', tip.show)
                 .on('mouseout', tip.hide);
+
             g.append("text")
                 .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
                 .attr("dy", ".35em")
