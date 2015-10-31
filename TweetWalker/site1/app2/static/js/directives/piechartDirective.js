@@ -59,7 +59,8 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         .attr('class', 'd3-tip')
                         .html(function(d) {
                         var percentage = (d.data.y/totalcount)*100;
-                        var txt = "<p>Language: " + d.data.x + "<br>" +
+                        var txt = "<p>Language: " + getLanguageName(d.data.x) + "<br>" +
+                                "Native Language: " + getLanguageNativeName(d.data.x) + "<br>" +
                                 "Count: " + d.data.y + "<br>" +
                                 "Percentage: " + percentage.toPrecision(3) + "%<p>";
                         return txt;
