@@ -34,6 +34,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     }
                     else if (key == "und"){
                         dict["undetermined"] = dict[key]
+                        delete dict[key];
                     }
                 }
             }

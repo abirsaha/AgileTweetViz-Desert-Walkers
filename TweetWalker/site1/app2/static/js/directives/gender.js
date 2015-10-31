@@ -1,3 +1,7 @@
+
+/**
+ * Created by Abir on 10/15/15.
+ */
 tweetApp.directive('genChart',['$parse', '$window', function($parse, $window){
 
     return{
@@ -74,17 +78,18 @@ tweetApp.directive('genChart',['$parse', '$window', function($parse, $window){
 
             //checking for resize on window element if it happens then draw
             // the new graph using same aspect ratio call redrawLineChart()
-            angular.element($window).on('resize',function(){
+            /*angular.element($window).on('resize',function(){
                 var the_chart = $("#viz"),
                     container = the_chart;
-                var aspect = $("#lchart").attr("width")/$("#lchart").attr("height");
+                var aspect = $("#gchart").attr("width")/$("#gchart").attr("height");
                 var targetWidth = (container[0].offsetWidth);
-                var new_chart = $("#lchart");
+                var new_chart = $("#gchart");
                 new_chart.attr("width", targetWidth);
                 new_chart.attr("height", targetWidth/aspect);
                 redrawLineChart();
-            });
 
+            });
+            */
             function setChartParameters(){
 
                 //.scale to set scaling for the axis
@@ -148,7 +153,7 @@ tweetApp.directive('genChart',['$parse', '$window', function($parse, $window){
                         .attr("transform", "rotate(-90)")
                         .attr("y", margin.top)
                         .style("text-anchor", "end")
-                        .text("-- "+attrs.yaxisLabel+"-->");
+                        .text("-- " + "Count" + "-->");
 
                 svg.append("svg:path")
                     .attr({
@@ -208,4 +213,4 @@ tweetApp.directive('genChart',['$parse', '$window', function($parse, $window){
             drawLineChart();
         }
     };
-}]);
+}])
