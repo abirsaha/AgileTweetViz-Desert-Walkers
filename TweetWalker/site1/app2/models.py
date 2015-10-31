@@ -145,7 +145,10 @@ def twitter_parser(string):
         data["date"] = tweet["created_at"]
         data["value"] = tweet["user"]["statuses_count"]
         data["text"] = tweet["text"]
-        data["sentiment"] = get_sentiment(tweet["text"])
+        if len(tweet["text"]) > 2:
+            data["sentiment"] = get_sentiment(tweet["text"])
+        else:
+            data["sentiment"] = 0
         date = tweet["created_at"].split()
         data["year"] = date[len(date)-1]
         data["month"] = month[date[1]]
