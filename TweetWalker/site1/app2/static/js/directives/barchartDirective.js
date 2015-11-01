@@ -27,6 +27,9 @@ tweetApp.directive('barChart', function($parse, $window){
             var exp = $parse(attrs.chartData);
 
             var dataToPlot=exp(scope);
+            if (attrs.type == "gender"){
+                var dataToPlot = scope.data_m;
+            }
             var a = angular.copy(dataToPlot);
             var ratio = a.sort(function (a, b) {
                 return a.y - b.y;
@@ -141,23 +144,68 @@ tweetApp.directive('barChart', function($parse, $window){
                     .attr("y", 10)
                     .style("text-anchor", "end")
                     .text("-- "+attrs.yaxisLabel+"-->");
-                svg.selectAll(".bar")
-                    .data(dataToPlot)
-                    .enter()
-                    .append("rect")
-                    .attr("class", barClass)
-                    .attr("x",function(d,i){
-                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*i;})
-                    .attr("width", barwidth($('#bchart').attr('width')))
-                    .attr("y",function(d){
-                        return height-margin.bottom-(ratio* d.y);
-                    })
-                    .attr("height", function(d){
-                        return ratio* d.y;})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
-
+                if (attrs.type == "regular") {
+                    svg.selectAll(".bar")
+                        .data(dataToPlot)
+                        .enter()
+                        .append("rect")
+                        //.attr("class", barClass)
+                        .attr("fill", "steelblue")
+                        .attr("x", function (d, i) {
+                            return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i;
+                        })
+                        .attr("width", barwidth($('#bchart').attr('width')))
+                        .attr("y", function (d) {
+                            return height - margin.bottom - (ratio * d.y);
+                        })
+                        .attr("height", function (d) {
+                            return ratio * d.y;
+                        })
+                        .on('mouseover', tip.show)
+                        .on('mouseout', tip.hide);
+                }
+                if (attrs.type == "gender") {
+                    width_double = width/2
+                    svg.selectAll(".bar")
+                        .data(dataToPlot)
+                        .enter()
+                        .append("rect")
+                        //.attr("class", barClass)
+                        .attr("fill", "steelblue")
+                        .attr("x", function (d, i) {
+                            return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i;
+                        })
+                        .attr("width", barwidth($('#bchart').attr('width'))/2)
+                        .attr("y", function (d) {
+                            return height - margin.bottom - (ratio * d.y);
+                        })
+                        .attr("height", function (d) {
+                            return ratio * d.y;
+                        })
+                        .on('mouseover', tip.show)
+                        .on('mouseout', tip.hide);
+                    var data_f = scope.data_f;
+                    svg.selectAll(".bar")
+                        .data(data_f)
+                        .enter()
+                        .append("rect")
+                        //.attr("class", barClass)
+                        .attr("fill", "gray")
+                        .attr("x", function (d, i) {
+                            return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i + (barwidth($('#bchart').attr('width'))/2);
+                        })
+                        .attr("width", barwidth($('#bchart').attr('width'))/2)
+                        .attr("y", function (d) {
+                            return height - margin.bottom - (ratio * d.y);
+                        })
+                        .attr("height", function (d) {
+                            return ratio * d.y;
+                        })
+                        .on('mouseover', tip.show)
+                        .on('mouseout', tip.hide);
+                }
             }
+
 
             function redrawBarChart() {
 
@@ -173,20 +221,52 @@ tweetApp.directive('barChart', function($parse, $window){
                 svg.selectAll("g.x.axis")
                     .attr("transform", "translate("+margin.left+","+ parseInt($("#bchart").attr('height')-margin.bottom) +")")
                     .call(xAxisGen);
+                if (attrs.type == "regular") {
+                    svg.selectAll(".bar")
+                        .data(dataToPlot)
+                        //.enter()
+                        //.append("rect")
+                        //.attr("class", barClass)
+                        .attr("x", function (d, i) {
+                            return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i;
+                        })
+                        .attr("width", barwidth($('#bchart').attr('width')))
+                        .attr("y", function (d) {
+                            return $("#bchart").attr("height") - margin.bottom - (ratio * d.y);
+                        })
+                        .attr("height", function (d) {
+                            return ratio * d.y;
+                        });
+                }
 
-                svg.selectAll(".bar")
-                    .data(dataToPlot)
-                    //.enter()
-                    //.append("rect")
-                    //.attr("class", barClass)
-                    .attr("x",function(d,i){
-                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*i;})
-                    .attr("width", barwidth($('#bchart').attr('width')))
+                else if (attrs.type == "gender") {
+                    var width_double = width/2;
+                    svg.selectAll(".bar")
+                        .data(dataToPlot)
+                        //.enter()
+                        //.append("rect")
+                        //.attr("class", barClass)
+                        .attr("x", function (d, i) {
+                            return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i;
+                        })
+                        .attr("width", barwidth($('#bchart').attr('width'))/2)
+                        .attr("y", function (d) {
+                            return $("#bchart").attr("height") - margin.bottom - (ratio * d.y);
+                        })
+                        .attr("height", function (d) {
+                            return ratio * d.y;
+                        });
+                    svg.selectAll(".bar")
+                        .data(data_f)
+                        .attr("x",function(d,i){
+                        return margin.left-(barwidth($('#bchart').attr('width'))/2)+((tbarpadding/(dataToPlot.length-1))+barwidth($('#bchart').attr('width')))*i + (barwidth($('#bchart').attr('width'))/2);})
+                    .attr("width", barwidth($('#bchart').attr('width'))/2)
                     .attr("y",function(d){
                         return $("#bchart").attr("height")-margin.bottom-(ratio* d.y);
                     })
                     .attr("height", function(d){
-                        return ratio* d.y;})
+                        return ratio* d.y;});
+                }
             }
 
             drawBarChart();

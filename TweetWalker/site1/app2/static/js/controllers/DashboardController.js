@@ -198,6 +198,32 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         /*Updating plotData so that new visualization can be loaded*/
         // $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
     };
+    var make_gender_data = function (rawdata, xCol, yCol){
+            var dict = {};
+            for(var i=0;i<rawdata.length;i++){
+            var obj = rawdata[i];
+            if (!(obj[xCol] in dict)){
+                var arr = [0,0]
+                dict[obj[xCol]] = arr;
+            }
+            if (obj["gender"] == "male")
+                dict[obj[xCol]][0]++;
+            else
+                dict[obj[xCol]][1]++;
+        }
+
+        var data_m = [];
+        var data_f = [];
+        for (key in dict){
+            if (dict.hasOwnProperty(key)) {
+                data_m.push({"x": key, "y": dict[key][0]});
+                data_f.push({"x": key, "y": dict[key][1]});
+            }
+        }
+        $scope.data_m = data_m;
+        $scope.data_f = data_f;
+    };
+    make_gender_data($scope.tweets, "minutes", "gender");
     /*
     var x_line_checked_count = 0;
     var x_line_clicked_element = [];

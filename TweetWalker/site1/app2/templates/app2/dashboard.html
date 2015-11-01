@@ -20,7 +20,8 @@
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
             <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
 			<li><a data-toggle="tab" href="#genchart">Gender Line Chart</a></li>
-            <li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>
+            <li><a data-toggle="tab" href="#genchartbar">Gender Bar Chart</a></li>
+             <li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -65,13 +66,20 @@
                 <button ng-click="regenerateBarViz()" disabled>Get Visualization</button>
                 <br/>
                 <br/>
-                <div bar-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+                <div bar-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" type="regular" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
             </div>
 
             <div id="genchart" class="tab-pane fade">
                 <h3>Gender Chart Visualization</h3>
                 <br/>
                 <div gen-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
+
+            </div>
+            <div id="genchartbar" class="tab-pane fade">
+                <h3>Gender Chart Visualization</h3>
+                <br/>
+                <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count" xaxis-label="minutes" type="gender" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gbarchart"></div>
+
             </div>
 
             <div id="piechart" class="tab-pane fade">
