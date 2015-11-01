@@ -9,45 +9,63 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
         template: "<svg></svg>",
         link: function (scope, elem, attrs) {
             var rawdata = scope.tweets;
-            var dict = {};
-            // we need to get full name of language
-            // we can use lang.js but there are languages that it doesn't support
-            for(var i=0;i<rawdata.length;i++){
-                var obj = rawdata[i];
-                if (obj["lang"] in dict){
-                    dict[obj["lang"]]++;
-                }
-                else{
-                    dict[obj["lang"]] = 1;
-                }
-             }
-            for (var key in dict) {
-                if (dict.hasOwnProperty(key)) {
-                    if (dict[key] < 10) {
-                        if ("Other" in dict) {
-                            dict["Other"] += dict[key];
-                        }
-                        else {
-                            dict["Other"] = dict[key];
-                        }
-                        delete dict[key];
+            if (attrs.type == "lang") {
+                var dict = {};
+                // we need to get full name of language
+                // we can use lang.js but there are languages that it doesn't support
+                for (var i = 0; i < rawdata.length; i++) {
+                    var obj = rawdata[i];
+                    if (obj["lang"] in dict) {
+                        dict[obj["lang"]]++;
                     }
-                    else if (key == "und"){
-                        dict["undetermined"] = dict[key]
-                        delete dict[key];
+                    else {
+                        dict[obj["lang"]] = 1;
+                    }
+                }
+                for (var key in dict) {
+                    if (dict.hasOwnProperty(key)) {
+                        if (dict[key] < 10) {
+                            if ("Other" in dict) {
+                                dict["Other"] += dict[key];
+                            }
+                            else {
+                                dict["Other"] = dict[key];
+                            }
+                            delete dict[key];
+                        }
+                        else if (key == "und") {
+                            dict["undetermined"] = dict[key]
+                            delete dict[key];
+                        }
+                    }
+                }
+
+                var data = [];
+                var totalcount = 0;
+                for (key in dict) {
+                    if (dict.hasOwnProperty(key)) {
+                        totalcount += dict[key];
+                        data.push({"x": key, "y": dict[key]})
                     }
                 }
             }
-
-            var data = [];
-            var totalcount = 0;
-                for (key in dict){
+            else if (attrs.type == "gender"){
+                dict = {"male": 0, "female": 0};
+                for (var i = 0; i < rawdata.length; i++) {
+                    var obj = rawdata[i];
+                    if (obj["gender"] == "male" || obj["gender"] == "female")
+                        dict[obj["gender"]]++;
+                }
+                var data = [];
+                var totalcount = 0;
+                for (key in dict) {
                     if (dict.hasOwnProperty(key)) {
                         totalcount += dict[key];
                         data.push({"x": key, "y": dict[key]})
                     }
                 }
 
+            }
             console.log("in directive");
             var margin = {top:10, right: 50, bottom: 25, left: 60};
             var padding = 0;
@@ -60,11 +78,21 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         .attr('class', 'd3-tip')
                         .html(function(d) {
                         var percentage = (d.data.y/totalcount)*100;
-                        var txt = "<p>Language: " + getLanguageName(d.data.x) + "<br>" +
+
+                        if (attrs.type == "lang"){
+
+                            var txt = "<p>Language: " + getLanguageName(d.data.x) + "<br>" +
                                 "Native Language: " + getLanguageNativeName(d.data.x) + "<br>" +
                                 "Count: " + d.data.y + "<br>" +
                                 "Percentage: " + percentage.toPrecision(3) + "%<p>";
-                        return txt;
+                                return txt;
+                        }
+                        else if (attrs.type == "gender"){
+                            var txt = "<p>Gender: " + d.data.x + "<br>" +
+                                "Count: " + d.data.y + "<br>" +
+                                "Percentage: " + percentage.toPrecision(3) + "%<p>";
+                                return txt;
+                        }
                 });
             var arc = d3.svg.arc()
                         .outerRadius(radius - 10)

@@ -13,30 +13,28 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.x_line_tweets = [
         "time",
         "sentiment"
-    ]
+    ];
     $scope.y_line_tweets = [
-        "tweet_count",
-        "retweet_count",
+        "tweet count",
+        "retweet count",
         "impact"
-    ]
+    ];
     $scope.x_bar_tweets = [
         "gender",
         "lang",
         "time",
         "sentiment"
-    ]
+    ];
     $scope.y_bar_tweets = [
-        "tweet_count",
-        "retweet_count",
+        "tweet count",
+        "retweet count",
         "impact"
-    ]
+    ];
     $scope.pie_tweets = [
         "gender",
         "lang",
-        "sentiment",
-        "tweet_count",
-        "retweet_count"
-    ]
+        "sentiment"
+    ];
 
     /* Converting chart Data in to 2D data */
 
@@ -49,7 +47,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         angular.forEach(data, function (d,i) {
             if (xCol == "minutes" && yCol == "retweet_count")
                 this.push({"x": d.minutes, "y": d.retweet_count});
-
             if (xCol == "time" && yCol == "tweet_count")
                 this.push({"x": d.time, "y": d.tweet_count});
             else if (xCol == "time" && yCol == "retweet_count")
@@ -200,8 +197,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
         /*Updating plotData so that new visualization can be loaded*/
         // $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
-    }
-
+    };
     /*
     var x_line_checked_count = 0;
     var x_line_clicked_element = [];

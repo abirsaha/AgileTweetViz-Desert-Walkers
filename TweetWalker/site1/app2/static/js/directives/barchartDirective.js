@@ -156,6 +156,7 @@ tweetApp.directive('barChart', function($parse, $window){
                         return ratio* d.y;})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
+
             }
 
             function redrawBarChart() {

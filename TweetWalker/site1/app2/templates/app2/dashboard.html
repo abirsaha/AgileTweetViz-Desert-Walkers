@@ -19,7 +19,8 @@
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
             <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
-			<li><a data-toggle="tab" href="#genchart">Gender Chart</a></li>
+			<li><a data-toggle="tab" href="#genchart">Gender Line Chart</a></li>
+            <li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -42,7 +43,7 @@
                 <button ng-click="regenerateLineViz()" disabled>Get Visualization</button>
                 <br/>
                 <br/>
-                <div linear-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" style="position: relative;top:30%;left:5%"></div>
+                <div linear-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" type="regular" style="position: relative;top:30%;left:5%"></div>
             </div>
             <div id="barchart" class="tab-pane fade">
                 <h3>Bar Chart Visualization</h3>
@@ -71,7 +72,6 @@
                 <h3>Gender Chart Visualization</h3>
                 <br/>
                 <div gen-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
-
             </div>
 
             <div id="piechart" class="tab-pane fade">
@@ -87,7 +87,13 @@
                 <button>Get Visualization</button>
                 <br/>
                 <br/>
-                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="lang" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+
+            </div>
+            <div id="genpiechart" class="tab-pane fade">
+                <h3>Pie Chart Visualization</h3>
+                <br/>
+                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="gender" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
             </div>
 
