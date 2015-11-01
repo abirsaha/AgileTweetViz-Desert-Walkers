@@ -5,6 +5,7 @@ import simplejson as json
 from datetime import datetime
 import uuid
 from sentiment import get_sentiment
+from impact_factor import get_impact_factor
 from gender import *
 
 
@@ -137,24 +138,43 @@ def twitter_parser(string):
         'Nov': 11,
         'Dec': 12
     }
+
+    max_retweet_count = 0
+    max_followers_count = 0
+    max_statuses_count = 0
+    # Evaluating maximum values for retweet_count, followers_count and statuses_count
+    for tweet in statuses:
+        if tweet["retweet_count"] > max_retweet_count:
+            max_retweet_count = tweet["retweet_count"]
+        if tweet["user"]["followers_count"] > max_followers_count:
+            max_followers_count = tweet["user"]["followers_count"]
+        if tweet["user"]["statuses_count"] > max_statuses_count:
+            max_statuses_count = tweet["user"]["statuses_count"]
+
     # Can be called when analysing data
     # data_analysis(statuses)
     for tweet in statuses:
         data = {}
         data["screenname"] = tweet["user"]["screen_name"]
         data["date"] = tweet["created_at"]
-        data["value"] = tweet["user"]["statuses_count"]
+        # data["value"] = tweet["user"]["statuses_count"]
+        data["value"] = 1
         data["text"] = tweet["text"]
         if len(tweet["text"]) > 2:
             data["sentiment"] = get_sentiment(tweet["text"])
         else:
             data["sentiment"] = 0
         date = tweet["created_at"].split()
-        data["year"] = date[len(date)-1]
-        data["month"] = month[date[1]]
-        data["day"] = date[2]
+        data["time"] = int(date[3].split(":")[0])
+        # data["year"] = date[len(date)-1]
+        # data["month"] = month[date[1]]
+        # data["day"] = date[2]
         data["minutes"] = int(date[3].split(":")[1])
         data["lang"] = tweet["lang"]
         data["gender"] = user_gender.get(data["screenname"])
+        data["retweet_count"] = tweet["retweet_count"]
+        data["impact"] = get_impact_factor(tweet["retweet_count"], max_retweet_count,
+                                             tweet["user"]["followers_count"], max_followers_count,
+                                             tweet["user"]["statuses_count"], max_statuses_count)
         jsonlist.append(data)
     return json.dumps(jsonlist)

@@ -10,11 +10,33 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 	// Getting count of the attributes inside each tweet
 	// Object.keys($scope.tweets[0]).length
 
-	$scope.x_line_tweets = ["month", "year", "date", "minutes", "day"]
-	$scope.y_line_tweets = ["lang", "text", "value", "screenname"]
-	$scope.x_bar_tweets = ["month", "year", "date", "minutes", "day"]
-	$scope.y_bar_tweets = ["lang", "text", "value", "screenname"]
-	$scope.pie_tweets = ["lang", "text", "value", "screenname"]
+    $scope.x_line_tweets = [
+        "time",
+        "sentiment"
+    ]
+    $scope.y_line_tweets = [
+        "tweet_count",
+        "retweet_count",
+        "impact"
+    ]
+    $scope.x_bar_tweets = [
+        "gender",
+        "lang",
+        "time",
+        "sentiment"
+    ]
+    $scope.y_bar_tweets = [
+        "tweet_count",
+        "retweet_count",
+        "impact"
+    ]
+    $scope.pie_tweets = [
+        "gender",
+        "lang",
+        "sentiment",
+        "tweet_count",
+        "retweet_count"
+    ]
 
     /* Converting chart Data in to 2D data */
 
@@ -25,21 +47,42 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         var temp = [];
 
         angular.forEach(data, function (d,i) {
-            if (xCol == "date" && yCol == "value")
-                this.push({"x": d.date, "y": d.value});
-            if (xCol == "minutes" && yCol == "value")
-                this.push({"x": d.minutes, "y": d.value});
+            if (xCol == "minutes" && yCol == "retweet_count")
+                this.push({"x": d.minutes, "y": d.retweet_count});
 
+            if (xCol == "time" && yCol == "tweet_count")
+                this.push({"x": d.time, "y": d.tweet_count});
+            else if (xCol == "time" && yCol == "retweet_count")
+                this.push({"x": d.time, "y": d.retweet_count});
+            else if (xCol == "time" && yCol == "impact")
+                this.push({"x": d.time, "y": d.impact});
+            else if (xCol == "gender" && yCol == "tweet_count")
+                this.push({"x": d.gender, "y": d.tweet_count});
+            else if (xCol == "gender" && yCol == "retweet_count")
+                this.push({"x": d.gender, "y": d.retweet_count});
+            else if (xCol == "gender" && yCol == "impact")
+                this.push({"x": d.gender, "y": d.impact});
+            else if (xCol == "lang" && yCol == "tweet_count")
+                this.push({"x": d.lang, "y": d.tweet_count});
+            else if (xCol == "lang" && yCol == "retweet_count")
+                this.push({"x": d.lang, "y": d.retweet_count});
+            else if (xCol == "lang" && yCol == "impact")
+                this.push({"x": d.lang, "y": d.impact});
+            else if (xCol == "sentiment" && yCol == "tweet_count")
+                this.push({"x": d.sentiment, "y": d.tweet_count});
+            else if (xCol == "sentiment" && yCol == "retweet_count")
+                this.push({"x": d.sentiment, "y": d.retweet_count});
+            else if (xCol == "sentiment" && yCol == "impact")
+                this.push({"x": d.sentiment, "y": d.impact});
+            else this.push({"x": d.time, "y": d.tweet_count});
         },temp);
 
         /* Sorting the 2D JSON Data*/
-
         temp.sort(function (a, b) {
             return a.x - b.x;
         });
 
         /* Returning the cumulative sum of y attribute corresponding to same x attribute*/
-
         var retValue = [];
         if (temp.length != 0) {
             var tempX = temp[0].x;
@@ -58,7 +101,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
                         this.push({"x": tempX-2, "y": 0});
                         this.push({"x": tempX-1, "y": 0});
                         this.push({"x": tempX, "y": tempY});
-                        this.push({"x": tempX+1, "y": 0})
+                        this.push({"x": tempX+1, "y": 0});
                         this.push({"x": tempX+2, "y": 0});
                     }
                     else{
@@ -70,10 +113,96 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         return retValue;
     };
 
+    /*variables that will determine the x-axis and y-axis of the visualization*/
+    var x_checked_element = "sentiment";
+    var y_checked_element = "impact";
+
     /*Putting chart data to scope*/
+    $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
 
-    $scope.plotData  = make_2d_Data($scope.tweets, "minutes", "value");
+    /*OnClick event of the radio buttons in x-axis of line chart*/
+    var x_line_clicked_element = [];
+    $scope.check_x_line = function(element){
+        x_line_clicked_element = [];
+        x_line_clicked_element.push(element);
+        // console.log("in check_x_line",element,x_line_clicked_element);
+    };
 
+    /*OnClick event of the radio buttons in y-axis of line chart*/
+    var y_line_clicked_element = [];
+    $scope.check_y_line = function(element){
+        y_line_clicked_element = [];
+        y_line_clicked_element.push(element);
+        // console.log("in check_y_line",element,y_line_clicked_element);
+    };
+
+    /*OnClick event of the radio buttons in x-axis of bar chart*/
+    var x_bar_clicked_element = [];
+    $scope.check_x_bar = function(element){
+        x_bar_clicked_element = [];
+        x_bar_clicked_element.push(element);
+        // console.log("in check_x_line",element,x_bar_clicked_element);
+    };
+
+    /*OnClick event of the radio buttons in y-axis of bar chart*/
+    var y_bar_clicked_element = [];
+    $scope.check_y_bar = function(element){
+        y_bar_clicked_element = [];
+        y_bar_clicked_element.push(element);
+        // console.log("in check_y_line",element,y_line_clicked_element);
+    };
+
+    /*OnClick event of the radio buttons of pie chart*/
+    var pie_clicked_element = [];
+    $scope.check_pie = function(element){
+        pie_clicked_element = [];
+        pie_clicked_element.push(element);
+        // console.log("in check_y_line",element,y_line_clicked_element);
+    };
+
+    /*OnClick event of the get visualization button of line chart*/
+    $scope.regenerateLineViz = function() {
+        $.each($scope.tweets[0],function(k,value){
+            if($scope.x_line_tweets.indexOf(k)>=0 && x_line_clicked_element.indexOf(k)>=0){
+                x_checked_element = k
+            }
+            if($scope.y_line_tweets.indexOf(k)>=0 && y_line_clicked_element.indexOf(k)>=0){
+                y_checked_element = k
+            }
+        });
+
+        /*Updating plotData so that new visualization can be loaded*/
+        $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
+    }
+
+    /*OnClick event of the get visualization button of bar chart*/
+    $scope.regenerateBarViz = function() {
+        $.each($scope.tweets[0],function(k,value){
+            if ($scope.x_bar_tweets.indexOf(k)>=0 && x_bar_clicked_element.indexOf(k)>=0){
+                x_checked_element = k
+            }
+            if ($scope.y_bar_tweets.indexOf(k)>=0 && y_bar_clicked_element.indexOf(k)>=0){
+                y_checked_element = k
+            }
+        });
+
+        /*Updating plotData so that new visualization can be loaded*/
+        $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
+    }
+
+    /*OnClick event of the get visualization button of pie chart*/
+    $scope.regeneratePieViz = function() {
+        $.each($scope.tweets[0],function(k,value){
+            //if ($scope.pie_tweets.indexOf(k)>=0 && pie_clicked_element.indexOf(k)>=0){
+            //    x_checked_element = k
+            //}
+        });
+
+        /*Updating plotData so that new visualization can be loaded*/
+        // $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
+    }
+
+    /*
     var x_line_checked_count = 0;
     var x_line_clicked_element = [];
     $scope.check_x_line = function(element){
@@ -233,6 +362,8 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             });
         }
     };
+    */
+
     $scope.gauge = {
         name: 'Positive Tweets',
         opacity: 0.55,

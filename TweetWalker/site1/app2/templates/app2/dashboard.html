@@ -16,77 +16,84 @@
     {%verbatim%}
     <div class="col-md-9" id = "viz">
         <ul class="nav nav-tabs">
-
             <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
             <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
             <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
-            <li><a data-toggle="tab" href="#genchart">Gender Chart</a></li>
-
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
                 <h3>Line Chart Visualization</h3>
-				<h5>Choose Dimension for X-Axis:</h5>
-				<div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">
-					<input type="checkbox" class="chk" id="{{xLineKey}}_line" ng-click="check_x_line(xLineKey)">{{xLineKey}}</input>
-				</div>
-				<br/>
-				<h5>Choose Dimension for Y-Axis:</h5>
-				<div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
-					<input type="checkbox" class="chk" id="{{yLineKey}}_line" ng-click="check_y_line(yLineKey)">{{yLineKey}}</input>
-				</div>
-				<br/>
-				<br/>
-				<button>Get Visualization</button>
-				<br/>
-				<br/>
-                <div linear-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%"></div>
+                <h4>Choose Dimension for X-Axis:</h4>
+                <div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">
+                    <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
+                           value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>
+                    <label>{{xLineKey}}</label>
+                </div>
+                <br/>
+                <h4>Choose Dimension for Y-Axis:</h4>
+                <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
+                    <input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"
+                           value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" required/>
+                    <label>{{yLineKey}}</label>
+                </div>
+                <br/>
+                <br/>
+                <button ng-click="regenerateLineViz()" disabled>Get Visualization</button>
+                <br/>
+                <br/>
+                <div linear-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" style="position: relative;top:30%;left:5%"></div>
             </div>
             <div id="barchart" class="tab-pane fade">
                 <h3>Bar Chart Visualization</h3>
-                <h5>Choose Dimension for X-Axis:</h5>
+                <h4>Choose Dimension for X-Axis:</h4>
                 <div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">
-                    <input type="checkbox" class="chk" id="{{xBarKey}}_bar" ng-click="check_x_bar(xBarKey)">{{xBarKey}}</input>
+                    <input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"
+                           value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" required/>
+                    <label>{{xBarKey}}</label>
                 </div>
                 <br/>
-                <h5>Choose Dimension for Y-Axis:</h5>
+                <h4>Choose Dimension for Y-Axis:</h4>
                 <div ng-repeat="yBarKey in y_bar_tweets" class="checkboxtext">
-                    <input type="checkbox" class="chk" id="{{yBarKey}}_bar" ng-click="check_y_bar(yBarKey)">{{yBarKey}}</input>
+                    <input type="radio" id="{{yBarKey}}_line" class="chk" name="y_bar_dimension"
+                           value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" required/>
+                    <label>{{yBarKey}}</label>
                 </div>
                 <br/>
                 <br/>
-                <button>Get Visualization</button>
+                <button ng-click="regenerateBarViz()" disabled>Get Visualization</button>
                 <br/>
                 <br/>
-                <div bar-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+                <div bar-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
             </div>
 
             <div id="genchart" class="tab-pane fade">
                 <h3>Gender Chart Visualization</h3>
                 <br/>
-                <div gen-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
+                <div gen-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
 
             </div>
-            
+
             <div id="piechart" class="tab-pane fade">
                 <h3>Pie Chart Visualization</h3>
-                <h5>Choose Dimension</h5>
+                <h4>Choose Dimension:</h4>
                 <div ng-repeat="pieKey in pie_tweets" class="checkboxtext">
-                    <input type="checkbox" class="chk" id="{{pieKey}}_pie" ng-click="check_pie(pieKey)">{{pieKey}}</input>
+                    <input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"
+                           value="{{pieKey}}" required/>
+                    <label>{{pieKey}}</label>
                 </div>
                 <br/>
                 <br/>
                 <button>Get Visualization</button>
                 <br/>
                 <br/>
-                <div pie-chart chart-data="plotData" yaxis-label="tweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
             </div>
 
         </div>
         <div style="width: 25%;">
 
-             <sentiment-directive id="gauge1" config="gauge"></sentiment-directive>
+            <sentiment-directive id="gauge1" config="gauge"></sentiment-directive>
         </div>
     </div>
     <div class="col-md-3">
