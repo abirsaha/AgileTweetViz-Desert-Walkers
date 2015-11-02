@@ -149,8 +149,7 @@ tweetApp.directive('barChart', function($parse, $window){
                         .data(dataToPlot)
                         .enter()
                         .append("rect")
-                        //.attr("class", barClass)
-                        .attr("fill", "steelblue")
+                        .attr("class", barClass)
                         .attr("x", function (d, i) {
                             return margin.left - (barwidth($('#bchart').attr('width')) / 2) + ((tbarpadding / (dataToPlot.length - 1)) + barwidth($('#bchart').attr('width'))) * i;
                         })
@@ -165,7 +164,6 @@ tweetApp.directive('barChart', function($parse, $window){
                         .on('mouseout', tip.hide);
                 }
                 if (attrs.type == "gender") {
-                    width_double = width/2
                     svg.selectAll(".bar")
                         .data(dataToPlot)
                         .enter()
@@ -240,7 +238,7 @@ tweetApp.directive('barChart', function($parse, $window){
                 }
 
                 else if (attrs.type == "gender") {
-                    var width_double = width/2;
+                    var data_f = scope.data_f;
                     svg.selectAll(".bar")
                         .data(dataToPlot)
                         //.enter()
