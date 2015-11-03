@@ -23,6 +23,8 @@
             <li><a data-toggle="tab" href="#genchartbar">Gender Bar Chart</a></li>
              <li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>
             <li><a data-toggle="tab" href="#circlechart">circleChart</a></li>
+            <li><a data-toggle="tab" href="#bubblechart">Bubble Chart</a></li>
+            <li><a data-toggle="tab" href="#slidechart">Slide Chart</a></li>
         </ul>
         <div class="tab-content">
             <div id="linechart" class="tab-pane fade in active">
@@ -111,7 +113,18 @@
                 <div circle-chart style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="cchart"></div>
 
             </div>
+            <div id="bubblechart" class="tab-pane fade">
+                <h3>Bubble Chart Visualization</h3>
+                <br/>
+                <div bubble-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="gender" id="bubble" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
 
+            </div>
+            <div id="slidechart" class="tab-pane fade">
+                <h3>Slide Chart Visualization</h3>
+                <br/>
+                <div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="gender" id="slide" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
+
+            </div>
         </div>
         <div style="width: 25%;">
 

@@ -159,8 +159,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                 var width = (container[0].offsetWidth),
                     height = (container[0].offsetHeight),
                     radius = Math.min(width, height) / 2;
-                console.log(width);
-                console.log(height);
                 redrawChart();
             });
             scope.$watchCollection('tweets', function(newVal, oldVal){
