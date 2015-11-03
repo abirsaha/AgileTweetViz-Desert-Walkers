@@ -15,7 +15,7 @@
                 replace: true,
                 controller: function($scope, $element) {
 
-                console.log("scope",$scope);
+                //console.log("scope",$scope);
 
                     var options = {
                         element: $element[0].id,

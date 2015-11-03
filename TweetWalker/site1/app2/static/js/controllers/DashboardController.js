@@ -5,7 +5,7 @@
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
 
     $scope.tweets = JSON.parse($window.data);
-    console.log("in dashboard",$scope.tweets);
+    //console.log("in dashboard",$scope.tweets);
 	
 	// Getting count of the attributes inside each tweet
 	// Object.keys($scope.tweets[0]).length

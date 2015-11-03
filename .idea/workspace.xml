@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="5e3a8242-92c8-4add-be5f-290aef2e5bfb" name="Default" comment="">
 <<<<<<< Updated upstream
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" afterPath="$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js" />
@@ -11,6 +12,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
 >>>>>>> Stashed changes
     </list>
+=======
+    <list default="true" id="5e3a8242-92c8-4add-be5f-290aef2e5bfb" name="Default" comment="" />
+>>>>>>> Stashed changes
     <ignored path="AgileTweetViz-Desert-Walkers.iws" />
     <ignored path=".idea/workspace.xml" />
     <ignored path=".idea/dataSources.local.xml" />
@@ -43,21 +47,21 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DashboardController.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.19266056">
-              <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="242" column="25" selection-start-line="242" selection-start-column="25" selection-end-line="242" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="150" column="33" selection-start-line="150" selection-start-column="33" selection-end-line="150" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.5045872">
+              <caret line="148" column="60" selection-start-line="148" selection-start-column="60" selection-end-line="148" selection-end-column="60" />
               <folding />
             </state>
           </provider>
@@ -1054,6 +1058,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/gender.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -1064,6 +1069,9 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js">
+=======
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/directives/barchartDirective.js">
+>>>>>>> Stashed changes
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="6" column="17" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="17" />
@@ -1121,8 +1129,16 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/static/js/controllers/DashboardController.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19266056">
-          <caret line="7" column="46" selection-start-line="7" selection-start-column="46" selection-end-line="7" selection-end-column="46" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="242" column="25" selection-start-line="242" selection-start-column="25" selection-end-line="242" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TweetWalker/site1/app2/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5045872">
+          <caret line="148" column="60" selection-start-line="148" selection-start-column="60" selection-end-line="148" selection-end-column="60" />
           <folding />
         </state>
       </provider>
