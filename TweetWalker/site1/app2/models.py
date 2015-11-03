@@ -34,6 +34,7 @@ class Twit(models.Model):
     possibly_sensitive = models.TextField(u'Possibly Sensitive', blank=True)
     geo = models.TextField(u'Geo', blank=True)
     favourite_count = models.PositiveIntegerField(u'Favorite Count', null=True)
+    profile_image_url = models.URLField(u'Profile Image Url')
 
     def __unicode__(self):
         return self.text
@@ -111,6 +112,8 @@ def twitter_parser(string):
     # Initiate the connection to Twitter Streaming API
     twitter = Twitter(auth=oauth)
     search_results = twitter.search.tweets(q= string, count='100')
+    print "Find Datas"
+    print search_results
     user_gender = Gender();
 
     statuses = search_results['statuses']
@@ -173,6 +176,8 @@ def twitter_parser(string):
         data["lang"] = tweet["lang"]
         data["gender"] = user_gender.get(data["screenname"])
         data["retweet_count"] = tweet["retweet_count"]
+        data["profile_image_url"] = tweet["user"]["profile_image_url"]
+        data["profile_image_url_https"] = tweet["user"]["profile_image_url_https"]
         data["impact"] = get_impact_factor(tweet["retweet_count"], max_retweet_count,
                                              tweet["user"]["followers_count"], max_followers_count,
                                              tweet["user"]["statuses_count"], max_statuses_count)
