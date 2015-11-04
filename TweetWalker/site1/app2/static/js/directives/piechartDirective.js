@@ -13,8 +13,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             var makedata = function(){
                 if (attrs.type == "lang") {
                     var dict = {};
-                    // we need to get full name of language
-                    // we can use lang.js but there are languages that it doesn't support
                     for (var i = 0; i < rawdata.length; i++) {
                         var obj = rawdata[i];
                         if (obj["lang"] in dict) {

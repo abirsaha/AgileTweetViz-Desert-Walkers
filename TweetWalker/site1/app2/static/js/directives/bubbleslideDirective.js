@@ -79,7 +79,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                 .attr("width", width)
                 .attr("height",h)
                 .on("mouseleave", function() {return resetBubbles();});
-            console.log(dict);
+            //console.log(dict);
            
             var bubbleObj = svg.selectAll(".topBubble")
                         .data(dict.children)

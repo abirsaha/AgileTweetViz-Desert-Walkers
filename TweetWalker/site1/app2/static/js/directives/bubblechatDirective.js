@@ -9,7 +9,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
         link: function (scope, elem, attrs) {
 
             var rawdata = scope.tweets;
-            var root = {"name": "bubble", "children":
+            /*var root = {"name": "bubble", "children":
                                             [{"name": "Male",
                                                 "size": 0,
                                                 "children" :
@@ -31,36 +31,166 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
                                                         "size": 0}
                                                         ]
                                              }]
+                        };*/
+            var root = {"name": "bubble", "children":
+                                            [{"name": "Male",
+                                                "size": 0,
+                                                "children" :
+                                                    []},
+                                             {"name": "Female",
+                                                 "size":0,
+                                                 "children":
+                                                    []
+                                             }]
                         };
 
+            if (attrs.type == "lang") {
+                var dict = {};
+                // we need to get full name of language
+                // we can use lang.js but there are languages that it doesn't support
+                var j = 0;
+                for (var i = 0; i < rawdata.length; i++) {
+                    var obj = rawdata[i];
+                    if (!(obj["lang"] in dict)) {
 
-            for (var i = 0; i < rawdata.length; i++) {
-                var obj = rawdata[i];
-                if (obj["gender"] == "male") {
-                    root.children[0].size++;
-                    if (obj["sentiment"] == 0) {
-                        root.children[0].children[0].size++;
+                        dict[obj["lang"]] = j;
+                        j++;
+                        if (obj["gender"] == "male") {
+                            root.children[0].children.push({
+                                    "name": obj["lang"], "size": 1
+                                });
+                            root.children[1].children.push({
+                                    "name": obj["lang"], "size": 0
+                                });
+                        }
+
+                        else if (obj["gender"] == "female"){
+                            root.children[0].children.push({
+                                    "name": obj["lang"], "size": 0
+                                });
+                            root.children[1].children.push({
+                                    "name": obj["lang"], "size": 1
+                                });
+                        }
                     }
-                    else if (obj["sentiment"] == 1) {
-                        root.children[0].children[1].size++;
-                    }
-                    else if (obj["sentiment"] == 2) {
-                        root.children[0].children[2].size++;
+                    else {
+                        if (obj["gender"] == "male") {
+                            root.children[0].size++;
+                            root.children[0].children[dict[obj["lang"]]].size++;
+                        }
+                        else if (obj["gender"] == "female"){
+                            root.children[1].size++;
+                            root.children[1].children[dict[obj["lang"]]].size++;
+                        }
+
                     }
                 }
-                else if (obj["gender"] == "female") {
-                    root.children[1].size++;
-                    if (obj["sentiment"] == 0) {
-                        root.children[1].children[0].size++;
+                // add children sentiment for gender--> lang--> sentiment
+                /*for (var key in dict) {
+                    root.children[0].children.push({
+                        "name": key, "size": dict[key]}
+                    );
+                    root.children[1].children.push({
+                        "name": key, "size": dict[key]});
+                }*/
+            }
+
+            if (attrs.type == "sentiment") {
+                root.children[0].children.push({"name": "Neutral",
+                                                        "size": 0},
+                                                        {"name": "Positive",
+                                                        "size":0},
+                                                        {"name": "Negative",
+                                                        "size": 0},
+                                                        {"name": "Other",
+                                                        "size": 0}
+                    );
+                    root.children[1].children.push({"name": "Neutral",
+                                                        "size": 0},
+                                                        {"name": "Positive",
+                                                        "size":0},
+                                                        {"name": "Negative",
+                                                        "size": 0},
+                                                        {"name": "Other",
+                                                        "size": 0}    );
+
+                for (var i = 0; i < rawdata.length; i++) {
+                    var obj = rawdata[i];
+                    if (obj["gender"] == "male") {
+                        root.children[0].size++;
+                        if (obj["sentiment"] == 0) {
+                            root.children[0].children[0].size++;
+                        }
+                        else if (obj["sentiment"] == 1) {
+                            root.children[0].children[1].size++;
+                        }
+                        else if (obj["sentiment"] == 2) {
+                            root.children[0].children[2].size++;
+                        }
+                        else if (obj["sentiment"] == -1) {
+                            root.children[0].children[3].size++;
+                        }
                     }
-                    else if (obj["sentiment"] == 1) {
-                        root.children[1].children[1].size++;
-                    }
-                    else if (obj["sentiment"] == 2) {
-                        root.children[1].children[2].size++;
+                    else if (obj["gender"] == "female") {
+                        root.children[1].size++;
+                        if (obj["sentiment"] == 0) {
+                            root.children[1].children[0].size++;
+                        }
+                        else if (obj["sentiment"] == 1) {
+                            root.children[1].children[1].size++;
+                        }
+                        else if (obj["sentiment"] == 2) {
+                            root.children[1].children[2].size++;
+                        }
+                        else if (obj["sentiment"] == -1) {
+                            root.children[0].children[3].size++;
+                        }
                     }
                 }
             }
+       // for gender--> lang--> sentiment
+       /* for (i = 0; i < rawdata.length; i++) {
+                    obj = rawdata[i];
+                    if (obj["gender"] == "male") {
+                        root.children[0].size++;
+                        for (var j in root.children[0].children){
+                            if (root.children[0].children[j].name == obj["lang"]){
+                                root.children[0].children[j].size++;
+                                if (obj["sentiment"] == 0) {
+                                    root.children[0].children[j].children[0].size++;
+                                }
+                                else if (obj["sentiment"] == 1) {
+                                    root.children[0].children[j].children[0].size++;
+                                }
+                                else if (obj["sentiment"] == 2) {
+                                    root.children[0].children[j].children[0].size++;
+                                }
+                                break;
+                            }
+                        }
+                    }
+                    else if (obj["gender"] == "female") {
+                        root.children[1].size++;
+                        for (j in root.children[1].children){
+                            if (root.children[0].children[j].name == obj["lang"]){
+                                root.children[0].children[j].size++;
+                                if (obj["sentiment"] == 0) {
+                                    root.children[0].children[j].children[0].size++;
+                                }
+                                else if (obj["sentiment"] == 1) {
+                                    root.children[0].children[j].children[1].size++;
+                                }
+                                else if (obj["sentiment"] == 2) {
+                                    root.children[0].children[j].children[2].size++;
+                                }
+                            }
+                            break;
+                        }
+                    }
+                }*/
+
+    console.log(root);
+
     var margin = 20,
     diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight);
 
@@ -70,66 +200,66 @@ var color = d3.scale.linear()
     .range(["hsl(152,80%,80%)", "hsl(228,30%,40%)"])
     .interpolate(d3.interpolateHcl);
 */
-var color = d3.scale.category20();
-var pack = d3.layout.pack()
-    .padding(2)
-    .size([diameter - margin, diameter - margin])
-    .value(function(d) { return d.size; })
-var rawsvg = elem.find("svg");
-var svg = d3.select(rawsvg[0])
-    .attr("width", diameter)
-    .attr("height", diameter)
-    .append("g")
-    .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+    var color = d3.scale.category10();
+    var pack = d3.layout.pack()
+                        .padding(2)
+                        .size([diameter - margin, diameter - margin])
+                        .value(function(d) { return d.size; });
+    var rawsvg = elem.find("svg");
+    var svg = d3.select(rawsvg[0])
+                .attr("width", diameter)
+                .attr("height", diameter)
+                .append("g")
+                .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
 
-  var focus = root,
-      nodes = pack.nodes(root),
-      view;
+      var focus = root,
+          nodes = pack.nodes(root),
+          view;
 
-  var circle = svg.selectAll("circle")
-      .data(nodes)
-    .enter().append("circle")
-      .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
-      .style("fill", function(d) { return d.children ? color(d.depth) : color(d.depth); })
-      //.on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
-  var text = svg.selectAll("text")
-      .data(nodes)
-    .enter().append("text")
-      .attr("class", "label")
-      .attr("text-anchor", "middle")
-      .style("fill-opacity", function(d) { return d.parent ? 1 : 0; })
-      .style("display", function(d) { return d.parent ? null : "none"; })
-      .text(function(d) { return d.name.substring(0, d.r / 3); });
+      var circle = svg.selectAll("circle")
+                        .data(nodes)
+                        .enter().append("circle")
+                            .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
+                            .style("fill", function(d) { return d.children ? color(d.depth) : color(d.depth); })
+                            .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+      var text = svg.selectAll("text")
+                    .data(nodes)
+                    .enter().append("text")
+                        .attr("class", "label")
+                        .attr("text-anchor", "middle")
+                        .style("fill-opacity", function(d) { return d.parent ? 1 : 0; })
+                        .style("display", function(d) { return d.parent ? null : "none"; })
+                        .text(function(d) { return d.name.substring(0, d.r / 3); });
 
-  var node = svg.selectAll("circle, text");
-  /*d3.select("#bubble")
-      .style("background", color(-1))
-      .on("click", function() { zoom(root); });
-*/
-  zoomTo([root.x, root.y, root.r * 2 + margin]);
-/*
-  function zoom(d) {
-    var focus0 = focus; focus = d;
+      var node = svg.selectAll("circle, text");
+      /*d3.select("#bubble")
+          .style("background", color(-1))
+          .on("click", function() { zoom(root); });
+    */
+      zoomTo([root.x, root.y, root.r * 2 + margin]);
 
-    var transition = d3.transition()
-        .duration(d3.event.altKey ? 7500 : 750)
-        .tween("zoom", function(d) {
-          var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-          return function(t) { zoomTo(i(t)); };
-        });
+      function zoom(d) {
+        var focus0 = focus; focus = d;
 
-    transition.selectAll("text")
-        .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-        .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-        .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-        .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+        var transition = d3.transition()
+                            .duration(d3.event.altKey ? 7500 : 750)
+                            .tween("zoom", function(d) {
+                                var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                                return function(t) { zoomTo(i(t)); };
+                            });
+
+        transition.selectAll("text")
+            .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
+            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+            .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+            .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
   }
-*/
-  function zoomTo(v) {
-    var k = diameter / v[2]; view = v;
-    node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
-    circle.attr("r", function(d) { return d.r * k; });
-  }
+
+      function zoomTo(v) {
+        var k = diameter / v[2]; view = v;
+        node.attr("transform", function(d) { return "translate(" + (d.x - v[0]) * k + "," + (d.y - v[1]) * k + ")"; });
+        circle.attr("r", function(d) { return d.r * k; });
+      }
 
             /*var width = $("#viz")[0].offsetWidth;
             var w = $("#viz")[0].offsetWidth*0.68*0.95;
