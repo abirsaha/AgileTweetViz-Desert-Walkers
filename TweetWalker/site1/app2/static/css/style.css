@@ -1,3 +1,8 @@
+path {
+    stroke: red;
+    stroke-width: 0.5px;
+    fill: grey;
+}
 
 .chk{
     font-size: 15pt;

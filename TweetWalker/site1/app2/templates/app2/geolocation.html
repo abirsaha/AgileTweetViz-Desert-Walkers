@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block content %}
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <h2>TweetWalker</h2>
+        </div>
+    </div>
+</nav>
+
+<div id="geolocation" class="container" style="width:100%;">
+    <script type='text/javascript'>
+        var back = "{{form|escapejs}}";
+        window.data = back
+    </script>
+    {%verbatim%}
+    <div class="col-md-12" id = "geo">
+        <h3>World Map Visualization</h3>
+        <div geo-chart></div>
+    </div>
+    {%endverbatim%}
+</div>
+{% endblock content %}
