@@ -227,8 +227,8 @@ var color = d3.scale.linear()
                     .enter().append("text")
                         .attr("class", "label")
                         .attr("text-anchor", "middle")
-                        .style("fill-opacity", function(d) { return d.parent ? 1 : 0; })
-                        .style("display", function(d) { return d.parent ? null : "none"; })
+                        .style("fill-opacity", function(d) { return d.parent === root ? 1 : 0; })
+                        .style("display", function(d) { return d.parent === root ? null : "none"; })
                         .text(function(d) { return d.name.substring(0, d.r / 3); });
 
       var node = svg.selectAll("circle, text");
@@ -239,21 +239,19 @@ var color = d3.scale.linear()
       zoomTo([root.x, root.y, root.r * 2 + margin]);
 
       function zoom(d) {
-        var focus0 = focus; focus = d;
-
-        var transition = d3.transition()
-                            .duration(d3.event.altKey ? 7500 : 750)
-                            .tween("zoom", function(d) {
-                                var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
-                                return function(t) { zoomTo(i(t)); };
-                            });
-
-        transition.selectAll("text")
-            .filter(function(d) { return d.parent === focus || this.style.display === "inline"; })
-            .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
-            .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
-            .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
-  }
+            var focus0 = focus; focus = d;
+            var transition = svg.transition()
+                                .duration(d3.event.altKey ? 7500 : 750)
+                                .tween("zoom", function(d) {
+                                    var i = d3.interpolateZoom(view, [focus.x, focus.y, focus.r * 2 + margin]);
+                                    return function(t) { zoomTo(i(t)); };
+                                });
+            transition.selectAll("text")
+                //.filter(function(d) {  return d.parent === focus || this.style.display === "inline"; })
+                .style("fill-opacity", function(d) { return d.parent === focus ? 1 : 0; })
+                .each("start", function(d) { if (d.parent === focus) this.style.display = "inline"; })
+                .each("end", function(d) { if (d.parent !== focus) this.style.display = "none"; });
+      }
 
       function zoomTo(v) {
         var k = diameter / v[2]; view = v;
