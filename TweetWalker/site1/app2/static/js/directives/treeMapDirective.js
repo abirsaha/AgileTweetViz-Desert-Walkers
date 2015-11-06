@@ -8,6 +8,7 @@ tweetApp.directive('treeMap', function ($compile) {
             data: '='
         },
         compile: function (compileJqElement, attrs) {
+            console.log("Inside directive");
             var valueAttr = attrs.value,
                 widthAttr = parseInt(attrs.width, 10),
                 heightAttr = parseInt(attrs.height, 10),

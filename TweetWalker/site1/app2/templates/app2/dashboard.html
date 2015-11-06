@@ -84,6 +84,36 @@
     }
 
 </style>
+
+<style type="text/css">
+    body {
+        font-family: Helvetica, Arial, Verdana;
+    }
+    .container .pvtlD3TreemapNode {
+        background: darkseagreen;
+        border: 3px solid white;
+    }
+    .container .pvtlD3TreemapNode div {
+        margin: 0;
+        padding: 15px;
+    }
+    span.population,
+    span.label {
+        display: block;
+        margin: 10px 0;
+        font-weight: bold;
+    }
+    span.label:before {
+        content: 'Label:';
+        display: block;
+        font-weight: normal;
+    }
+    span.population:before {
+        content: 'Population:';
+        display: block;
+        font-weight: normal;
+    }
+</style>
 <div class="navbar navbar-default">
     <div class="col-sm-2">
 
@@ -384,6 +414,17 @@
                         </li>
 
                     </ul>
+                    <button class="btn btn-primary" ng-click="loadData()">Load Data</button>
+                    <button  class="btn btn-primary" ng-click="updateData()">Update Data</button>
+                    <button  class="btn btn-primary" ng-click="clearData()">Clear Data</button>
+                    <tree-map width="370" height="350" data="populationData" value="population">
+                        <div>
+                            <div ng-if="!children">
+                                <!--<span class="label">{{label}}</span>-->
+                                <!--<span class="population">{{population}}</span>-->
+                            </div>
+                        </div>
+                    </tree-map>
                 </div>
             </div>
         </div>

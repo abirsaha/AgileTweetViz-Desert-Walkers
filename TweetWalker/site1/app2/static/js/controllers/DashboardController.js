@@ -398,6 +398,64 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $interval(function(){
         $scope.gauge.value= Math.round(Math.random()*100);
     }, 5000);
+
+    $scope.populationData = undefined;
+
+    $scope.loadData = function () {
+        console.log("Inside load")
+        $scope.populationData = {
+            label: 'United Kingdom',
+            population: 63181775,
+            children: [
+                {
+                    label: 'England',
+                    population: 53012456
+                },
+                {
+                    label: 'Scotland',
+                    population: 5295000
+                },
+                {
+                    label: 'Wales',
+                    population: 3063456
+                },
+                {
+                    label: 'Northern Ireland',
+                    population: 1810863
+                }
+            ]
+        };
+    };
+
+    $scope.updateData = function () {
+        $scope.populationData = {
+            label: 'United Kingdom',
+            population: 63181775,
+            children: [
+                {
+                    label: 'England',
+                    population: 5301245
+                },
+                {
+                    label: 'London',
+                    population: 2308000
+                },
+                {
+                    label: 'Wales',
+                    population: 3063456
+                },
+                {
+                    label: 'Northern Ireland',
+                    population: 1810863
+                }
+            ]
+        };
+    };
+
+    $scope.clearData = function () {
+        $scope.populationData = undefined;
+    };
+
     /* $interval(function(){
      var x=$scope.yData.length+1;
      var y= Math.round(Math.random() * 100);
