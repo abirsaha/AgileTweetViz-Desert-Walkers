@@ -15,6 +15,8 @@ def get_impact_factor(retweet_count, max_retweet_count,
     :param max_statuses_count: max number of statuses for the set of fetched tweets
     :return:
     """
+    if max_retweet_count ==0 or max_followers_count==0 or max_statuses_count==0:
+        return 1
     return Decimal(
         Decimal(Decimal(retweet_count)/Decimal(2*max_retweet_count)) +\
         Decimal(Decimal(3*followers_count)/Decimal(10*max_followers_count)) +\
