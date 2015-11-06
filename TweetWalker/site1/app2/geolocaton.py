@@ -5,6 +5,7 @@ from tweepy import Stream
 import json
 import re
 import pandas as pd
+from geopy.geocoders import Nominatim
 #Variables that contains the user credentials to access Twitter API 
 access_token = "4116969794-tLPUT7YG4mphyF3rqSC0xCwOXzdmNh54Io3S61X"
 access_token_secret = "GNUhLaEHP3koxCZmIjomL3DNwUoViWEUzmwZiBUgdPzgN"
@@ -31,6 +32,9 @@ class StdOutListener(StreamListener):
                     #print words
                     if  len(words) == 1:
                         print tweet['user']['time_zone']
+                        geolocator = Nominatim()
+                        location = geolocator.geocode(tweet['user']['time_zone'])
+                        print((location.latitude, location.longitude))
         #print tweet[location]
         #print tweet['id']
         #if tweet.has_key('location'):
