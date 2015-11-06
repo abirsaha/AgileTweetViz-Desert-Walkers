@@ -15,10 +15,26 @@ def get_impact_factor(retweet_count, max_retweet_count,
     :param max_statuses_count: max number of statuses for the set of fetched tweets
     :return:
     """
-    if max_retweet_count ==0 or max_followers_count==0 or max_statuses_count==0:
-        return 1
-    return Decimal(
+    if max_retweet_count ==0 and max_followers_count==0 and max_statuses_count==0: 
+        return 0
+    elif max_retweet_count !=0 and max_followers_count==0 and max_statuses_count==0:
+        return   Decimal(Decimal(retweet_count)/Decimal(2*max_retweet_count)) 
+    elif max_retweet_count ==0 and max_followers_count!=0 and max_statuses_count==0:
+        return Decimal(Decimal(3*followers_count)/Decimal(10*max_followers_count))
+    elif max_retweet_count ==0 and max_followers_count==0 and max_statuses_count!=0:
+        return Decimal(Decimal(statuses_count)/Decimal(5*max_statuses_count))
+    elif max_retweet_count !=0 and max_followers_count!=0 and max_statuses_count==0:
+        return Decimal(Decimal(retweet_count)/Decimal(2*max_retweet_count)) +\
+        Decimal(Decimal(3*followers_count)/Decimal(10*max_followers_count))
+    elif max_retweet_count !=0 and max_followers_count==0 and max_statuses_count!=0:
+        return Decimal(Decimal(retweet_count)/Decimal(2*max_retweet_count)) +\
+        Decimal(Decimal(statuses_count)/Decimal(5*max_statuses_count))
+    elif max_retweet_count ==0 and max_followers_count!=0 and max_statuses_count!=0:
+        return Decimal(Decimal(3*followers_count)/Decimal(10*max_followers_count)) +\
+        Decimal(Decimal(statuses_count)/Decimal(5*max_statuses_count))
+    else:
+        return Decimal(
         Decimal(Decimal(retweet_count)/Decimal(2*max_retweet_count)) +\
         Decimal(Decimal(3*followers_count)/Decimal(10*max_followers_count)) +\
         Decimal(Decimal(statuses_count)/Decimal(5*max_statuses_count))
-    )
+        )
