@@ -113,6 +113,8 @@
         display: block;
         font-weight: normal;
     }
+    .form-control {width:120px;}
+    .popover {max-width:400px;}
 </style>
 <div class="navbar navbar-default">
     <div class="col-sm-2">
@@ -132,10 +134,12 @@
 
 </div>
 </div>
-<div id="dashboard" ng-controller="DashboardCtrl" class="container" style="width:100%;overflow: hidden;height:900px">
+<div id="dashboard"  ng-controller="DashboardCtrl" class="container" style="width:100%;overflow: hidden;height:900px">
     <script type='text/javascript'>
         var back = "{{form|escapejs}}";
         window.data = back
+
+
     </script>
     {%verbatim%}
     <div class="container-fluid" style="margin-top:10px">
@@ -287,6 +291,48 @@
             <!--</div>-->
             <!--      <div class="container">
                       <div class="row">-->
+            <div id="1D" class="hide">
+                <div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">
+                <input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"
+                value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" required/>
+                <label>{{xBarKey}}</label>
+                </div>
+            </div>
+            <div id="1M" class="hide">
+                <div ng-repeat="yBarKey in y_bar_tweets" class="checkboxtext">
+                    <input type="radio" id="{{yBarKey}}_line" class="chk" name="y_bar_dimension"
+                    value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" required/>
+                    <label>{{yBarKey}}</label>
+                    </div>
+            </div>
+            <div id="2D" class="hide">
+                <div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">
+                    <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
+                           value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>
+                    <label>{{xLineKey}}</label>
+                </div>
+            </div>
+            <div id="2M" class="hide">
+                <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
+                    <input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"
+                    value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" required/>
+                    <label>{{yLineKey}}</label>
+                    </div>
+            </div>
+            <div id="3D" class="hide">
+                <div ng-repeat="pieKey in pie_tweets" class="checkboxtext">
+                <input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"
+                value="{{pieKey}}" required/>
+                <label>{{pieKey}}</label>
+                </div>
+            </div>
+            <div id="3M" class="hide">
+                <!--<div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">-->
+                    <!--<input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"-->
+                           <!--value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>-->
+                    <!--<label>{{xLineKey}}</label>-->
+                <!--</div>-->
+            </div>
             <div class="col-md-8">
                 <div id="widgets" style="top: -20px;position: relative;">
 
@@ -314,47 +360,60 @@
                 <!-- Nav tabs -->
                 <div class="card" >
                     <ul class="nav nav-tabs" role="tablist" style="background-color: #16a085;color: cornsilk;">
-                        <li role="presentation" class="active"><a href="#messages" aria-controls="messages" role="tab"
+                        <li role="presentation" class="active"><a href="#barChart" aria-controls="barchart" role="tab"
                                                                   data-toggle="tab">Bar Chart</a></li>
 
-                        <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Line
+                        <li role="presentation"><a href="#lineChart" aria-controls="linechart" role="tab" data-toggle="tab">Line
                             Chart</a></li>
-                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pie
+                        <li role="presentation"><a href="#pieChart" aria-controls="piechart" role="tab" data-toggle="tab">Pie
                             Chart</a></li>
-                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab"
+                        <li role="presentation"><a href="#bubbleChart" aria-controls="bubblechart" role="tab"
                                                    data-toggle="tab">Bubble Chart</a></li>
                         <li role="presentation"><a href="#slideChart" aria-controls="slideChart" role="tab"
                                                    data-toggle="tab">Slide Chart</a></li>
                         <li role="presentation"><a href="#circleChart" aria-controls="circleChart" role="tab"
                                                    data-toggle="tab">Circle Chart</a></li>
+                        <!--<li style="float: right"><a data-placement="left" data-toggle="popover" data-container="body" data-trigger="click"  type="button" data-html="true" href="#" id="login"><span title="Data Filter" class="glyphicon glyphicon-th" style="margin:3px 0 0 0"></span></a></li>-->
 
                     </ul>
 
                     <!-- Tab panes -->
-                    <div id="container" style="margin:8px;">
+                    <div id="container1" style="margin:8px;">
                         <div class="tab-content" id="viz">
-                            <div role="tabpanel" class="tab-pane" id="slideChart">
-                                <div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
-                                     type="gender" id="slide"
-                                     style="position: relative;top:0%;left:5%; height: 400px;width: 400px"></div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="home">
-                                <div linear-chart chart-data="plotData" yaxis-label="retweet_count"
-                                     xaxis-label="minutes"
-                                     type="regular" style="position: relative;top:30%;left:5%"></div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="profile">
-                                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
-                                     type="gender"
-                                     style="position: relative;top:-10%;left:0; height:400px;width: 80%"></div>
-                            </div>
-                            <div role="tabpanel" class="tab-pane active" id="messages">
+                            <div role="tabpanel" class="tab-pane active" id="barChart">
+                                <div id="bardim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
+                                <br>
+                                <br>
+                                <div id="barmeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>
+
                                 <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count"
                                      xaxis-label="minutes" type="gender"
                                      style="position: relative;top:0%;left:0%; height: 400px;width: 400px"
                                      id="gbarchart"></div>
                             </div>
-                            <div role="tabpanel" class="tab-pane" id="settings">
+
+                            <div role="tabpanel" class="tab-pane" id="lineChart">
+                                <div id="linedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
+                                <br>
+                                <br>
+                                <div id="linemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover2m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>
+
+                                <div linear-chart chart-data="plotData" yaxis-label="retweet_count"
+                                     xaxis-label="minutes"
+                                     type="regular" style="position: relative;top:30%;left:5%"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="pieChart">
+                                <div id="piedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
+                                <br>
+                                <br>
+                                <!--<div id="piemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>-->
+
+                                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
+                                     type="gender"
+                                     style="position: relative;top:-10%;left:0; height:400px;width: 80%"></div>
+                            </div>
+
+                            <div role="tabpanel" class="tab-pane" id="bubbleChart">
                                 <div bubble-chart chart-data="plotData" yaxis-label="retweet count"
                                      xaxis-label="minutes"
                                      type="lang" id="bubble"
@@ -364,6 +423,12 @@
                             <div role="tabpanel" class="tab-pane" id="circleChart">
                                 <div circle-chart style="position: relative;top:30%;left:15%; height: 100px;width: 100px"
                                 id="cchart"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="slideChart">
+
+                                <div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
+                                     type="gender" id="slide"
+                                     style="position: relative;top:0%;left:5%; height: 400px;width: 400px"></div>
                             </div>
                         </div>
                     </div>

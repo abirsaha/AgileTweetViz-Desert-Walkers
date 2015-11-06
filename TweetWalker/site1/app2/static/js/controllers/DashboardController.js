@@ -456,6 +456,55 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         $scope.populationData = undefined;
     };
 
+    $("[data-toggle=popover1d]").popover({
+        html: true,
+        content: function () {
+
+
+            return $('#1D').html();
+        }
+    });
+    $("[data-toggle=popover1m]").popover({
+        html: true,
+        content: function () {
+
+
+            return $('#1M').html();
+        }
+    });
+    $("[data-toggle=popover2d]").popover({
+        html: true,
+        content: function () {
+
+
+            return $('#2D').html();
+        }
+    });
+    $("[data-toggle=popover2m]").popover({
+        html: true,
+        content: function () {
+
+
+            return $('#2M').html();
+        }
+    });
+    $("[data-toggle=popover3d]").popover({
+        html: true,
+        content: function () {
+
+
+            return $('#3D').html();
+        }
+    });
+    //$("[data-toggle=popover3m]").popover({
+    //    html: true,
+    //    content: function () {
+    //
+    //
+    //        return $('#popover-content').html();
+    //    }
+    //});
+
     /* $interval(function(){
      var x=$scope.yData.length+1;
      var y= Math.round(Math.random() * 100);
