@@ -1,153 +1,394 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block content %}
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <h2>TweetWalker</h2>
-        </div>
+<style>
+    .nav-tabs {
+        border-bottom: 2px solid #DDD;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        border-width: 0;
+    }
+
+    .nav-tabs > li > a {
+        border: none;
+        color: cornsilk;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
+        border: none;
+        color: goldenrod !important;
+        background: transparent;
+    }
+
+    .nav-tabs > li > a::after {
+        content: "";
+        background: goldenrod;
+        height: 2px;
+        position: absolute;
+        width: 100%;
+        left: 0px;
+        bottom: -1px;
+        transition: all 250ms ease 0s;
+        transform: scale(0);
+    }
+
+    .nav-tabs > li.active > a::after, .nav-tabs > li:hover > a::after {
+        transform: scale(1);
+    }
+
+    .tab-nav > li > a::after {
+        background: goldenrod none repeat scroll 0% 0%;
+    }
+
+    .tab-pane {
+        padding: 15px 0;
+    }
+
+    .tab-content {
+        padding: 5px;
+        background-image: url("/static/img/graph.jpg");
+        height: 600px;
+        z-index: 10000;
+        box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .card {
+        background: #FFF none repeat scroll 0% 0%;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        margin-bottom: 30px;
+        height: auto
+    }
+
+    #widgets {
+        background: #FFF none repeat scroll 0% 0%;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+
+        height: 200px
+    }
+
+    #tweetContainer {
+        background: #FFF none repeat scroll 0% 0%;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        margin-bottom: 0px;
+        height: 350px;
+        top: -20px;
+        position: relative;
+    }
+
+    #treeMap {
+        background: #FFF none repeat scroll 0% 0%;
+        box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+        margin-bottom: 5px;
+        height: 450px;
+    }
+
+</style>
+<div class="navbar navbar-default">
+    <div class="col-sm-2">
+
+        <h3>TweetWalker</h3>
+
     </div>
-</nav>
-<div id="dashboard" ng-controller="DashboardCtrl" class="container" style="width:100%;">
+    <div class="col-sm-6" style="margin-top:5px">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="# hashtag">
+      <span class="input-group-btn">
+        <button class="btn btn-default btn-primary" type="button">Get Tweets!</button>
+      </span>
+        </div>
+        <!-- /input-group -->
+    </div>
+
+</div>
+</div>
+<div id="dashboard" ng-controller="DashboardCtrl" class="container" style="width:100%;overflow: hidden;height:900px">
     <script type='text/javascript'>
         var back = "{{form|escapejs}}";
         window.data = back
     </script>
     {%verbatim%}
-    <div class="col-md-9" id = "viz">
-        <ul class="nav nav-tabs">
-            <li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>
-            <li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>
-            <li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>
-			<li><a data-toggle="tab" href="#genchart">Gender Line Chart</a></li>
-            <li><a data-toggle="tab" href="#genchartbar">Gender Bar Chart</a></li>
-             <li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>
-            <li><a data-toggle="tab" href="#circlechart">circleChart</a></li>
-            <li><a data-toggle="tab" href="#bubblechart">Bubble Chart</a></li>
-            <li><a data-toggle="tab" href="#slidechart">Slide Chart</a></li>
-        </ul>
-        <div class="tab-content">
-            <div id="linechart" class="tab-pane fade in active">
-                <h3>Line Chart Visualization</h3>
-                <h4>Choose Dimension for X-Axis:</h4>
-                <div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">
-                    <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
-                           value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>
-                    <label>{{xLineKey}}</label>
+    <div class="container-fluid" style="margin-top:10px">
+        <div class="row">
+            <!--<div class="col-md-8 col-md-pull-0" id="viz">-->
+            <!--<ul class="nav nav-tabs">-->
+            <!--<li class="active"><a data-toggle="tab" href="#linechart">Line Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#barchart">Bar Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#piechart">Pie Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#genchart">Gender Line Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#genchartbar">Gender Bar Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#genpiechart">Gender Pie Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#circlechart">circleChart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#bubblechart">Bubble Chart</a></li>-->
+            <!--<li><a data-toggle="tab" href="#slidechart">Slide Chart</a></li>-->
+            <!--</ul>-->
+            <!--<div class="tab-content">-->
+            <!--<div id="linechart" class="tab-pane fade in active">-->
+            <!--<h3>Line Chart Visualization</h3>-->
+            <!--<h4>Choose Dimension for X-Axis:</h4>-->
+
+            <!--<div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">-->
+            <!--<input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"-->
+            <!--value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>-->
+            <!--<label>{{xLineKey}}</label>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<h4>Choose Dimension for Y-Axis:</h4>-->
+
+            <!--<div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">-->
+            <!--<input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"-->
+            <!--value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" required/>-->
+            <!--<label>{{yLineKey}}</label>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<br/>-->
+            <!--<button ng-click="regenerateLineViz()" disabled>Get Visualization</button>-->
+            <!--<br/>-->
+            <!--<br/>-->
+
+            <!--<div linear-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes"-->
+            <!--type="regular" style="position: relative;top:30%;left:5%"></div>-->
+            <!--</div>-->
+            <!--<div id="barchart" class="tab-pane fade">-->
+            <!--<h3>Bar Chart Visualization</h3>-->
+            <!--<h4>Choose Dimension for X-Axis:</h4>-->
+
+            <!--<div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">-->
+            <!--<input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"-->
+            <!--value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" required/>-->
+            <!--<label>{{xBarKey}}</label>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<h4>Choose Dimension for Y-Axis:</h4>-->
+
+            <!--<div ng-repeat="yBarKey in y_bar_tweets" class="checkboxtext">-->
+            <!--<input type="radio" id="{{yBarKey}}_line" class="chk" name="y_bar_dimension"-->
+            <!--value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" required/>-->
+            <!--<label>{{yBarKey}}</label>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<br/>-->
+            <!--<button ng-click="regenerateBarViz()" disabled>Get Visualization</button>-->
+            <!--<br/>-->
+            <!--<br/>-->
+
+            <!--<div bar-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes"-->
+            <!--type="regular"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>-->
+            <!--</div>-->
+
+            <!--<div id="genchart" class="tab-pane fade">-->
+            <!--<h3>Gender Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div gen-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>-->
+
+            <!--</div>-->
+            <!--<div id="genchartbar" class="tab-pane fade">-->
+            <!--<h3>Gender Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count"-->
+            <!--xaxis-label="minutes" type="gender"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"-->
+            <!--id="gbarchart"></div>-->
+
+            <!--</div>-->
+
+            <!--<div id="piechart" class="tab-pane fade">-->
+            <!--<h3>Pie Chart Visualization</h3>-->
+            <!--<h4>Choose Dimension:</h4>-->
+
+            <!--<div ng-repeat="pieKey in pie_tweets" class="checkboxtext">-->
+            <!--<input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"-->
+            <!--value="{{pieKey}}" required/>-->
+            <!--<label>{{pieKey}}</label>-->
+            <!--</div>-->
+            <!--<br/>-->
+            <!--<br/>-->
+            <!--<button>Get Visualization</button>-->
+            <!--<br/>-->
+            <!--<br/>-->
+
+            <!--<div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"-->
+            <!--type="lang" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>-->
+
+            <!--</div>-->
+            <!--<div id="genpiechart" class="tab-pane fade">-->
+            <!--<h3>Pie Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"-->
+            <!--type="gender"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>-->
+
+            <!--</div>-->
+            <!--<div id="circlechart" class="tab-pane fade">-->
+            <!--<h3>Circle Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div circle-chart style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"-->
+            <!--id="cchart"></div>-->
+
+            <!--</div>-->
+            <!--<div id="bubblechart" class="tab-pane fade">-->
+            <!--<h3>Bubble Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div bubble-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"-->
+            <!--type="lang" id="bubble"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>-->
+
+            <!--</div>-->
+            <!--<div id="slidechart" class="tab-pane fade">-->
+            <!--<h3>Slide Chart Visualization</h3>-->
+            <!--<br/>-->
+
+            <!--<div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"-->
+            <!--type="gender" id="slide"-->
+            <!--style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>-->
+
+            <!--</div>-->
+            <!--</div>-->
+            <!--<div style="width: 25%;">-->
+
+            <!--<sentiment-directive id="gauge1" config="gauge"></sentiment-directive>-->
+            <!--</div>-->
+            <!--      <div class="container">
+                      <div class="row">-->
+            <div class="col-md-8">
+                <div id="widgets" style="top: -20px;position: relative;">
+
+                    <div class="col" style="float:left;left:0;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+
+                    <sentiment-directive id="gauge1" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                    </div>
+                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+
+                        <sentiment-directive id="gauge2" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                    </div>
+
+                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+
+                        <sentiment-directive id="gauge3" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                    </div>
+                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:26px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+
+                        <sentiment-directive id="gauge4" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                    </div>
+
+
+
                 </div>
-                <br/>
-                <h4>Choose Dimension for Y-Axis:</h4>
-                <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
-                    <input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"
-                           value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" required/>
-                    <label>{{yLineKey}}</label>
+                <!-- Nav tabs -->
+                <div class="card" >
+                    <ul class="nav nav-tabs" role="tablist" style="background-color: #16a085;color: cornsilk;">
+                        <li role="presentation" class="active"><a href="#messages" aria-controls="messages" role="tab"
+                                                                  data-toggle="tab">Bar Chart</a></li>
+
+                        <li role="presentation"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">Line
+                            Chart</a></li>
+                        <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">Pie
+                            Chart</a></li>
+                        <li role="presentation"><a href="#settings" aria-controls="settings" role="tab"
+                                                   data-toggle="tab">Bubble Chart</a></li>
+                        <li role="presentation"><a href="#slideChart" aria-controls="slideChart" role="tab"
+                                                   data-toggle="tab">Slide Chart</a></li>
+                        <li role="presentation"><a href="#circleChart" aria-controls="circleChart" role="tab"
+                                                   data-toggle="tab">Circle Chart</a></li>
+
+                    </ul>
+
+                    <!-- Tab panes -->
+                    <div id="container" style="margin:8px;">
+                        <div class="tab-content" id="viz">
+                            <div role="tabpanel" class="tab-pane" id="slideChart">
+                                <div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
+                                     type="gender" id="slide"
+                                     style="position: relative;top:0%;left:5%; height: 400px;width: 400px"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="home">
+                                <div linear-chart chart-data="plotData" yaxis-label="retweet_count"
+                                     xaxis-label="minutes"
+                                     type="regular" style="position: relative;top:30%;left:5%"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="profile">
+                                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
+                                     type="gender"
+                                     style="position: relative;top:-10%;left:0; height:400px;width: 80%"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane active" id="messages">
+                                <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count"
+                                     xaxis-label="minutes" type="gender"
+                                     style="position: relative;top:0%;left:0%; height: 400px;width: 400px"
+                                     id="gbarchart"></div>
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="settings">
+                                <div bubble-chart chart-data="plotData" yaxis-label="retweet count"
+                                     xaxis-label="minutes"
+                                     type="lang" id="bubble"
+                                     style="position: relative;top:10%;left:5%; height: 400px;width: 400px"></div>
+
+                            </div>
+                            <div role="tabpanel" class="tab-pane" id="circleChart">
+                                <div circle-chart style="position: relative;top:30%;left:15%; height: 100px;width: 100px"
+                                id="cchart"></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <br/>
-                <br/>
-                <button ng-click="regenerateLineViz()" disabled>Get Visualization</button>
-                <br/>
-                <br/>
-                <div linear-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" type="regular" style="position: relative;top:30%;left:5%"></div>
             </div>
-            <div id="barchart" class="tab-pane fade">
-                <h3>Bar Chart Visualization</h3>
-                <h4>Choose Dimension for X-Axis:</h4>
-                <div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">
-                    <input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"
-                           value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" required/>
-                    <label>{{xBarKey}}</label>
+            <!--
+                            </div>
+            -->
+
+
+            <div class="col-md-4 col-md-push-0">
+                <div id="tweetContainer">
+                    <ul class="nav nav-tabs" role="tablist"
+                        style="color: cornsilk;height:40px;background-color: #16a085">
+                        <li role="presentation" class="active"
+                            style="font-size: 20pt;font-weight: bold;padding-left: 10px;top:5px">Tweet Feeder
+                        </li>
+
+                    </ul>
+                    <!--<div id="feederLabel" style="color: cornsilk;height:40px;background-color: #16a085">
+                       <span style="font-size: 20pt;font-weight: bold;padding-left: 10px"> Tweet Feeder</span>
+                        </div>-->
+                    <div id="tweetContent" style="overflow: scroll;height:300px">
+                        <ul class="timeline">
+                            <li ng-repeat="tweet in tweets">
+                                <div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
+                                <div class="timeline-panel">
+                                    <div class="timeline-heading">
+                                        <h6 class="timeline-title">@ {{tweet.screenname}}</h6>
+                                    </div>
+                                    <div class="timeline-body">
+                                        <p>{{tweet.text}}</p>
+                                    </div>
+                                </div>
+                            </li>
+                            {%endverbatim%}
+                        </ul>
+                    </div>
                 </div>
-                <br/>
-                <h4>Choose Dimension for Y-Axis:</h4>
-                <div ng-repeat="yBarKey in y_bar_tweets" class="checkboxtext">
-                    <input type="radio" id="{{yBarKey}}_line" class="chk" name="y_bar_dimension"
-                           value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" required/>
-                    <label>{{yBarKey}}</label>
+                <div id="treeMap">
+                    <!--<div id="treeLabel" style="color: cornsilk;height:40px;background-color: #16a085">-->
+                    <!--<span style="font-size: 20pt;font-weight: bold;padding-left: 10px"> Tree Map</span>-->
+                    <!--</div>-->
+                    <ul class="nav nav-tabs" role="tablist"
+                        style="color: cornsilk;height:30px;background-color: #16a085">
+                        <li role="presentation" class="active"
+                            style="font-size: 20pt;font-weight: bold;padding-left: 10px;top:-5px">Tree Map
+                        </li>
+
+                    </ul>
                 </div>
-                <br/>
-                <br/>
-                <button ng-click="regenerateBarViz()" disabled>Get Visualization</button>
-                <br/>
-                <br/>
-                <div bar-chart chart-data="plotData" yaxis-label="retweet_count" xaxis-label="minutes" type="regular" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
-            </div>
-
-            <div id="genchart" class="tab-pane fade">
-                <h3>Gender Chart Visualization</h3>
-                <br/>
-                <div gen-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gchart"></div>
-
-            </div>
-            <div id="genchartbar" class="tab-pane fade">
-                <h3>Gender Chart Visualization</h3>
-                <br/>
-                <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count" xaxis-label="minutes" type="gender" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="gbarchart"></div>
-
-            </div>
-
-            <div id="piechart" class="tab-pane fade">
-                <h3>Pie Chart Visualization</h3>
-                <h4>Choose Dimension:</h4>
-                <div ng-repeat="pieKey in pie_tweets" class="checkboxtext">
-                    <input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"
-                           value="{{pieKey}}" required/>
-                    <label>{{pieKey}}</label>
-                </div>
-                <br/>
-                <br/>
-                <button>Get Visualization</button>
-                <br/>
-                <br/>
-                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="lang" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
-
-            </div>
-            <div id="genpiechart" class="tab-pane fade">
-                <h3>Pie Chart Visualization</h3>
-                <br/>
-                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="gender" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
-
-            </div>
-            <div id="circlechart" class="tab-pane fade">
-                <h3>Circle Chart Visualization</h3>
-                <br/>
-                <div circle-chart style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px" id="cchart"></div>
-
-            </div>
-            <div id="bubblechart" class="tab-pane fade">
-                <h3>Bubble Chart Visualization</h3>
-                <br/>
-                <div bubble-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="lang" id="bubble" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
-
-            </div>
-            <div id="slidechart" class="tab-pane fade">
-                <h3>Slide Chart Visualization</h3>
-                <br/>
-                <div slide-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes" type="gender" id="slide" style="position: relative;top:30%;left:5%; height: 1000px;width: 1000px"></div>
-
             </div>
         </div>
-        <div style="width: 25%;">
-
-            <sentiment-directive id="gauge1" config="gauge"></sentiment-directive>
-        </div>
-    </div>
-    <div class="col-md-3">
-        <h2>Tweet Feeds</h2>
-        <ul class="timeline">
-            <li ng-repeat="tweet in tweets">
-                <div class="timeline-badge up"><i class="fa fa-thumbs-up"></i></div>
-                <div class="timeline-panel">
-                    <div class="timeline-heading">
-                        <h6 class="timeline-title">@ {{tweet.screenname}}</h6>
-                    </div>
-                    <div class="timeline-body">
-                        <p>{{tweet.text}}</p>
-                    </div>
-                </div>
-            </li>
-            {%endverbatim%}
-        </ul>
     </div>
 </div>
+
 
 {% endblock content %}

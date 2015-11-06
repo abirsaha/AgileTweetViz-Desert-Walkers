@@ -8,7 +8,7 @@ tweetApp.directive('circleChart',['$parse', '$window', function($parse, $window)
         template: "<svg></svg>",
         link: function (scope, elem, attrs) {
             console.log("in directive of circle")
-            var diameter = 960,
+            var diameter = 500,
                 format = d3.format(",d");
 
             var pack = d3.layout.pack()

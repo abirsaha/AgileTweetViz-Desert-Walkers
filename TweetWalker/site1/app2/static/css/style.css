@@ -1,7 +1,10 @@
-path {
-    stroke: red;
-    stroke-width: 0.5px;
-    fill: grey;
+/*path {*/
+    /*stroke: red;*/
+    /*stroke-width: 0.5px;*/
+    /*fill: grey;*/
+/*}*/
+.navbar{
+    margin-bottom:0pt;padding:0pt;height:4px;background-color: #16a085;color: cornsilk;
 }
 
 .chk{
@@ -83,15 +86,16 @@ path {
     clear: both;
 }
 .timeline > li > .timeline-panel {
-    width: 250%;
+    width: 300%;
     float: left;
     border: 1px solid #d4d4d4;
     border-radius: 22px;
     padding: 10px;
     padding-left: 20px;
     position: relative;
-    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
-    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.175);
+    -webkit-box-shadow: 0 1px 6px rgba(0, 0, 5, 0.3);
+    box-shadow: 0 1px 6px rgba(0, 0, 5, 0.3);
+    background-color: cornsilk;
 }
 .timeline > li > .timeline-panel:before {
     position: absolute;
@@ -152,7 +156,7 @@ path {
 }
 .timeline-title {
     margin-top: 0;
-    color: inherit;
+    color: mediumblue;
 }
 .timeline-body > p,
 .timeline-body > ul {

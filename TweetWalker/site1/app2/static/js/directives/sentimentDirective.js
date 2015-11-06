@@ -111,11 +111,11 @@
                         var image = paper.image(options.image, 0, 0, radius, radius);
                     }
 
-                    // adding text in the middle (if it is set)
+                     //adding text in the middle (if it is set)
                     if (options.text) {
                         var text = paper.text(radius / 2, radius / 2, options.text)
                             .attr({
-                                'font-size': radius / 16,
+                                'font-size': radius / 12,
                                 "stroke": options.textColor,
                                 "fill": options.textColor
                             });
