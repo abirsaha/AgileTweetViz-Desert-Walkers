@@ -158,7 +158,11 @@ def twitter_parser(string):
     # data_analysis(statuses)
     for tweet in statuses:
         data = {}
-        data["screenname"] = tweet["user"]["screen_name"]
+        if tweet.has_key('user'):
+            if tweet['user'].has_key('name'):
+                data["screenname"] = tweet["user"]["name"]
+            elif tweet['user'].has_key('screenname'):
+                data["screenname"] = tweet["user"]["screenname"]
         data["date"] = tweet["created_at"]
         # data["value"] = tweet["user"]["statuses_count"]
         data["value"] = 1
@@ -175,6 +179,7 @@ def twitter_parser(string):
         data["minutes"] = int(date[3].split(":")[1])
         data["lang"] = tweet["lang"]
         data["gender"] = user_gender.get(data["screenname"])
+        #print(data["gender"])
         data["retweet_count"] = tweet["retweet_count"]
         data["profile_image_url"] = tweet["user"]["profile_image_url"]
         data["profile_image_url_https"] = tweet["user"]["profile_image_url_https"]
