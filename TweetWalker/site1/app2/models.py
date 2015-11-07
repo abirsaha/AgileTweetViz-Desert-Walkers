@@ -111,13 +111,13 @@ def twitter_parser(string):
     oauth = OAuth(ACCESS_TOKEN, ACCESS_SECRET, CONSUMER_KEY, CONSUMER_SECRET)
     # Initiate the connection to Twitter Streaming API
     twitter = Twitter(auth=oauth)
-    search_results = twitter.search.tweets(q= string, count='100')
+    search_results = twitter.search.tweets(q= string, count='300')
     print "Find Datas"
     print search_results
     user_gender = Gender();
 
     statuses = search_results['statuses']
-    while len(statuses) < 300:
+    while len(statuses) < 600:
         try:
             next_results = search_results['search_metadata']['next_results']
         except KeyError, e: # No more results when next_results doesn't exist

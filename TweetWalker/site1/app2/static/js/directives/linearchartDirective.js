@@ -1,14 +1,9 @@
-
-/**
- * Created by Abir on 10/15/15.
- */
 tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window){
-
     return{
         restrict:'EA',
         template:"<svg></svg>",
         link: function(scope, elem, attrs){
-            var margin = {top:10, right: 50, bottom: 25, left: 60};
+            var margin = {top:10, right: 50, bottom: 25, left: 20};
             var padding = 0;
             width = $("#viz")[0].offsetWidth,
                 height = $("#viz")[0].offsetHeight-123;
@@ -33,7 +28,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
                 .html(function(d) {
-                    return  attrs.xaxisLabel+": "+d.x+",<br>"+attrs.yaxisLabel+": "+ d.y;
+                    return  "Minutes: "+d.x+",<br>"+" Tweet Count: "+ d.y;
                 });
 
             //setting values for initial dimensions of svg element
@@ -70,13 +65,13 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 //.scale to set scaling for the axis
                 // .linear tell the linear behaviour of the axis
                 // .domain sets min and max value along the axis
-                 // .range to set width or height of the axis plotted
+                // .range to set width or height of the axis plotted
                 xScale = d3.scale.linear()
-                    .domain([dataToPlot[0].x, dataToPlot[dataToPlot.length-1].x])
+                    .domain([retTotal[0].x, retTotal[retTotal.length-1].x])
                     .range([0, $("#viz")[0].offsetWidth - margin.right -margin.left]);
 
                 yScale = d3.scale.linear()
-                    .domain([0, d3.max(dataToPlot, function (d) {
+                    .domain([0, d3.max(retTotal, function (d) {
                         return d.y;
                     })])
                     .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
@@ -111,36 +106,52 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 // to created x axis, appended text to axis following are setting
                 // parameters to text
                 svg.append("svg:g")
-                        .attr("class", "x axis")
-                        .attr("transform", "translate("+margin.left+","+ parseInt($("#viz")[0].offsetHeight-123-margin.bottom) +")")
-                        .call(xAxisGen)
+                    .attr("class", "x axis")
+                    .attr("transform", "translate("+margin.left+","+ parseInt($("#viz")[0].offsetHeight-123-margin.bottom) +")")
+                    .call(xAxisGen)
                     .append("text")
-                        .attr("x", margin.left+margin.right)
-                        .attr("y",margin.bottom)
-                        .style("text-anchor", "middle")
-                        .text("-- "+attrs.xaxisLabel+" -->");
+                    .attr("x", margin.left+margin.right)
+                    .attr("y",margin.bottom)
+                    .style("text-anchor", "middle")
+                    .text("-- minutes -->");
 
                 svg.append("svg:g")
-                        .attr("class", "y axis")
-                        .attr("transform", "translate("+margin.left+","+margin.top+")")
-                        .call(yAxisGen)
+                    .attr("class", "y axis")
+                    .attr("transform", "translate("+margin.left+","+margin.top+")")
+                    .call(yAxisGen)
                     .append("text")
-                        .attr("transform", "rotate(-90)")
-                        .attr("y", margin.top)
-                        .style("text-anchor", "end")
-                        .text("-- "+attrs.yaxisLabel+"-->");
+                    .attr("transform", "rotate(-90)")
+                    .attr("y", margin.top)
+                    .style("text-anchor", "end")
+                    .text("-- tweet count -->");
 
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(dataToPlot),
+                        d: lineFun(retTotal),
                         "stroke": "blue",
                         "stroke-width": 2,
                         "fill": "none",
-                        "class": pathClass
+                        "class": pathClass,
+                    })
+                svg.append("svg:path")
+                    .attr({
+                        d: lineFun(retFemale),
+                        "stroke": "blue",
+                        "stroke-width": 2,
+                        "fill": "none",
+                        "class": pathClass,
+                    })
+                svg.append("svg:path")
+                    .attr({
+                        d: lineFun(retMale),
+                        "stroke": "blue",
+                        "stroke-width": 2,
+                        "fill": "none",
+                        "class": pathClass,
                     })
 
                 svg.selectAll("dot")
-                    .data(dataToPlot)
+                    .data(retTotal)
                     .enter()
                     .append("circle").attr("r",5)
                     .attr("cx", function(d){
@@ -148,6 +159,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
+                console.log("path is", svg.selectAll("."+pathClass))
             }
 
             function redrawLineChart() {
@@ -171,12 +183,99 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top});
 
                 //regenerate line on line chart
-                svg.selectAll("."+pathClass)
-                    .attr({
-                        d: lineFun(dataToPlot)
-                    });
+                //svg.selectAll("."+pathClass)
+                //    .attr({
+                //        d: lineFun(retTotal)
+                //    });
             }
 
+            var retTotal = [];
+            var retMale = [];
+            var retFemale = [];
+            var line_data = function (data) {
+
+                //console.log("in make data");
+                //console.log("data is", data);
+                /* Sorting the JSON Data*/
+
+                data.sort(function (a, b) {
+                    return a.minutes - b.minutes;
+                });
+                var total = [];
+                var y_val = 0;
+                //var gender_male = [];
+                //var gender_female = [];
+                angular.forEach(data, function (d,i) {
+                    //var y_val = d.retweet_count + d.value;
+                    y_val = d.value;
+                    this.push({"x": d.minutes, "y": y_val, "z": d.gender});
+                    //console.log("gender is", data.gender);
+                    //if (data.gender="male"){
+                    //    gender_male.push({"x": d.minutes, "y": y_val});
+                    //}
+                    //else if(data.gender = "female"){
+                    //    gender_female.push({"x": d.minutes, "y": y_val});
+                    //}
+                },total);
+
+
+                //console.log("values are male , female",gender_male);
+                //console.log("female are:",gender_female);
+                /* Returning the cumulative sum of y attribute corresponding to same x attribute*/
+                if (total.length != 0) {
+                    var tempX = total[0].x;
+                    var totalY = 0;
+                    var maleY = 0;
+                    var femaleY = 0;
+                    angular.forEach(total, function (d,i) {
+                        if (tempX == d.x) {
+                            totalY = totalY + d.y;
+                            if (d.z == "male"){
+                                maleY = maleY + d.y
+                            }
+                            else{
+                                femaleY = femaleY + d.y
+                            }
+                        }
+                        else {
+                            this.push({"x": tempX, "y": totalY});
+                            retMale.push({"x": tempX, "y": maleY});
+                            retFemale.push({"x": tempX, "y": femaleY});
+                            totalY = 0;
+                            maleY = 0;
+                            femaleY = 0;
+                            tempX = d.x;
+                        }
+                        if(i==(total.length-1)){
+                            if (this.length<1){
+                                this.push({"x": tempX-2, "y": 0});
+                                this.push({"x": tempX-1, "y": 0});
+                                this.push({"x": tempX, "y": totalY});
+                                this.push({"x": tempX+1, "y": 0});
+                                this.push({"x": tempX+2, "y": 0});
+
+                                retMale.push({"x": tempX-2, "y": 0});
+                                retMale.push({"x": tempX-1, "y": 0});
+                                retMale.push({"x": tempX, "y": maleY});
+                                retMale.push({"x": tempX+1, "y": 0});
+                                retMale.push({"x": tempX+2, "y": 0});
+
+                                retFemale.push({"x": tempX-2, "y": 0});
+                                retFemale.push({"x": tempX-1, "y": 0});
+                                retFemale.push({"x": tempX, "y": femaleY});
+                                retFemale.push({"x": tempX+1, "y": 0});
+                                retFemale.push({"x": tempX+2, "y": 0});
+                            }
+                            else{
+                                this.push({"x": tempX, "y": totalY})
+                                retMale.push({"x": tempX, "y": maleY})
+                                retFemale.push({"x": tempX, "y": femaleY})
+                            }
+                        }
+                    },retTotal)
+                }
+            };
+            line_data(scope.tweets);
             drawLineChart();
         }
     };
