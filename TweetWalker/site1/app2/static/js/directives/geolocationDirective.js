@@ -44,6 +44,7 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
                     .enter()
                     .append("path")
                     .attr("d", path)
+                    .attr("class", "mappath")
             });
         }
     }

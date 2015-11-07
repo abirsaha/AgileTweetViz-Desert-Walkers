@@ -14,26 +14,31 @@ from django.core.context_processors import csrf
 import simplejson as json
 
 
-def index(request):
-	# form = indexForm(initial={'jsonout': x})
-	print "in index"
-	form = x
-	twits = Twit.objects.all()
-	args = {}
-	args.update(csrf(request))
-	args['form'] = form
-	return render(request,'app2/dashboard.html', args)
+def dashboard(request):
+    print "in index"
+    form = x
+    args = {}
+    args.update(csrf(request))
+    args['form'] = form
+    return render(request,'app2/dashboard.html', args)
 
-
-def indexSubmit(request):
-    print "in indexsumbmit"
+def landingpage(request):
+    print "in landingpage"
     if request.POST:
-        form = twitterForm(request.POST)
-        if form.is_valid():
-            string = request.POST['hashtagInput']
-            global x
-            x = twitter_parser(string)
-        return HttpResponseRedirect('app2/index')
+        if 'get_tweets' in request.POST:
+            form = twitterForm(request.POST)
+            if form.is_valid():
+                string = request.POST['hashtagInput']
+                global x
+                x = twitter_parser(string)
+            return HttpResponseRedirect('app2/dashboard')
+        elif 'get_map' in request.POST:
+            form = twitterForm(request.POST)
+            if form.is_valid():
+                string = request.POST['hashtagInput']
+                global x
+                x = twitter_parser(string)
+            return HttpResponseRedirect('geo/geomap')
     else:
         form = twitterForm()
         args = {}

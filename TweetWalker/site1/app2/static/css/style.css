@@ -1,8 +1,9 @@
-/*path {*/
-    /*stroke: red;*/
-    /*stroke-width: 0.5px;*/
-    /*fill: grey;*/
-/*}*/
+.mappath {
+    stroke: red;
+    stroke-width: 0.5px;
+    fill: grey;
+}
+
 .navbar{
     margin-bottom:0pt;padding:0pt;height:4px;background-color: #16a085;color: cornsilk;
 }
