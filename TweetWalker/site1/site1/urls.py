@@ -24,6 +24,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-   	url(r'^$', 'app2.views.indexSubmit'),
-       url(r'^app2/index/$', 'app2.views.index'),
+    url(r'^$', 'app2.views.landingpage'),
+    url(r'^app2/dashboard/$', 'app2.views.dashboard'),
+    url(r'^geo/geomap/$', 'geo.views.geomap'),
 ]
