@@ -306,7 +306,7 @@
                     </div>
             </div>
             <div id="2D" class="hide">
-                <div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">
+                <div ng-repeat="xLineKey in line_met" class="checkboxtext">
                     <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
                            value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>
                     <label>{{xLineKey}}</label>
@@ -393,10 +393,19 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
-                                <div id="linedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
-                                <br>
-                                <br>
-                                <div id="linemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover2m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>
+                                <div id="linedim" style="position: relative;left: 5%;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
+                                    <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" >
+                                        <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
+                                    </a>
+                                </div>
+                                <div style="position: relative;left: 78%;width:20%;border: 2px solid royalblue">
+                                    <div style="position: relative;background-color:green" align="right">Total</div>
+                                    <div style="position: relative;background-color:blue" align="right">Male</div>
+                                    <div style="position: relative;background-color:pink" align="right">Female</div>
+                                </div>
+                                <!--<div id="linemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue">-->
+                                    <!--<span style="font-size: large"title="Data Filter">&nbsp;M</span>-->
+                                <!--</div>-->
 
                                 <div linear-chart chart-data="plotData" yaxis-label="retweet_count"
                                      xaxis-label="minutes"

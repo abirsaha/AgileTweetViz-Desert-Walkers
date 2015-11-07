@@ -7,7 +7,7 @@ tweetApp.directive('circleChart',['$parse', '$window', function($parse, $window)
         restrict: 'EA',
         template: "<svg></svg>",
         link: function (scope, elem, attrs) {
-            console.log("in directive of circle")
+            //console.log("in directive of circle")
             var diameter = 500,
                 format = d3.format(",d");
 
@@ -25,7 +25,7 @@ tweetApp.directive('circleChart',['$parse', '$window', function($parse, $window)
 
             d3.json("/static/data/flare.json", function(error, root) {
                 if (error) throw error;
-                console.log("error is",error)
+                //console.log("error is",error)
 
                 var node = svg.datum(root).selectAll(".node")
                     .data(pack.nodes)
@@ -34,7 +34,7 @@ tweetApp.directive('circleChart',['$parse', '$window', function($parse, $window)
                         //console.log("child is",d.children);
                         return d.children ? "node" : "leaf node"; })
                     .attr("transform", function(d) {
-                        console.log("transforming", d.x, d.y);
+                        //console.log("transforming", d.x, d.y);
                         return "translate(" + d.x + "," + d.y + ")"; });
 
                 node.append("title")

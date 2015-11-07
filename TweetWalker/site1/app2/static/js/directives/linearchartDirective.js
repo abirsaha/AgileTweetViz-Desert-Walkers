@@ -52,11 +52,11 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             angular.element($window).on('resize',function(){
                 var the_chart = $("#viz"),
                     container = the_chart;
-                var aspect = $("#lchart").attr("width")/$("#lchart").attr("height");
+                //var aspect = $("#lchart").attr("width")/$("#lchart").attr("height");
                 var targetWidth = (container[0].offsetWidth);
                 var new_chart = $("#lchart");
                 new_chart.attr("width", targetWidth);
-                new_chart.attr("height", targetWidth/aspect);
+                //new_chart.attr("height", targetWidth/aspect);
                 redrawLineChart();
             });
 
@@ -128,18 +128,20 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(retTotal),
-                        "stroke": "blue",
+                        "stroke": "green",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
+                        "id": "totalline"
                     })
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(retFemale),
-                        "stroke": "blue",
+                        "stroke": "pink",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
+                        "id": "femaleline"
                     })
                 svg.append("svg:path")
                     .attr({
@@ -148,6 +150,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
+                        "id": "maleline"
                     })
 
                 svg.selectAll("dot")
@@ -159,7 +162,25 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
-                console.log("path is", svg.selectAll("."+pathClass))
+                svg.selectAll("dot")
+                    .data(retMale)
+                    .enter()
+                    .append("circle").attr("r",5)
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+                svg.selectAll("dot")
+                    .data(retFemale)
+                    .enter()
+                    .append("circle").attr("r",5)
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+                //console.log("path is", svg.selectAll("."+pathClass))
             }
 
             function redrawLineChart() {
@@ -183,10 +204,18 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top});
 
                 //regenerate line on line chart
-                //svg.selectAll("."+pathClass)
-                //    .attr({
-                //        d: lineFun(retTotal)
-                //    });
+                svg.selectAll("#totalline")
+                    .attr({
+                        d: lineFun(retTotal)
+                    });
+                svg.selectAll("#maleline")
+                    .attr({
+                        d: lineFun(retMale)
+                    });
+                svg.selectAll("#femaleline")
+                    .attr({
+                        d: lineFun(retFemale)
+                    });
             }
 
             var retTotal = [];

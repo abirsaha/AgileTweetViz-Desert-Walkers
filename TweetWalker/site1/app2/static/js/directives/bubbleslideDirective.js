@@ -167,7 +167,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
             h = Math.ceil(w/nTop*2);
             svgContainer.style("height",h+"px");
      
-            console.log("in reset");
+    //        console.log("in reset");
             svg.attr("width", width);
             svg.attr("height",h);      
            

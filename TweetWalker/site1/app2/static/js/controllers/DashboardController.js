@@ -12,9 +12,15 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 	// Getting count of the attributes inside each tweet
 	// Object.keys($scope.tweets[0]).length
 
-    $scope.x_line_tweets = [
-        "time",
+    $scope.line_met = [
+        "total",
+        "gender",
         "sentiment"
+    ]
+
+    $scope.x_line_tweets = [
+        "tie",
+        "senti"
     ];
     $scope.y_line_tweets = [
         "tweet count",
@@ -124,6 +130,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.check_x_line = function(element){
         x_line_clicked_element = [];
         x_line_clicked_element.push(element);
+        console.log("in on click", x_line_clicked_element);
         // console.log("in check_x_line",element,x_line_clicked_element);
     };
 
@@ -164,6 +171,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         $.each($scope.tweets[0],function(k,value){
             if($scope.x_line_tweets.indexOf(k)>=0 && x_line_clicked_element.indexOf(k)>=0){
                 x_checked_element = k
+                console.log("in on click", k)
             }
             if($scope.y_line_tweets.indexOf(k)>=0 && y_line_clicked_element.indexOf(k)>=0){
                 y_checked_element = k
