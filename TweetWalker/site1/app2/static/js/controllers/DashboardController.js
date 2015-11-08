@@ -16,7 +16,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         "total",
         "gender",
         "sentiment"
-    ]
+    ];
 
     $scope.x_line_tweets = [
         "tie",
@@ -126,10 +126,11 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
 
     /*OnClick event of the radio buttons in x-axis of line chart*/
+    //$scope.xLineKey=0;
     var x_line_clicked_element = [];
-    $scope.check_x_line = function(e){
+    window.check_x_line = function(){
         x_line_clicked_element = [];
-        x_line_clicked_element.push(e);
+        x_line_clicked_element.push('hi');
         console.log("in on click", x_line_clicked_element);
         // console.log("in check_x_line",element,x_line_clicked_element);
     };

@@ -210,7 +210,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
-                console.log("path is", svg.selectAll("dot"));
+                //console.log("path is", svg.selectAll("dot"));
 
                 svg.selectAll("dot")
                     .data(retPos)
@@ -239,7 +239,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
-                console.log("path is", svg.selectAll("dot"))
+                //console.log("path is", svg.selectAll("dot"))
             }
 
             function redrawLineChart() {

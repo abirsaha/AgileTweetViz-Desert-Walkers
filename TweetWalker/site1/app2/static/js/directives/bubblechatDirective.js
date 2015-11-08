@@ -189,7 +189,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
                     }
                 }*/
 
-    console.log(root);
+    //console.log(root);
 
     var margin = 20,
     diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight);

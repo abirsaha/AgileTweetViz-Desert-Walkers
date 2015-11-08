@@ -310,7 +310,7 @@
             <div id="2D" class="hide">
                 <div ng-repeat="xLineKey in line_met" class="checkboxtext">
                     <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
-                           value="{{xLineKey}}" onclick="check_x_line('{{xLineKey}}')"  />
+                           value="{{xLineKey}}" ng-click="check_x_line()"  />
                     <label>{{xLineKey}}</label>
                 </div>
             </div>
@@ -396,7 +396,7 @@
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
                                 <div id="linedim" style="position: relative;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
-                                    <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" >
+                                    <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" ng-href="#" >
                                         <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
                                     </a>
                                 </div>
@@ -475,7 +475,6 @@
                                     </div>
                                 </div>
                             </li>
-                            {%endverbatim%}
                         </ul>
                     </div>
                 </div>
@@ -501,6 +500,7 @@
                             </div>
                         </div>
                     </tree-map>
+                    {%endverbatim%}
                 </div>
             </div>
         </div>
