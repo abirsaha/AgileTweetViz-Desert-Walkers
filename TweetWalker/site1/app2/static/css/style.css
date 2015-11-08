@@ -1,3 +1,13 @@
+svg:active {
+    cursor: move;
+    cursor: -moz-grabbing;
+    cursor: -webkit-grabbing;
+}
+.circlestyle {
+    fill: none;
+    stroke-width: 1.5px;
+}
+
 .mappath {
     stroke: red;
     stroke-width: 0.5px;
