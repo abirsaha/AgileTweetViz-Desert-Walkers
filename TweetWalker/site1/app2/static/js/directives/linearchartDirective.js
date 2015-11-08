@@ -133,7 +133,8 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         "fill": "none",
                         "class": pathClass,
                         "id": "totalline"
-                    })
+                    });
+
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(retFemale),
@@ -142,7 +143,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         "fill": "none",
                         "class": pathClass,
                         "id": "femaleline"
-                    })
+                    });
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(retMale),
@@ -151,21 +152,50 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         "fill": "none",
                         "class": pathClass,
                         "id": "maleline"
-                    })
+                    });
+
+                svg.append("svg:path")
+                    .attr({
+                        d: lineFun(retPos),
+                        "stroke": "yellow",
+                        "stroke-width": 2,
+                        "fill": "none",
+                        "class": pathClass,
+                        "id": "posline"
+                    });
+                svg.append("svg:path")
+                    .attr({
+                        d: lineFun(retNeg),
+                        "stroke": "black",
+                        "stroke-width": 2,
+                        "fill": "none",
+                        "class": pathClass,
+                        "id": "negline"
+                    });
+                svg.append("svg:path")
+                    .attr({
+                        d: lineFun(retNeu),
+                        "stroke": "red",
+                        "stroke-width": 2,
+                        "fill": "none",
+                        "class": pathClass,
+                        "id": "neuline"
+                    });
 
                 svg.selectAll("dot")
                     .data(retTotal)
                     .enter()
-                    .append("circle").attr("r",5)
+                    .append("circle").attr("r",3)
                     .attr("cx", function(d){
                         return xScale(d.x)+margin.left})
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
+
                 svg.selectAll("dot")
                     .data(retMale)
                     .enter()
-                    .append("circle").attr("r",5)
+                    .append("circle").attr("r",3)
                     .attr("cx", function(d){
                         return xScale(d.x)+margin.left})
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
@@ -174,13 +204,42 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 svg.selectAll("dot")
                     .data(retFemale)
                     .enter()
-                    .append("circle").attr("r",5)
+                    .append("circle").attr("r",3)
                     .attr("cx", function(d){
                         return xScale(d.x)+margin.left})
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
-                //console.log("path is", svg.selectAll("."+pathClass))
+                console.log("path is", svg.selectAll("dot"));
+
+                svg.selectAll("dot")
+                    .data(retPos)
+                    .enter()
+                    .append("circle").attr("r",3)
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+                svg.selectAll("dot")
+                    .data(retNeg)
+                    .enter()
+                    .append("circle").attr("r",3)
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+                svg.selectAll("dot")
+                    .data(retNeu)
+                    .enter()
+                    .append("circle").attr("r",3)
+                    .attr("cx", function(d){
+                        return xScale(d.x)+margin.left})
+                    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                    .on('mouseover', tip.show)
+                    .on('mouseout', tip.hide);
+                console.log("path is", svg.selectAll("dot"))
             }
 
             function redrawLineChart() {
@@ -221,6 +280,9 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             var retTotal = [];
             var retMale = [];
             var retFemale = [];
+            var retPos = [];
+            var retNeg =[];
+            var retNeu = [];
             var line_data = function (data) {
 
                 //console.log("in make data");
@@ -237,7 +299,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 angular.forEach(data, function (d,i) {
                     //var y_val = d.retweet_count + d.value;
                     y_val = d.value;
-                    this.push({"x": d.minutes, "y": y_val, "z": d.gender});
+                    this.push({"x": d.minutes, "y": y_val, "z": d.gender, "w": d.sentiment});
                     //console.log("gender is", data.gender);
                     //if (data.gender="male"){
                     //    gender_male.push({"x": d.minutes, "y": y_val});
@@ -256,6 +318,9 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     var totalY = 0;
                     var maleY = 0;
                     var femaleY = 0;
+                    var posY = 0;
+                    var negY = 0;
+                    var neuY = 0;
                     angular.forEach(total, function (d,i) {
                         if (tempX == d.x) {
                             totalY = totalY + d.y;
@@ -265,14 +330,29 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                             else{
                                 femaleY = femaleY + d.y
                             }
+                            if (d.w == "1"){
+                                posY = posY + d.y
+                            }
+                            else if (d.w == "2"){
+                                negY = negY + d.y
+                            }
+                            else{
+                                neuY = neuY + d.y
+                            }
                         }
                         else {
                             this.push({"x": tempX, "y": totalY});
                             retMale.push({"x": tempX, "y": maleY});
                             retFemale.push({"x": tempX, "y": femaleY});
+                            retPos.push({"x": tempX, "y": posY});
+                            retNeg.push({"x": tempX, "y": negY});
+                            retNeu.push({"x": tempX, "y": neuY});
                             totalY = 0;
                             maleY = 0;
                             femaleY = 0;
+                            posY = 0;
+                            negY = 0;
+                            neuY = 0;
                             tempX = d.x;
                         }
                         if(i==(total.length-1)){
@@ -294,11 +374,32 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                                 retFemale.push({"x": tempX, "y": femaleY});
                                 retFemale.push({"x": tempX+1, "y": 0});
                                 retFemale.push({"x": tempX+2, "y": 0});
+
+                                retPos.push({"x": tempX-2, "y": 0});
+                                retPos.push({"x": tempX-1, "y": 0});
+                                retPos.push({"x": tempX, "y": posY});
+                                retPos.push({"x": tempX+1, "y": 0});
+                                retPos.push({"x": tempX+2, "y": 0});
+
+                                retNeg.push({"x": tempX-2, "y": 0});
+                                retNeg.push({"x": tempX-1, "y": 0});
+                                retNeg.push({"x": tempX, "y": negY});
+                                retNeg.push({"x": tempX+1, "y": 0});
+                                retNeg.push({"x": tempX+2, "y": 0});
+
+                                retNeu.push({"x": tempX-2, "y": 0});
+                                retNeu.push({"x": tempX-1, "y": 0});
+                                retNeu.push({"x": tempX, "y": neuY});
+                                retNeu.push({"x": tempX+1, "y": 0});
+                                retNeu.push({"x": tempX+2, "y": 0});
                             }
                             else{
-                                this.push({"x": tempX, "y": totalY})
-                                retMale.push({"x": tempX, "y": maleY})
-                                retFemale.push({"x": tempX, "y": femaleY})
+                                this.push({"x": tempX, "y": totalY});
+                                retMale.push({"x": tempX, "y": maleY});
+                                retFemale.push({"x": tempX, "y": femaleY});
+                                retPos.push({"x": tempX, "y": posY});
+                                retNeg.push({"x": tempX, "y": negY});
+                                retNeu.push({"x": tempX, "y": neuY});
                             }
                         }
                     },retTotal)

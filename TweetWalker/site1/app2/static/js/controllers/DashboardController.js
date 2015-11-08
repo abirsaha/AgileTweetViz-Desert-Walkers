@@ -127,9 +127,9 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     /*OnClick event of the radio buttons in x-axis of line chart*/
     var x_line_clicked_element = [];
-    $scope.check_x_line = function(element){
+    $scope.check_x_line = function(e){
         x_line_clicked_element = [];
-        x_line_clicked_element.push(element);
+        x_line_clicked_element.push(e);
         console.log("in on click", x_line_clicked_element);
         // console.log("in check_x_line",element,x_line_clicked_element);
     };

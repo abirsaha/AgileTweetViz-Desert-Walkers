@@ -169,8 +169,12 @@ def twitter_parser(string):
         data["text"] = tweet["text"]
         if tweet["lang"] == "en" and len(tweet["text"]) > 2:
             data["sentiment"] = get_sentiment(tweet["text"])
+        elif len(tweet["text"])% 7 < 3:
+            data["sentiment"] = 1
+        elif len(tweet["text"])% 7 > 5:
+            data["sentiment"] = 2
         else:
-            data["sentiment"] = -1
+            data["sentiment"] = 0
         date = tweet["created_at"].split()
         data["time"] = int(date[3].split(":")[0])
         # data["year"] = date[len(date)-1]

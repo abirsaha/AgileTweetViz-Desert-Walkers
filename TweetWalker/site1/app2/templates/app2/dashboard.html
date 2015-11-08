@@ -116,6 +116,13 @@
     .form-control {width:120px;}
     .popover {max-width:400px;}
 </style>
+<script type='text/javascript'>
+    var back = "{{form|escapejs}}";
+    window.data = back
+
+
+</script>
+{%verbatim%}
 <div class="navbar navbar-default">
     <div class="col-sm-2">
 
@@ -134,14 +141,9 @@
 
 </div>
 </div>
+
 <div id="dashboard"  ng-controller="DashboardCtrl" class="container" style="width:100%;overflow: hidden;height:900px">
-    <script type='text/javascript'>
-        var back = "{{form|escapejs}}";
-        window.data = back
 
-
-    </script>
-    {%verbatim%}
     <div class="container-fluid" style="margin-top:10px">
         <div class="row">
             <!--<div class="col-md-8 col-md-pull-0" id="viz">-->
@@ -294,35 +296,35 @@
             <div id="1D" class="hide">
                 <div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">
                 <input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"
-                value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" required/>
+                value="{{xBarKey}}" ng-click="check_x_bar(xBarKey)" />
                 <label>{{xBarKey}}</label>
                 </div>
             </div>
             <div id="1M" class="hide">
                 <div ng-repeat="yBarKey in y_bar_tweets" class="checkboxtext">
                     <input type="radio" id="{{yBarKey}}_line" class="chk" name="y_bar_dimension"
-                    value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" required/>
+                    value="{{yBarKey}}" ng-click="check_y_bar(yBarKey)" />
                     <label>{{yBarKey}}</label>
                     </div>
             </div>
             <div id="2D" class="hide">
                 <div ng-repeat="xLineKey in line_met" class="checkboxtext">
                     <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
-                           value="{{xLineKey}}" ng-click="check_x_line(xLineKey)" required/>
+                           value="{{xLineKey}}" onclick="check_x_line('{{xLineKey}}')"  />
                     <label>{{xLineKey}}</label>
                 </div>
             </div>
             <div id="2M" class="hide">
                 <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
                     <input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"
-                    value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" required/>
+                    value="{{yLineKey}}" ng-click="check_y_line(yLineKey)" />
                     <label>{{yLineKey}}</label>
                     </div>
             </div>
             <div id="3D" class="hide">
                 <div ng-repeat="pieKey in pie_tweets" class="checkboxtext">
                 <input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"
-                value="{{pieKey}}" required/>
+                value="{{pieKey}}" />
                 <label>{{pieKey}}</label>
                 </div>
             </div>
@@ -393,12 +395,12 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
-                                <div id="linedim" style="position: relative;left: 5%;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
+                                <div id="linedim" style="position: relative;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
                                     <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" >
                                         <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
                                     </a>
                                 </div>
-                                <div style="position: relative;left: 78%;width:20%;border: 2px solid royalblue">
+                                <div style="position: relative;float: right;width:10%;border: 2px solid royalblue">
                                     <div style="position: relative;background-color:green" align="right">Total</div>
                                     <div style="position: relative;background-color:blue" align="right">Male</div>
                                     <div style="position: relative;background-color:pink" align="right">Female</div>
