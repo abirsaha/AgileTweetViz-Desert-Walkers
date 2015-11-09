@@ -19,8 +19,8 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     ];
 
     $scope.x_line_tweets = [
-        "tie",
-        "senti"
+        "time",
+        "sentiment"
     ];
     $scope.y_line_tweets = [
         "tweet count",
@@ -127,12 +127,231 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     /*OnClick event of the radio buttons in x-axis of line chart*/
     //$scope.xLineKey=0;
-    var x_line_clicked_element = [];
-    window.check_x_line = function(){
-        x_line_clicked_element = [];
-        x_line_clicked_element.push('hi');
-        console.log("in on click", x_line_clicked_element);
-        // console.log("in check_x_line",element,x_line_clicked_element);
+    //var x_line_clicked_element = [];
+    $scope.totalbool = true;
+    $scope.genderbool = false;
+    $scope.sentibool = false;
+
+    window.check_x_line = function(e){
+        var margin = {top:10, right: 50, bottom: 25, left: 20};
+        var xScale = d3.scale.linear()
+            .domain([$scope.retTotal[0].x, $scope.retTotal[$scope.retTotal.length-1].x])
+            .range([0, $("#viz")[0].offsetWidth - margin.right -margin.left]);
+
+        var yScale = d3.scale.linear()
+            .domain([0, d3.max($scope.retTotal, function (d) {
+               return d.y;
+            })])
+            .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
+
+       //getting d3 window in d3
+       //var d3 = window.d3;
+
+       //making d3.tip function for d3-tip
+        var tip = d3.tip()
+            .attr('class', 'd3-tip')
+            .html(function(d) {
+                //console.log("in tip",d);
+                return  "Minutes: "+d.x+",<br>"+" Tweet Count: "+ d.y;
+            });
+
+        //calling tip to append it to svg element
+        d3.select("#lchart")
+            .call(tip);
+
+       //d3.select("#lchart").selectAll("circle").remove();
+       //    .style({
+       //    opacity: 0
+       //});
+       //console.log(d3.select("#lchart").selectAll("dot"));
+       //x_line_clicked_element = [];
+       //x_line_clicked_element.push(e);
+       //e = d3.select("path#totalline");
+       //f = d3.select("path#maleline");
+       //g = d3.select("path#femaleline");
+       //console.log("in on click",x_line_clicked_element);
+        if (e == "total"){
+            $scope.totalbool = true;
+            $scope.genderbool = false;
+            $scope.sentibool = false;
+            d3.select("#lchart")
+                .selectAll("circle")
+                .remove();
+            d3.select("path#maleline")
+                .style({
+                    opacity:0
+                });
+            d3.select("path#femaleline")
+                .style({
+                    opacity:0
+                });
+            d3.select("path#posline")
+                .style({
+                    opacity:0
+                });
+            d3.select("path#negline")
+                .style({
+                    opacity:0
+                });
+            d3.select("path#neuline")
+                .style({
+                    opacity:0
+                });
+            d3.select("path#totalline")
+                .style({
+                    opacity:1
+                });
+            d3.select("#lchart")
+                .selectAll("dot")
+                .data($scope.retTotal)
+                .enter()
+                .append("circle")
+                .attr("r",3)
+                .attr("cx", function(d){
+                    return xScale(d.x)+margin.left
+                })
+                .attr("cy",function(d){
+                    return yScale(d.y)+margin.top
+                })
+                .on('mouseover', tip.show)
+                .on('mouseout', tip.hide);
+        }
+       else if (e == "gender"){
+           $scope.totalbool = false;
+           $scope.genderbool = true;
+           $scope.sentibool = false;
+           d3.select("#lchart")
+               .selectAll("circle")
+               .remove();
+           //console.log("in gender if");
+           d3.select("path#maleline")
+               .style({
+                   opacity:1
+               });
+           d3.select("path#femaleline")
+               .style({
+                   opacity:1
+               });
+           d3.select("path#posline")
+               .style({
+                   opacity:0
+               });
+           d3.select("path#negline")
+               .style({
+                   opacity:0
+               });
+           d3.select("path#neuline")
+               .style({
+                   opacity:0
+               });
+           d3.select("path#totalline")
+               .style({
+                   opacity:0
+               });
+           d3.select("#lchart")
+               .selectAll("dot")
+               .data($scope.retMale)
+               .enter()
+               .append("circle")
+               .attr("r",3)
+               .attr("cx", function(d){
+                   return xScale(d.x)+margin.left
+               })
+               .attr("cy",function(d){
+                   return yScale(d.y)+margin.top
+               })
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+           d3.select("#lchart")
+               .selectAll("dot")
+               .data($scope.retFemale)
+               .enter()
+               .append("circle")
+               .attr("r",3)
+               .attr("cx", function(d){
+                   return xScale(d.x)+margin.left
+               })
+               .attr("cy",function(d){
+                   return yScale(d.y)+margin.top
+               })
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+       }
+       else if (e == "sentiment"){
+           $scope.totalbool = false;
+           $scope.genderbool = false;
+           $scope.sentibool = true;
+           d3.select("#lchart")
+               .selectAll("circle")
+               .remove();
+           d3.select("path#maleline")
+               .style({
+                   opacity:0
+               });
+           d3.select("path#femaleline")
+               .style({
+                   opacity:0
+               });
+           d3.select("path#posline")
+               .style({
+                   opacity:1
+               });
+           d3.select("path#negline")
+               .style({
+                   opacity:1
+               });
+           d3.select("path#neuline")
+               .style({
+                   opacity:1
+               });
+           d3.select("path#totalline")
+               .style({
+                   opacity:0
+               });
+           d3.select("#lchart")
+               .selectAll("dot")
+               .data($scope.retPos)
+               .enter()
+               .append("circle")
+               .attr("r",3)
+               .attr("cx", function(d){
+                   return xScale(d.x)+margin.left
+               })
+               .attr("cy",function(d){
+                   return yScale(d.y)+margin.top
+               })
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+           d3.select("#lchart")
+               .selectAll("dot")
+               .data($scope.retNeg)
+               .enter()
+               .append("circle")
+               .attr("r",3)
+               .attr("cx", function(d){
+                   return xScale(d.x)+margin.left
+               })
+               .attr("cy",function(d){
+                   return yScale(d.y)+margin.top
+               })
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+           d3.select("#lchart")
+               .selectAll("dot")
+               .data($scope.retNeu)
+               .enter()
+               .append("circle")
+               .attr("r",3)
+               .attr("cx", function(d){
+                   return xScale(d.x)+margin.left
+               })
+               .attr("cy",function(d){
+                   return yScale(d.y)+margin.top
+               })
+               .on('mouseover', tip.show)
+               .on('mouseout', tip.hide);
+       }
+        //console.log("in check_x_line",element,x_line_clicked_element,e,f,g);
     };
 
     /*OnClick event of the radio buttons in y-axis of line chart*/

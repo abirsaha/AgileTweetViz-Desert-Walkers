@@ -67,11 +67,11 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 // .domain sets min and max value along the axis
                 // .range to set width or height of the axis plotted
                 xScale = d3.scale.linear()
-                    .domain([retTotal[0].x, retTotal[retTotal.length-1].x])
+                    .domain([scope.retTotal[0].x, scope.retTotal[scope.retTotal.length-1].x])
                     .range([0, $("#viz")[0].offsetWidth - margin.right -margin.left]);
 
                 yScale = d3.scale.linear()
-                    .domain([0, d3.max(retTotal, function (d) {
+                    .domain([0, d3.max(scope.retTotal, function (d) {
                         return d.y;
                     })])
                     .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
@@ -127,7 +127,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
 
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retTotal),
+                        d: lineFun(scope.retTotal),
                         "stroke": "green",
                         "stroke-width": 2,
                         "fill": "none",
@@ -137,53 +137,68 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
 
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retFemale),
+                        d: lineFun(scope.retFemale),
                         "stroke": "pink",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
                         "id": "femaleline"
+                    })
+                    .style({
+                        opacity:0
                     });
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retMale),
+                        d: lineFun(scope.retMale),
                         "stroke": "blue",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
                         "id": "maleline"
+                    })
+                    .style({
+                        opacity:0
                     });
 
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retPos),
+                        d: lineFun(scope.retPos),
                         "stroke": "yellow",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
                         "id": "posline"
+                    })
+                    .style({
+                        opacity:0
                     });
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retNeg),
+                        d: lineFun(scope.retNeg),
                         "stroke": "black",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
                         "id": "negline"
+                    })
+                    .style({
+                        opacity:0
                     });
                 svg.append("svg:path")
                     .attr({
-                        d: lineFun(retNeu),
+                        d: lineFun(scope.retNeu),
                         "stroke": "red",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
                         "id": "neuline"
+                    })
+                    .style({
+                        opacity:0
                     });
 
                 svg.selectAll("dot")
-                    .data(retTotal)
+                    .data(scope.retTotal)
                     .enter()
                     .append("circle").attr("r",3)
                     .attr("cx", function(d){
@@ -192,53 +207,53 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
 
-                svg.selectAll("dot")
-                    .data(retMale)
-                    .enter()
-                    .append("circle").attr("r",3)
-                    .attr("cx", function(d){
-                        return xScale(d.x)+margin.left})
-                    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
-                svg.selectAll("dot")
-                    .data(retFemale)
-                    .enter()
-                    .append("circle").attr("r",3)
-                    .attr("cx", function(d){
-                        return xScale(d.x)+margin.left})
-                    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                //svg.selectAll("dot")
+                //    .data(scope.retMale)
+                //    .enter()
+                //    .append("circle").attr("r",3)
+                //    .attr("cx", function(d){
+                //        return xScale(d.x)+margin.left})
+                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                //    .on('mouseover', tip.show)
+                //    .on('mouseout', tip.hide);
+                //svg.selectAll("dot")
+                //    .data(scope.retFemale)
+                //    .enter()
+                //    .append("circle").attr("r",3)
+                //    .attr("cx", function(d){
+                //        return xScale(d.x)+margin.left})
+                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                //    .on('mouseover', tip.show)
+                //    .on('mouseout', tip.hide);
                 //console.log("path is", svg.selectAll("dot"));
 
-                svg.selectAll("dot")
-                    .data(retPos)
-                    .enter()
-                    .append("circle").attr("r",3)
-                    .attr("cx", function(d){
-                        return xScale(d.x)+margin.left})
-                    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
-                svg.selectAll("dot")
-                    .data(retNeg)
-                    .enter()
-                    .append("circle").attr("r",3)
-                    .attr("cx", function(d){
-                        return xScale(d.x)+margin.left})
-                    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
-                svg.selectAll("dot")
-                    .data(retNeu)
-                    .enter()
-                    .append("circle").attr("r",3)
-                    .attr("cx", function(d){
-                        return xScale(d.x)+margin.left})
-                    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                    .on('mouseover', tip.show)
-                    .on('mouseout', tip.hide);
+                //svg.selectAll("dot")
+                //    .data(scope.retPos)
+                //    .enter()
+                //    .append("circle").attr("r",3)
+                //    .attr("cx", function(d){
+                //        return xScale(d.x)+margin.left})
+                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                //    .on('mouseover', tip.show)
+                //    .on('mouseout', tip.hide);
+                //svg.selectAll("dot")
+                //    .data(scope.retNeg)
+                //    .enter()
+                //    .append("circle").attr("r",3)
+                //    .attr("cx", function(d){
+                //        return xScale(d.x)+margin.left})
+                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                //    .on('mouseover', tip.show)
+                //    .on('mouseout', tip.hide);
+                //svg.selectAll("dot")
+                //    .data(scope.retNeu)
+                //    .enter()
+                //    .append("circle").attr("r",3)
+                //    .attr("cx", function(d){
+                //        return xScale(d.x)+margin.left})
+                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
+                //    .on('mouseover', tip.show)
+                //    .on('mouseout', tip.hide);
                 //console.log("path is", svg.selectAll("dot"))
             }
 
@@ -265,24 +280,24 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 //regenerate line on line chart
                 svg.selectAll("#totalline")
                     .attr({
-                        d: lineFun(retTotal)
+                        d: lineFun(scope.retTotal)
                     });
                 svg.selectAll("#maleline")
                     .attr({
-                        d: lineFun(retMale)
+                        d: lineFun(scope.retMale)
                     });
                 svg.selectAll("#femaleline")
                     .attr({
-                        d: lineFun(retFemale)
+                        d: lineFun(scope.retFemale)
                     });
             }
 
-            var retTotal = [];
-            var retMale = [];
-            var retFemale = [];
-            var retPos = [];
-            var retNeg =[];
-            var retNeu = [];
+            scope.retTotal = [];
+            scope.retMale = [];
+            scope.retFemale = [];
+            scope.retPos = [];
+            scope.retNeg =[];
+            scope.retNeu = [];
             var line_data = function (data) {
 
                 //console.log("in make data");
@@ -342,11 +357,11 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                         }
                         else {
                             this.push({"x": tempX, "y": totalY});
-                            retMale.push({"x": tempX, "y": maleY});
-                            retFemale.push({"x": tempX, "y": femaleY});
-                            retPos.push({"x": tempX, "y": posY});
-                            retNeg.push({"x": tempX, "y": negY});
-                            retNeu.push({"x": tempX, "y": neuY});
+                            scope.retMale.push({"x": tempX, "y": maleY});
+                            scope.retFemale.push({"x": tempX, "y": femaleY});
+                            scope.retPos.push({"x": tempX, "y": posY});
+                            scope.retNeg.push({"x": tempX, "y": negY});
+                            scope.retNeu.push({"x": tempX, "y": neuY});
                             totalY = 0;
                             maleY = 0;
                             femaleY = 0;
@@ -363,46 +378,46 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                                 this.push({"x": tempX+1, "y": 0});
                                 this.push({"x": tempX+2, "y": 0});
 
-                                retMale.push({"x": tempX-2, "y": 0});
-                                retMale.push({"x": tempX-1, "y": 0});
-                                retMale.push({"x": tempX, "y": maleY});
-                                retMale.push({"x": tempX+1, "y": 0});
-                                retMale.push({"x": tempX+2, "y": 0});
+                                scope.retMale.push({"x": tempX-2, "y": 0});
+                                scope.retMale.push({"x": tempX-1, "y": 0});
+                                scope.retMale.push({"x": tempX, "y": maleY});
+                                scope.retMale.push({"x": tempX+1, "y": 0});
+                                scope.retMale.push({"x": tempX+2, "y": 0});
 
-                                retFemale.push({"x": tempX-2, "y": 0});
-                                retFemale.push({"x": tempX-1, "y": 0});
-                                retFemale.push({"x": tempX, "y": femaleY});
-                                retFemale.push({"x": tempX+1, "y": 0});
-                                retFemale.push({"x": tempX+2, "y": 0});
+                                scope.retFemale.push({"x": tempX-2, "y": 0});
+                                scope.retFemale.push({"x": tempX-1, "y": 0});
+                                scope.retFemale.push({"x": tempX, "y": femaleY});
+                                scope.retFemale.push({"x": tempX+1, "y": 0});
+                                scope.retFemale.push({"x": tempX+2, "y": 0});
 
-                                retPos.push({"x": tempX-2, "y": 0});
-                                retPos.push({"x": tempX-1, "y": 0});
-                                retPos.push({"x": tempX, "y": posY});
-                                retPos.push({"x": tempX+1, "y": 0});
-                                retPos.push({"x": tempX+2, "y": 0});
+                                scope.retPos.push({"x": tempX-2, "y": 0});
+                                scope.retPos.push({"x": tempX-1, "y": 0});
+                                scope.retPos.push({"x": tempX, "y": posY});
+                                scope.retPos.push({"x": tempX+1, "y": 0});
+                                scope.retPos.push({"x": tempX+2, "y": 0});
 
-                                retNeg.push({"x": tempX-2, "y": 0});
-                                retNeg.push({"x": tempX-1, "y": 0});
-                                retNeg.push({"x": tempX, "y": negY});
-                                retNeg.push({"x": tempX+1, "y": 0});
-                                retNeg.push({"x": tempX+2, "y": 0});
+                                scope.retNeg.push({"x": tempX-2, "y": 0});
+                                scope.retNeg.push({"x": tempX-1, "y": 0});
+                                scope.retNeg.push({"x": tempX, "y": negY});
+                                scope.retNeg.push({"x": tempX+1, "y": 0});
+                                scope.retNeg.push({"x": tempX+2, "y": 0});
 
-                                retNeu.push({"x": tempX-2, "y": 0});
-                                retNeu.push({"x": tempX-1, "y": 0});
-                                retNeu.push({"x": tempX, "y": neuY});
-                                retNeu.push({"x": tempX+1, "y": 0});
-                                retNeu.push({"x": tempX+2, "y": 0});
+                                scope.retNeu.push({"x": tempX-2, "y": 0});
+                                scope.retNeu.push({"x": tempX-1, "y": 0});
+                                scope.retNeu.push({"x": tempX, "y": neuY});
+                                scope.retNeu.push({"x": tempX+1, "y": 0});
+                                scope.retNeu.push({"x": tempX+2, "y": 0});
                             }
                             else{
                                 this.push({"x": tempX, "y": totalY});
-                                retMale.push({"x": tempX, "y": maleY});
-                                retFemale.push({"x": tempX, "y": femaleY});
-                                retPos.push({"x": tempX, "y": posY});
-                                retNeg.push({"x": tempX, "y": negY});
-                                retNeu.push({"x": tempX, "y": neuY});
+                                scope.retMale.push({"x": tempX, "y": maleY});
+                                scope.retFemale.push({"x": tempX, "y": femaleY});
+                                scope.retPos.push({"x": tempX, "y": posY});
+                                scope.retNeg.push({"x": tempX, "y": negY});
+                                scope.retNeu.push({"x": tempX, "y": neuY});
                             }
                         }
-                    },retTotal)
+                    },scope.retTotal)
                 }
             };
             line_data(scope.tweets);

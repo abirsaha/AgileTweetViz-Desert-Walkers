@@ -307,12 +307,13 @@
                     <label>{{yBarKey}}</label>
                     </div>
             </div>
-            <div id="2D" class="hide">
-                <div ng-repeat="xLineKey in line_met" class="checkboxtext">
-                    <input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"
-                           value="{{xLineKey}}" ng-click="check_x_line()"  />
-                    <label>{{xLineKey}}</label>
-                </div>
+            <div id="2D">
+                <input type="radio" id="total_line" name="line_met" onclick="check_x_line('total')"/>
+                <label>Total</label>
+                <input type="radio" id="gender_line" name="line_met" onclick="check_x_line('gender')"/>
+                <label>Gender</label>
+                <input type="radio" id="sentiment_line" name="line_met" onclick="check_x_line('sentiment')"/>
+                <label>Sentiment</label>
             </div>
             <div id="2M" class="hide">
                 <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
@@ -401,9 +402,12 @@
                                     </a>
                                 </div>
                                 <div style="position: relative;float: right;width:10%;border: 2px solid royalblue">
-                                    <div style="position: relative;background-color:green" align="right">Total</div>
-                                    <div style="position: relative;background-color:blue" align="right">Male</div>
-                                    <div style="position: relative;background-color:pink" align="right">Female</div>
+                                    <div style="position: relative;background-color:green" align="right" ng-show="totalbool">Total</div>
+                                    <div style="position: relative;background-color:blue" align="right" ng-show="genderbool">Male</div>
+                                    <div style="position: relative;background-color:pink" align="right" ng-show="genderbool">Female</div>
+                                    <div style="position: relative;background-color:black" align="right" ng-show="sentibool">Negative</div>
+                                    <div style="position: relative;background-color:red" align="right" ng-show="sentibool">Neutral</div>
+                                    <div style="position: relative;background-color:yellow" align="right" ng-show="sentibool">Positive</div>
                                 </div>
                                 <!--<div id="linemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue">-->
                                     <!--<span style="font-size: large"title="Data Filter">&nbsp;M</span>-->
