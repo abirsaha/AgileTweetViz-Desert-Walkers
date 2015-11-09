@@ -90,7 +90,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         }
                     });
                 arc = d3.svg.arc()
-                    .outerRadius(radius - 10)
+                    .outerRadius(radius - 50)
                     .innerRadius(3 * radius / 5);
                 pie = d3.layout.pie()
                     .sort(null)
@@ -154,7 +154,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             angular.element($window).on('resize',function(){
                 var the_chart = $("#viz"),
                     container = the_chart;
-                var width = (container[0].offsetWidth),
+                width = (container[0].offsetWidth),
                     height = (container[0].offsetHeight),
                     radius = Math.min(width, height) / 2;
                 redrawChart();

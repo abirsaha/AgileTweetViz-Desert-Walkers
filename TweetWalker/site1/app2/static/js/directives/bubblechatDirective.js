@@ -32,7 +32,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
                                                         ]
                                              }]
                         };*/
-            var root = {"name": "bubble", "children":
+            var root = {"name": "bubble", size: 0, "children":
                                             [{"name": "Male",
                                                 "size": 0,
                                                 "children" :
@@ -51,6 +51,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
                 var j = 0;
                 for (var i = 0; i < rawdata.length; i++) {
                     var obj = rawdata[i];
+                    root.size++;
                     if (!(obj["lang"] in dict)) {
 
                         dict[obj["lang"]] = j;
@@ -116,6 +117,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
 
                 for (var i = 0; i < rawdata.length; i++) {
                     var obj = rawdata[i];
+                    root.size++;
                     if (obj["gender"] == "male") {
                         root.children[0].size++;
                         if (obj["sentiment"] == 0) {
@@ -216,12 +218,39 @@ var color = d3.scale.linear()
           nodes = pack.nodes(root),
           view;
 
+        var tip = d3.tip()
+                .attr('class', 'd3-tip')
+                .html(function (d) {
+                    if (d.parent == undefined){
+                        var txt = "<p>" + d["name"] + ": " + d["size"] + "</p>";
+
+                    }
+                    else {
+                        var totalcount = 0;
+                        console.log(d);
+                        for (var i = 0; i < d.parent.children.length; i++) {
+                            console.log(d.parent.children[i]);
+                            totalcount += d.parent.children[i]["size"];
+                        }
+                        console.log(totalcount);
+                        var percentage = (d["size"] / totalcount) * 100;
+                        console.log(d);
+                        var txt = "<p>" + d["name"] + ": " + d["size"] + "<br>" +
+                            "Percentage: " + percentage + "</p>";
+                    }
+                    return txt;
+
+                });
+        svg.call(tip);
+
       var circle = svg.selectAll("circle")
                         .data(nodes)
                         .enter().append("circle")
                             .attr("class", function(d) { return d.parent ? d.children ? "node" : "node node--leaf" : "node node--root"; })
                             .style("fill", function(d) { return d.children ? color(d.depth) : color(d.depth); })
-                            .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); });
+                            .on("click", function(d) { if (focus !== d) zoom(d), d3.event.stopPropagation(); })
+                            .on('mouseover', tip.show)
+                            .on('mouseout', tip.hide);
       var text = svg.selectAll("text")
                     .data(nodes)
                     .enter().append("text")
