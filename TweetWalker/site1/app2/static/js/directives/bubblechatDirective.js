@@ -193,7 +193,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
 
     //console.log(root);
 
-    var margin = 20,
+    var margin = 50,
     diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight);
 
 /*
@@ -204,7 +204,7 @@ var color = d3.scale.linear()
 */
     var color = d3.scale.category10();
     var pack = d3.layout.pack()
-                        .padding(2)
+                        .padding(5)
                         .size([diameter - margin, diameter - margin])
                         .value(function(d) { return d.size; });
     var rawsvg = elem.find("svg");
