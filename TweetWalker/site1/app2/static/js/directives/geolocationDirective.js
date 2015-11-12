@@ -49,27 +49,23 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
                     .attr("d", path)
             });
 
-            aa = [-122.490402, 37.786453];
-            bb = [-122.389809, 37.72728];
-
             function shower() {
                 svg.append("circle")
-                    .attr("cx", 600)
-                        .attr("cy", 300)
-                            .attr("r", 1)
-                            .attr("class", "circlestyle")
-                            .style("fill", "green")
-                            .style("fill-opacity", 0.5)
-                            .style("stroke", "red")
-                            .style("stroke-opacity", 0.5)
-                            .transition()
-                            .duration(2000)
-                            .ease(Math.sqrt)
-                            .attr("r", 20)
-                            .attr("class", "circlestyle")
-                            .style("fill-opacity", 1e-6)
-                            .style("stroke-opacity", 1e-6)
-                            .remove()
+                    .attr("r", 1)
+                    .attr("class", "circlestyle")
+                    .attr("transform", function(d) {return "translate(" + projection(["-111","34"]) + ")";})
+                    .style("fill", "green")
+                    .style("fill-opacity", 0.5)
+                    .style("stroke", "red")
+                    .style("stroke-opacity", 0.5)
+                    .transition()
+                    .duration(2000)
+                    .ease(Math.sqrt)
+                    .attr("r", 20)
+                    .attr("class", "circlestyle")
+                    .style("fill-opacity", 1e-6)
+                    .style("stroke-opacity", 1e-6)
+                    .remove()
                 setTimeout(shower, 200);
             }
 

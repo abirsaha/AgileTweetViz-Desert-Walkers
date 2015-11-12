@@ -293,6 +293,7 @@
             <!--</div>-->
             <!--      <div class="container">
                       <div class="row">-->
+            <!--
             <div id="1D" class="hide">
                 <div ng-repeat="xBarKey in x_bar_tweets" class="checkboxtext">
                 <input type="radio" id="{{xBarKey}}_line" class="chk" name="x_bar_dimension"
@@ -307,6 +308,7 @@
                     <label>{{yBarKey}}</label>
                     </div>
             </div>
+
             <div id="2D">
                 <input type="radio" id="total_line" name="line_met" onclick="check_x_line('total')"/>
                 <label>Total</label>
@@ -315,6 +317,7 @@
                 <input type="radio" id="sentiment_line" name="line_met" onclick="check_x_line('sentiment')"/>
                 <label>Sentiment</label>
             </div>
+            -->
             <div id="2M" class="hide">
                 <div ng-repeat="yLineKey in y_line_tweets" class="checkboxtext">
                     <input type="radio" id="{{yLineKey}}_line" class="chk" name="y_line_dimension"
@@ -322,6 +325,7 @@
                     <label>{{yLineKey}}</label>
                     </div>
             </div>
+            <!--
             <div id="3D" class="hide">
                 <div ng-repeat="pieKey in pie_tweets" class="checkboxtext">
                 <input type="radio" id="{{pieKey}}_line" class="chk" name="pie_dimension"
@@ -329,6 +333,7 @@
                 <label>{{pieKey}}</label>
                 </div>
             </div>
+            -->
             <div id="3M" class="hide">
                 <!--<div ng-repeat="xLineKey in x_line_tweets" class="checkboxtext">-->
                     <!--<input type="radio" id="{{xLineKey}}_line" class="chk" name="x_line_dimension"-->
@@ -364,28 +369,67 @@
                 <div class="card" >
                     <ul class="nav nav-tabs" role="tablist" style="background-color: #16a085;color: cornsilk;">
                         <li role="presentation" class="active"><a href="#barChart" aria-controls="barchart" role="tab"
-                                                                  data-toggle="tab">Bar Chart</a></li>
+                                                                  ng-click="tab_change('1D')" data-toggle="tab">Bar Chart</a></li>
 
-                        <li role="presentation"><a href="#lineChart" aria-controls="linechart" role="tab" data-toggle="tab">Line
+                        <li role="presentation"><a href="#lineChart" aria-controls="linechart" ng-click="tab_change('2D')" role="tab" data-toggle="tab">Line
                             Chart</a></li>
-                        <li role="presentation"><a href="#pieChart" aria-controls="piechart" role="tab" data-toggle="tab">Pie
+                        <li role="presentation"><a href="#pieChart" aria-controls="piechart" ng-click="tab_change('3D')" role="tab" data-toggle="tab">Pie
                             Chart</a></li>
                         <li role="presentation"><a href="#bubbleChart" aria-controls="bubblechart" role="tab"
-                                                   data-toggle="tab">Bubble Chart</a></li>
+                                                   ng-click="tab_change('4D')" data-toggle="tab">Bubble Chart</a></li>
                         <li role="presentation"><a href="#slideChart" aria-controls="slideChart" role="tab"
-                                                   data-toggle="tab">Slide Chart</a></li>
+                                                   ng-click="tab_change('4D')" data-toggle="tab">Slide Chart</a></li>
                         <li role="presentation"><a href="#circleChart" aria-controls="circleChart" role="tab"
-                                                   data-toggle="tab">Circle Chart</a></li>
+                                                   ng-click="tab_change('4D')" data-toggle="tab">Circle Chart</a></li>
                         <!--<li style="float: right"><a data-placement="left" data-toggle="popover" data-container="body" data-trigger="click"  type="button" data-html="true" href="#" id="login"><span title="Data Filter" class="glyphicon glyphicon-th" style="margin:3px 0 0 0"></span></a></li>-->
 
                     </ul>
+
+                    <div id="1D" style="background-color: #16a085;color: cornsilk;">
+                        <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
+                        <input type="radio" id="gender_bar" name="bar_x_met" onclick="check_x_bar('gender')"/>
+                        <label>Gender&nbsp;&nbsp;</label>
+                        <input type="radio" id="language_bar" name="bar_x_met" onclick="check_x_bar('lang')"/>
+                        <label>Language&nbsp;&nbsp;</label>
+                        <input type="radio" id="sentiment_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
+                        <label>Sentiment</label>
+                    </div>
+                    <div id="1M" style="background-color: #16a085;color: cornsilk;">
+                        <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
+                        <input type="radio" id="tweet_bar" name="bar_y_met" onclick="check_y_bar('tweet')"/>
+                        <label>Tweet&nbsp;&nbsp;</label>
+                        <input type="radio" id="retweet_bar" name="bar_y_met" onclick="check_y_bar('retweet')"/>
+                        <label>Retweet&nbsp;&nbsp;</label>
+                        <input type="radio" id="impact_bar" name="bar_y_met" onclick="check_y_bar('impact')"/>
+                        <label>ImpactFactor</label>
+                    </div>
+
+                    <div id="2D" style="background-color: #16a085;color: cornsilk;">
+                        <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
+                        <input type="radio" id="total_line" name="line_met" onclick="check_x_line('total')"/>
+                        <label>Total&nbsp;&nbsp;</label>
+                        <input type="radio" id="gender_line" name="line_met" onclick="check_x_line('gender')"/>
+                        <label>Gender&nbsp;&nbsp;</label>
+                        <input type="radio" id="sentiment_line" name="line_met" onclick="check_x_line('sentiment')"/>
+                        <label>Sentiment</label>
+                    </div>
+
+                    <div id="3D" style="background-color: #16a085;color: cornsilk;">
+                        <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
+                        <input type="radio" id="gender_pie" name="pie_met" onclick="check_pie('gender')"/>
+                        <label>Gender&nbsp;&nbsp;</label>
+                        <input type="radio" id="lang_pie" name="pie_met" onclick="check_pie('lang')"/>
+                        <label>Language&nbsp;&nbsp;</label>
+                        <input type="radio" id="sentiment_pie" name="pie_met" onclick="check_pie('sentiment')"/>
+                        <label>Sentiment</label>
+                    </div>
 
                     <!-- Tab panes -->
                     <div id="container1" style="margin:8px;">
                         <div class="tab-content" id="viz">
                             <div role="tabpanel" class="tab-pane active" id="barChart">
                                 <div id="bardim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
-<br>
+                                <br>
                                 <br>
                                 <div id="barmeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>
 
@@ -396,6 +440,8 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
+
+
                                 <div id="linedim" style="position: relative;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
                                     <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" ng-href="#" >
                                         <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
@@ -423,7 +469,7 @@
                                 <br>
                                 <!--<div id="piemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>-->
 
-                                <div pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
+                                <div id="piechartdiag" pie-chart chart-data="plotData" yaxis-label="retweet count" xaxis-label="minutes"
                                      type="gender"
                                      style="position: relative;top:-90px;left:0; height:400px;width: 80%"></div>
                             </div>

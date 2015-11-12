@@ -38,7 +38,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         "retweet count",
         "impact"
     ];
-    $scope.pie_tweets = [
+    $scope.pie_met = [
         "gender",
         "lang",
         "sentiment"
@@ -378,9 +378,48 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         // console.log("in check_y_line",element,y_line_clicked_element);
     };
 
+    $scope.tab_change = function(element) {
+        if(element == "1D") {
+            document.getElementById(element).style.display = '';
+            document.getElementById("1M").style.display = '';
+
+            document.getElementById("2D").style.display = 'none';
+            document.getElementById("3D").style.display = 'none';
+        }
+        else if(element == "2D") {
+            document.getElementById(element).style.display = '';
+
+            document.getElementById("3D").style.display = 'none';
+            document.getElementById("1D").style.display = 'none';
+            document.getElementById("1M").style.display = 'none';
+        }
+        else if(element == "3D") {
+            document.getElementById(element).style.display = '';
+
+            document.getElementById("2D").style.display = 'none';
+            document.getElementById("1D").style.display = 'none';
+            document.getElementById("1M").style.display = 'none';
+        }
+        else {
+            document.getElementById("3D").style.display = 'none';
+            document.getElementById("2D").style.display = 'none';
+            document.getElementById("1D").style.display = 'none';
+            document.getElementById("1M").style.display = 'none';
+        }
+    }
+
     /*OnClick event of the radio buttons of pie chart*/
     var pie_clicked_element = [];
-    $scope.check_pie = function(element){
+    window.check_pie = function(element){
+        if (element == "language") {
+            document.getElementById("piechartdiag").type = 'lang';
+        }
+        else if (element == "sentiment") {
+            document.getElementById("piechartdiag").type = 'sentiment';
+        }
+        else {
+            document.getElementById("piechartdiag").type = 'gender';
+        }
         pie_clicked_element = [];
         pie_clicked_element.push(element);
         // console.log("in check_y_line",element,y_line_clicked_element);
