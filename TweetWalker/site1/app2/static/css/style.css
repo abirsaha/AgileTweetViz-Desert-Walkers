@@ -309,3 +309,103 @@ circle {
 text {
     font: 10px sans-serif;
 }
+
+
+/* 7 seg display*/
+
+.seven-segment {
+    position: relative;
+}
+.seven-segment .a {
+    position: relative;
+    top: 5%;
+    left: 0px;
+    /*width: 30px;*/
+    /*height: 0;*/
+    border-top: 6px solid #16a085;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.seven-segment .b {
+    position: relative;
+    float: right;
+    /*height: 30px;*/
+    width: 0;
+    top: 2px;
+    /*left: 90%;*/
+    /*left: -1000000px;*/
+    /*background-color: blue;*/
+    border-right: 6px solid #16a085;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+.seven-segment .c {
+    position: relative;
+    float: right;
+    top: 53%;
+    /*height: 30px;*/
+    left: 6px;
+    width: 0;
+    /*background-color: blue;*/
+    border-right: 6px solid #16a085;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+.seven-segment .d {
+    position: relative;
+    top: 98%;
+    left: 0px;
+    /*height: 0;*/
+    /*width: 30px;*/
+    /*background-color: blue;*/
+    border-bottom: 6px solid #16a085;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.seven-segment .e {
+    position: relative;
+    /*left: -1px;*/
+    float: left;
+    top: 48%;
+    /*height: 30px;*/
+    /*width: 0;*/
+    /*background-color: blue;*/
+    border-left: 6px solid #16a085;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+.seven-segment .f {
+    position: relative;
+    left: -6px;
+    float: left;
+    top: -4px;
+    /*height: 30px;*/
+    /*width: 0;*/
+    border-left: 6px solid #16a085;
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+}
+.gbottom {
+    position: relative;
+    height: 0;
+    width: 100%;
+    top: 44%;
+    border-top: 3px solid #16a085;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.gtop {
+    position: relative;
+    height: 0;
+    width: 100%;
+    top: 44%;
+    border-bottom: 3px solid #16a085;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+}
+.pt{
+    position: relative;
+    top: 95%;
+    background-color: #16a085;
+    height: 7%
+}

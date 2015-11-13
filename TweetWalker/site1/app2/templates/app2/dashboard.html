@@ -357,9 +357,50 @@
                         <sentiment-directive id="gauge2" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
                     </div>
 
-                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+                    <div class="col" style="float:left;position:relative;width: 20%; height: 100%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
-                        <sentiment-directive id="gauge3" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                        <!--<seg7disp id="wid3" style="width:80%;position:relative;top:4px;margin-left:15px;"></seg7disp>-->
+                        <div id="seg-7-disp" style="width:80%; height:80%; position:relative;top:4px;margin-left:5px;">
+                            <div class="seven-segment" style="float:left;left:0;width: 25%; height: 70%;margin: 3%">
+                                <div class="a" style="width: 100%"></div>
+                                <div class="b" style="height: 48%;"></div>
+                                <div class="c" style="height: 48%;"></div>
+                                <div class="d" style="width: 100%"></div>
+                                <div class="e" style="height: 48%"></div>
+                                <div class="f" style="height: 48%"></div>
+                                <!--<div class="g">-->
+                                        <div class="gtop" style="width: 100%"></div>
+                                        <div class="gbottom"></div>
+                                <!--</div>-->
+                            </div>
+                            <div class="seven-segment" style="float:left;position:relative;width: 25%;height: 70%;margin: 3%">
+                                <div class="a" style="width: 100%"></div>
+                                <div class="b" style="height: 48%;"></div>
+                                <div class="c" style="height: 48%;"></div>
+                                <div class="d" style="width: 100%"></div>
+                                <div class="e" style="height: 48%"></div>
+                                <div class="f" style="height: 48%"></div>
+                                <div class="gtop" style="width: 100%"></div>
+                                <div class="gbottom"></div>
+                                <!--<div class="g"></div>-->
+                            </div>
+                            <div class="seven-segment" style="float: left;position: relative;width: 5%;height: 70%;margin: 1%">
+                                <div class="pt"> </div>
+                            </div>
+                            <!--<div style="width: 10px; height: 10px; float:left"></div>-->
+                            <div class="seven-segment" style="float:left;position:relative;width: 25%;height: 70%;margin: 3%">
+                                <div class="a" style="width: 100%"></div>
+                                <div class="b" style="height: 48%;"></div>
+                                <div class="c" style="height: 48%;"></div>
+                                <div class="d" style="width: 100%"></div>
+                                <div class="e" style="height: 48%"></div>
+                                <div class="f" style="height: 48%"></div>
+                                <div class="gtop" style="width: 100%"></div>
+                                <div class="gbottom"></div>
+                                <!--<div class="g"></div>-->
+                            </div>
+                        </div>
+                        <div style="top: 50px"><p align="center">Impact Point of the searched query!!</p></div>
                     </div>
                     <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:26px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
@@ -397,6 +438,8 @@
                         <label>Language&nbsp;&nbsp;</label>
                         <input type="radio" id="sentiment_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
                         <label>Sentiment</label>
+                        <input type="radio" id="total_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
+                        <label>Total</label>
                     </div>
                     <div id="1M" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
