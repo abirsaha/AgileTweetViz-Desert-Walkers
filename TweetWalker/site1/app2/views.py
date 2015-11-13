@@ -11,16 +11,29 @@ from models import twitter_parser
 from forms import twitterForm
 from forms import indexForm
 from django.core.context_processors import csrf
+from django.template import RequestContext
 import simplejson as json
 
 
 def dashboard(request):
-    print "in index"
-    form = x
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-    return render(request,'app2/dashboard.html', args)
+    print "in dashboard"
+    if request.POST:
+        print "in dashboard post"
+        if 'get_tweets_dashboard' in request.POST:
+            string = request.POST['hashtag_dashboard']
+            y = twitter_parser(string)
+            form = y
+            args = {}
+            args.update(csrf(request))
+            args['form'] = form
+            return render(request,'app2/dashboard.html', args)
+    else:
+        form = x
+        args = {}
+        args.update(csrf(request))
+        args['form'] = form
+        return render(request,'app2/dashboard.html', args)
+
 
 def landingpage(request):
     print "in landingpage"

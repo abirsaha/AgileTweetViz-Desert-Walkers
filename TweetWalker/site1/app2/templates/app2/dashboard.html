@@ -122,27 +122,31 @@
 
 
 </script>
-{%verbatim%}
-<div class="navbar navbar-default">
-    <div class="col-sm-2">
 
-        <h3>TweetWalker</h3>
+<div id="dashboard" ng-controller="DashboardCtrl">
+<form action="" method="post" >
+    <div class="navbar navbar-default">
+        {% csrf_token %}
+        {%verbatim%}
+        <div class="col-sm-2">
 
-    </div>
-    <div class="col-sm-6" style="margin-top:5px">
-        <div class="input-group">
-            <input type="text" class="form-control" placeholder="# hashtag">
-      <span class="input-group-btn">
-        <button class="btn btn-default btn-primary" type="button">Get Tweets!</button>
-      </span>
+            <h3>TweetWalker</h3>
+
         </div>
-        <!-- /input-group -->
+        <div class="col-sm-6" style="margin-top:5px">
+            <div class="input-group">
+                <input type="text" class="form-control" name="hashtag_dashboard" id="hashtag_dashboard" ng-model="hashtagdb"
+                       placeholder="# enter hashtag"/>
+                <span class="input-group-btn">
+                    <button class="btn btn-default btn-primary" id="submit_dashboard" name="get_tweets_dashboard"
+                            type="submit" value="Send" ng-disabled="disabled" >Get Tweets!</button>
+                </span>
+            </div>
+            <!-- /input-group -->
+        </div>
     </div>
 
-</div>
-</div>
-
-<div id="dashboard"  ng-controller="DashboardCtrl" class="container" style="width:100%;overflow: hidden;height:900px">
+<div class="container" style="width:100%;overflow: hidden;height:900px">
 
     <div class="container-fluid" style="margin-top:10px">
         <div class="row">
@@ -404,7 +408,7 @@
                         <label>ImpactFactor</label>
                     </div>
 
-                    <div id="2D" style="background-color: #16a085;color: cornsilk;">
+                    <div id="2D" style="display:none; background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
                         <input type="radio" id="total_line" name="line_met" onclick="check_x_line('total')"/>
                         <label>Total&nbsp;&nbsp;</label>
@@ -414,7 +418,7 @@
                         <label>Sentiment</label>
                     </div>
 
-                    <div id="3D" style="background-color: #16a085;color: cornsilk;">
+                    <div id="3D" style="display:none; background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
                         <input type="radio" id="gender_pie" name="pie_met" onclick="check_pie('gender')"/>
                         <label>Gender&nbsp;&nbsp;</label>
@@ -441,12 +445,15 @@
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
 
-
+                                <!--
                                 <div id="linedim" style="position: relative;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
+
                                     <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" ng-href="#" >
                                         <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
                                     </a>
+
                                 </div>
+                                -->
                                 <div style="position: relative;float: right;width:10%;border: 2px solid royalblue">
                                     <div style="position: relative;background-color:green" align="right" ng-show="totalbool">Total</div>
                                     <div style="position: relative;background-color:blue" align="right" ng-show="genderbool">Male</div>
@@ -556,6 +563,7 @@
         </div>
     </div>
 </div>
-
+</form>
+</div>
 
 {% endblock content %}

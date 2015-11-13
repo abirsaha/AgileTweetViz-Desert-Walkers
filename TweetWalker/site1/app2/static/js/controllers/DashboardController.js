@@ -5,7 +5,19 @@
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
 
     $scope.tweets = JSON.parse($window.data);
+    $scope.hashtagdb;
 
+    $scope.disabled = true;
+
+    $scope.$watch('hashtagdb',function(newVal){
+        if(newVal != "" && newVal != undefined){
+            $scope.disabled = false;
+
+        }
+        else{
+            $scope.disabled = true;
+        }
+    });
 
     //console.log("in dashboard",$scope.tweets);
 	
