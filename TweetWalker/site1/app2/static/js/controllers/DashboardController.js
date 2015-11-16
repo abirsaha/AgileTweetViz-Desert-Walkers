@@ -857,5 +857,37 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
      var y= Math.round(Math.random() * 100);
      $scope.yData.push({x: x, y:y});
      }, 1000, 10);*/
+    var openOverlay = function (olEl) {
+        console.log('adad');
+        var overLay = $(olEl);
 
+        if ($('#overlay-shade').length == 0)
+            $('body').prepend('<div id="overlay-shade"></div>');
+
+        $('#overlay-shade').fadeTo(300, 0.6, function () {
+            var props = {
+                oLayWidth: overLay.width(),
+                scrTop: $(window).scrollTop(),
+                viewPortWidth: $(window).width()
+            };
+
+            var leftPos = (props.viewPortWidth - props.oLayWidth) / 2;
+
+            overLay
+                .css({
+                    display: 'block',
+                    opacity: 0,
+                    top: '300',
+                    left: leftPos + 'px'
+                })
+                .animate({
+                    top: props.scrTop + 40,
+                    opacity: 1
+                }, 600);
+        });
+
+    };
+    angular.element('#submit_dashboard').on('click', function () {
+        openOverlay('#overlay-inAbox');
+    });
 }]);
