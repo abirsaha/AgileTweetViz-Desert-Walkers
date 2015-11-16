@@ -76,7 +76,7 @@ tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function
         }
     });
 
-angular.element('#submit').on('click', function () {
+angular.element('#submit1').on('click', function () {
     openOverlay('#overlay-inAbox');
 });
 /*

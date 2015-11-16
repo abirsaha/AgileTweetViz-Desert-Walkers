@@ -23,7 +23,7 @@ tweetApp.directive('treeMap', function ($compile) {
                 ]
             };
 
-            var width = 370,
+            var width = 440,
                 height = 420,
                 color = d3.scale.category20c(),
                 div = d3.select("#treeNode").append("div")
