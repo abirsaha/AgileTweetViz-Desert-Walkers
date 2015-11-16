@@ -187,6 +187,7 @@ def twitter_parser(string):
         data["retweet_count"] = tweet["retweet_count"]
         data["profile_image_url"] = tweet["user"]["profile_image_url"]
         data["profile_image_url_https"] = tweet["user"]["profile_image_url_https"]
+        data["followers_count"]=tweet["user"]["followers_count"]
         data["impact"] = get_impact_factor(tweet["retweet_count"], max_retweet_count,
                                              tweet["user"]["followers_count"], max_followers_count,
                                              tweet["user"]["statuses_count"], max_statuses_count)

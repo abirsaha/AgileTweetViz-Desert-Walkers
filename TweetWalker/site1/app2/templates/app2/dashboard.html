@@ -2,6 +2,33 @@
 {% load i18n %}
 {% block content %}
 <style>
+    .node {
+        border: solid 1px white;
+        line-height: 0.95;
+        overflow: hidden;
+        position: absolute;
+        border-radius: 6px;
+        background-image: -webkit-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+        background-image:    -moz-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+        background-image:     -ms-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+        background-image:      -o-linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+        background-image:         linear-gradient(top, hsla(0,0%,100%,.3), hsla(0,0%,100%,0));
+        text-shadow: -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 1px 2px hsla(0,0%,100%,0.25),
+        1px -1px 2px hsla(0,0%,100%,0.25),
+        -1px 0px 2px hsla(0,0%,100%,0.25),
+        1px 0px 2px hsla(0,0%,100%,0.25);
+    }
+
+    .node div {
+        padding: 1px 4%;
+    }
+
+
+</style>
+
+<style>
     .nav-tabs {
         border-bottom: 2px solid #DDD;
     }
@@ -591,17 +618,20 @@
                         </li>
 
                     </ul>
-                    <button class="btn btn-primary" ng-click="loadData()">Load Data</button>
-                    <button  class="btn btn-primary" ng-click="updateData()">Update Data</button>
-                    <button  class="btn btn-primary" ng-click="clearData()">Clear Data</button>
-                    <tree-map width="370" height="350" data="populationData" value="population">
-                        <div>
-                            <div ng-if="!children">
-                                <!--<span class="label">{{label}}</span>-->
-                                <!--<span class="population">{{population}}</span>-->
-                            </div>
-                        </div>
-                    </tree-map>
+                    <div tree-map data="populationData"
+                         style=" "></div>
+                    <!--<button class="btn btn-primary" ng-click="loadData()">Load Data</button>-->
+                    <!--<button  class="btn btn-primary" ng-click="updateData()">Update Data</button>-->
+                    <!--<button  class="btn btn-primary" ng-click="clearData()">Clear Data</button>-->
+                    <!--<tree-map width="370" height="350" data="populationData" value="population">-->
+                    <!--&lt;!&ndash;<div >&ndash;&gt;-->
+
+                    <!--&lt;!&ndash;<div ng-if="!children">&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<span class="label">{{label}}</span>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;&lt;!&ndash;<img src="{{dump.children}}" class="population"/>&ndash;&gt;&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--</tree-map>-->
                     {%endverbatim%}
                 </div>
             </div>

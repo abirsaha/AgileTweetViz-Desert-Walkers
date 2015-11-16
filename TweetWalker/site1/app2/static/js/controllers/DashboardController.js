@@ -684,6 +684,50 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         }
     };
     */
+    $scope.dump=[];
+    angular.forEach($scope.tweets,function(d,i){
+        $scope.children={
+            label:"Image",
+            population: d.followers_count,
+            screenname: d.screenname,
+            //url: d.profile_image_url_https.slice(0, d.profile_image_url_https.lastIndexOf("_")) + d.profile_image_url_https.slice(d.profile_image_url_https.lastIndexOf("."))
+            url:d.profile_image_url_https
+        }
+        $scope.dump.push($scope.children);
+        $scope.dump.sort(function(a, b) {
+            return b.population - a.population;
+        });
+
+    });
+    $scope.user=[];
+    $scope.collection=[];
+    var counter=0;
+
+    $scope.test=[{}]
+
+    $.each($scope.dump, function (index, value) {
+        if(counter<50){
+            if ($.inArray(value.url, $scope.collection) == -1) {
+                $scope.user.push(value.screenname);
+                $scope.collection.push(value);
+                counter++;
+
+            }};
+    });
+
+    console.log($scope.collection);
+    //angular.forEach($scope.dump,function(d,i){
+    //    if(i<5){
+    //        $.each(json_all, function (index, value) {
+    //            if ($.inArray(value.id, arr) == -1) {
+    //                $scope.user.push(value.id);
+    //                $scope.collection.push(value);
+    //            }
+    //        });
+    //   // $scope.user.push(d)
+    //   }
+    //});
+
 
     $scope.gauge = {
         name: 'Positive Tweets',
@@ -696,62 +740,66 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         $scope.gauge.value= Math.round(Math.random()*100);
     }, 5000);
 
-    $scope.populationData = undefined;
-
-    $scope.loadData = function () {
-        console.log("Inside load")
-        $scope.populationData = {
-            label: 'United Kingdom',
-            population: 63181775,
-            children: [
-                {
-                    label: 'England',
-                    population: 53012456
-                },
-                {
-                    label: 'Scotland',
-                    population: 5295000
-                },
-                {
-                    label: 'Wales',
-                    population: 3063456
-                },
-                {
-                    label: 'Northern Ireland',
-                    population: 1810863
-                }
-            ]
-        };
+    $scope.populationData={
+        label:"tree",
+        children:$scope.collection
     };
-
-    $scope.updateData = function () {
-        $scope.populationData = {
-            label: 'United Kingdom',
-            population: 63181775,
-            children: [
-                {
-                    label: 'England',
-                    population: 5301245
-                },
-                {
-                    label: 'London',
-                    population: 2308000
-                },
-                {
-                    label: 'Wales',
-                    population: 3063456
-                },
-                {
-                    label: 'Northern Ireland',
-                    population: 1810863
-                }
-            ]
-        };
-    };
-
-    $scope.clearData = function () {
-        $scope.populationData = undefined;
-    };
+    //$scope.populationData = undefined;
+    //
+    //$scope.loadData = function () {
+    //    console.log("Inside load")
+    //    $scope.populationData = {
+    //        label: 'United Kingdom',
+    //        population: 63181775,
+    //        children: [
+    //            {
+    //                label: 'England',
+    //                population: 53012456
+    //            },
+    //            {
+    //                label: 'Scotland',
+    //                population: 5295000
+    //            },
+    //            {
+    //                label: 'Wales',
+    //                population: 3063456
+    //            },
+    //            {
+    //                label: 'Northern Ireland',
+    //                population: 1810863
+    //            }
+    //        ]
+    //    };
+    //};
+    //
+    //$scope.updateData = function () {
+    //    $scope.populationData = {
+    //        label: 'United Kingdom',
+    //        population: 63181775,
+    //        children: [
+    //            {
+    //                label: 'England',
+    //                population: 5301245
+    //            },
+    //            {
+    //                label: 'London',
+    //                population: 2308000
+    //            },
+    //            {
+    //                label: 'Wales',
+    //                population: 3063456
+    //            },
+    //            {
+    //                label: 'Northern Ireland',
+    //                population: 1810863
+    //            }
+    //        ]
+    //    };
+    //};
+    //
+    //$scope.clearData = function () {
+    //    $scope.populationData = undefined;
+    //};
 
     $("[data-toggle=popover1d]").popover({
         html: true,
