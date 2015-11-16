@@ -39,15 +39,14 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         "retweet count",
         "impact"
     ];
-    $scope.x_bar_tweets = [
+    $scope.bar_x_met = [
         "gender",
         "lang",
-        "time",
         "sentiment"
     ];
-    $scope.y_bar_tweets = [
-        "tweet count",
-        "retweet count",
+    $scope.bar_y_met = [
+        "tweet_count",
+        "retweet_count",
         "impact"
     ];
     $scope.pie_met = [
@@ -376,17 +375,19 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     /*OnClick event of the radio buttons in x-axis of bar chart*/
     var x_bar_clicked_element = [];
-    $scope.check_x_bar = function(element){
+    window.check_x_bar = function(element){
         x_bar_clicked_element = [];
         x_bar_clicked_element.push(element);
+        regenerateBarViz();
         // console.log("in check_x_line",element,x_bar_clicked_element);
     };
 
     /*OnClick event of the radio buttons in y-axis of bar chart*/
     var y_bar_clicked_element = [];
-    $scope.check_y_bar = function(element){
+    window.check_y_bar = function(element){
         y_bar_clicked_element = [];
         y_bar_clicked_element.push(element);
+        regenerateBarViz();
         // console.log("in check_y_line",element,y_line_clicked_element);
     };
 
@@ -453,19 +454,36 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
     }
 
+    var old_x_bar_clicked_element = []
+    var old_y_bar_clicked_element = []
     /*OnClick event of the get visualization button of bar chart*/
-    $scope.regenerateBarViz = function() {
+    var regenerateBarViz = function() {
+        var make_call = false;
         $.each($scope.tweets[0],function(k,value){
-            if ($scope.x_bar_tweets.indexOf(k)>=0 && x_bar_clicked_element.indexOf(k)>=0){
-                x_checked_element = k
+            if ($scope.bar_x_met.indexOf(k)>=0 && x_bar_clicked_element.indexOf(k)>=0){
+                x_checked_element = k;
+                if (old_x_bar_clicked_element.length==0 || old_x_bar_clicked_element.indexOf(k)<0) {
+                    old_x_bar_clicked_element = [];
+                    old_x_bar_clicked_element.push(k);
+
+                    make_call = true;
+                }
             }
-            if ($scope.y_bar_tweets.indexOf(k)>=0 && y_bar_clicked_element.indexOf(k)>=0){
-                y_checked_element = k
+            if ($scope.bar_y_met.indexOf(k)>=0 && y_bar_clicked_element.indexOf(k)>=0){
+                y_checked_element = k;
+                if (old_y_bar_clicked_element.length==0 || old_y_bar_clicked_element.indexOf(k)<0) {
+                    old_y_bar_clicked_element = [];
+                    old_y_bar_clicked_element.push(k);
+
+                    make_call = true;
+                }
             }
         });
-
-        /*Updating plotData so that new visualization can be loaded*/
-        $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
+        if (make_call == true) {
+            /*Updating plotData so that new visualization can be loaded*/
+            //$scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
+            make_gender_data($scope.tweets, x_checked_element, y_checked_element);
+        }
     }
 
     /*OnClick event of the get visualization button of pie chart*/
