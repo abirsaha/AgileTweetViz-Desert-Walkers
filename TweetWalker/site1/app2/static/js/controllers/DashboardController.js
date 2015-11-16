@@ -685,13 +685,15 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     };
     */
     $scope.dump=[];
+    console.log($scope.tweets);
     angular.forEach($scope.tweets,function(d,i){
         $scope.children={
             label:"Image",
             population: d.followers_count,
             screenname: d.screenname,
             //url: d.profile_image_url_https.slice(0, d.profile_image_url_https.lastIndexOf("_")) + d.profile_image_url_https.slice(d.profile_image_url_https.lastIndexOf("."))
-            url:d.profile_image_url_https
+            url:d.profile_image_url_https,
+            id: d.source_id
         }
         $scope.dump.push($scope.children);
         $scope.dump.sort(function(a, b) {
@@ -707,8 +709,8 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     $.each($scope.dump, function (index, value) {
         if(counter<50){
-            if ($.inArray(value.url, $scope.collection) == -1) {
-                $scope.user.push(value.screenname);
+            if ($.inArray(value.url, $scope.user) == -1) {
+                $scope.user.push(value.url);
                 $scope.collection.push(value);
                 counter++;
 
