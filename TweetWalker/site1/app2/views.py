@@ -25,12 +25,23 @@ def create_queue(string):
                             routing_key='argument_queue',
                             body=string)
 def dashboard(request):
-    print "in index"
-    form = x
-    args = {}
-    args.update(csrf(request))
-    args['form'] = form
-    return render(request,'app2/dashboard.html', args)
+    print "in dashboard"
+    if request.POST:
+        print "in dashboard post"
+        if 'get_tweets_dashboard' in request.POST:
+            string = request.POST['hashtag_dashboard']
+            y = twitter_parser(string)
+            form = y
+            args = {}
+            args.update(csrf(request))
+            args['form'] = form
+            return render(request,'app2/dashboard.html', args)
+    else:
+        form = x
+        args = {}
+        args.update(csrf(request))
+        args['form'] = form
+        return render(request,'app2/dashboard.html', args)
 
 def landingpage(request):
     print "in landingpage"
