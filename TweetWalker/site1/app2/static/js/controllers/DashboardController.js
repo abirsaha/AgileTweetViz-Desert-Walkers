@@ -5,6 +5,7 @@
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
 
     $scope.tweets = JSON.parse($window.data);
+    console.log($scope.tweets);
     $scope.hashtagdb;
 
     $scope.disabled = true;
@@ -691,9 +692,10 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             label:"Image",
             population: d.followers_count,
             screenname: d.screenname,
-            //url: d.profile_image_url_https.slice(0, d.profile_image_url_https.lastIndexOf("_")) + d.profile_image_url_https.slice(d.profile_image_url_https.lastIndexOf("."))
-            url:d.profile_image_url_https,
-            id: d.source_id
+            url: d.profile_image_url_https.slice(0, d.profile_image_url_https.lastIndexOf("_")) + d.profile_image_url_https.slice(d.profile_image_url_https.lastIndexOf(".")),
+            //url:d.profile_image_url_https,
+            id: d.source_id,
+            tweet: d.text
         }
         $scope.dump.push($scope.children);
         $scope.dump.sort(function(a, b) {
@@ -708,7 +710,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.test=[{}]
 
     $.each($scope.dump, function (index, value) {
-        if(counter<50){
+        if(counter<5){
             if ($.inArray(value.url, $scope.user) == -1) {
                 $scope.user.push(value.url);
                 $scope.collection.push(value);
@@ -731,77 +733,38 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     //});
 
 
-    $scope.gauge = {
-        name: 'Positive Tweets',
-        opacity: 0.55,
-        value: 65,
-        text: 'Sentiment Analysis'
-    };
+
 
     $interval(function(){
-        $scope.gauge.value= Math.round(Math.random()*100);
+        $scope.gauge.value= $scope.gValue;
     }, 5000);
 
     $scope.populationData={
         label:"tree",
         children:$scope.collection
     };
-    //$scope.populationData = undefined;
-    //
-    //$scope.loadData = function () {
-    //    console.log("Inside load")
-    //    $scope.populationData = {
-    //        label: 'United Kingdom',
-    //        population: 63181775,
-    //        children: [
-    //            {
-    //                label: 'England',
-    //                population: 53012456
-    //            },
-    //            {
-    //                label: 'Scotland',
-    //                population: 5295000
-    //            },
-    //            {
-    //                label: 'Wales',
-    //                population: 3063456
-    //            },
-    //            {
-    //                label: 'Northern Ireland',
-    //                population: 1810863
-    //            }
-    //        ]
-    //    };
-    //};
-    //
-    //$scope.updateData = function () {
-    //    $scope.populationData = {
-    //        label: 'United Kingdom',
-    //        population: 63181775,
-    //        children: [
-    //            {
-    //                label: 'England',
-    //                population: 5301245
-    //            },
-    //            {
-    //                label: 'London',
-    //                population: 2308000
-    //            },
-    //            {
-    //                label: 'Wales',
-    //                population: 3063456
-    //            },
-    //            {
-    //                label: 'Northern Ireland',
-    //                population: 1810863
-    //            }
-    //        ]
-    //    };
-    //};
-    //
-    //$scope.clearData = function () {
-    //    $scope.populationData = undefined;
-    //};
+
+    $scope.sensitivityIndex= calc_sense();
+    $scope.gValue = parseInt($scope.sensitivityIndex);
+    console.log("Sensitivity", $scope.gValue);
+
+    function calc_sense(){
+        var positive = 0;
+
+        angular.forEach($scope.tweets,function(d,i){
+            if(d.sentiment == '1'){
+                positive++;
+            }
+        });
+        return Math.round(positive*100/$scope.tweets.length);
+    }
+
+    $scope.gauge = {
+        name: 'Positive Tweets',
+        opacity: 0.55,
+        value: $scope.gValue,
+        text: 'Sentiment Analysis'
+    };
 
     $("[data-toggle=popover1d]").popover({
         html: true,
