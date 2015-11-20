@@ -1,11 +1,6 @@
-/**
- * Created by Abir on 10/15/15.
- */
-
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
 
     $scope.tweets = JSON.parse($window.data);
-    console.log($scope.tweets);
     $scope.hashtagdb;
 
     $scope.disabled = true;
@@ -20,26 +15,126 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         }
     });
 
-    //console.log("in dashboard",$scope.tweets);
-	
-	// Getting count of the attributes inside each tweet
-	// Object.keys($scope.tweets[0]).length
+    var show_seg = function(x, number){
+        switch (x){
+            case 0: $('#a'+number)[0].style.opacity= 1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=1;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=0;
+                $('#g'+number+'2')[0].style.opacity=0;
+                break;
+            case 1: $('#a'+number)[0].style.opacity=0;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=0;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=0;
+                $('#g'+number+'1')[0].style.opacity=0;
+                $('#g'+number+'2')[0].style.opacity=0;
+                break;
+            case 2: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=0;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=1;
+                $('#f'+number)[0].style.opacity=0;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 3: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=0;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 4: $('#a'+number)[0].style.opacity=0;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=0;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 5: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=0;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 6: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=0;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=1;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 7: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=0;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=0;
+                $('#g'+number+'1')[0].style.opacity=0;
+                $('#g'+number+'2')[0].style.opacity=0;
+                break;
+            case 8: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=1;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            case 9: $('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=0;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+                break;
+            default :$('#a'+number)[0].style.opacity=1;
+                $('#b'+number)[0].style.opacity=1;
+                $('#c'+number)[0].style.opacity=1;
+                $('#d'+number)[0].style.opacity=1;
+                $('#e'+number)[0].style.opacity=1;
+                $('#f'+number)[0].style.opacity=1;
+                $('#g'+number+'1')[0].style.opacity=1;
+                $('#g'+number+'2')[0].style.opacity=1;
+        }
+    };
 
-    $scope.line_met = [
-        "total",
-        "gender",
-        "sentiment"
-    ];
 
-    $scope.x_line_tweets = [
-        "time",
-        "sentiment"
-    ];
-    $scope.y_line_tweets = [
-        "tweet count",
-        "retweet count",
-        "impact"
-    ];
+    disp_seg = function(){
+        var sum = 0;
+        angular.forEach($scope.tweets, function(d,i){
+            sum += d.impact;
+        });
+        sum = sum*100;
+        sum = sum - sum%1;
+        show_seg((sum%10),3);
+        sum = sum - sum%10;
+        show_seg(((sum/10)%10),2);
+        sum = sum - sum%100;
+        show_seg(((sum/100)%10),1);
+    };
+
+    disp_seg();
+
     $scope.bar_x_met = [
         "gender",
         "lang",
@@ -59,8 +154,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     /* Converting chart Data in to 2D data */
 
     var make_2d_Data = function (data, xCol, yCol) {
-        //console.log("in make data");
-        //console.log("data is", data);
 
         var temp = [];
 
@@ -138,8 +231,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
 
     /*OnClick event of the radio buttons in x-axis of line chart*/
-    //$scope.xLineKey=0;
-    //var x_line_clicked_element = [];
     $scope.totalbool = true;
     $scope.genderbool = false;
     $scope.sentibool = false;
@@ -156,32 +247,16 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             })])
             .range([$("#lchart").attr("height")-margin.bottom-margin.top, 0]);
 
-       //getting d3 window in d3
-       //var d3 = window.d3;
-
        //making d3.tip function for d3-tip
         var tip = d3.tip()
             .attr('class', 'd3-tip')
             .html(function(d) {
-                //console.log("in tip",d);
                 return  "Minutes: "+d.x+",<br>"+" Tweet Count: "+ d.y;
             });
 
         //calling tip to append it to svg element
         d3.select("#lchart")
             .call(tip);
-
-       //d3.select("#lchart").selectAll("circle").remove();
-       //    .style({
-       //    opacity: 0
-       //});
-       //console.log(d3.select("#lchart").selectAll("dot"));
-       //x_line_clicked_element = [];
-       //x_line_clicked_element.push(e);
-       //e = d3.select("path#totalline");
-       //f = d3.select("path#maleline");
-       //g = d3.select("path#femaleline");
-       //console.log("in on click",x_line_clicked_element);
         if (e == "total"){
             $scope.totalbool = true;
             $scope.genderbool = false;
@@ -235,7 +310,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
            d3.select("#lchart")
                .selectAll("circle")
                .remove();
-           //console.log("in gender if");
            d3.select("path#maleline")
                .style({
                    opacity:1
@@ -363,7 +437,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
                .on('mouseover', tip.show)
                .on('mouseout', tip.hide);
        }
-        //console.log("in check_x_line",element,x_line_clicked_element,e,f,g);
     };
 
     /*OnClick event of the radio buttons in y-axis of line chart*/
@@ -371,7 +444,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.check_y_line = function(element){
         y_line_clicked_element = [];
         y_line_clicked_element.push(element);
-        // console.log("in check_y_line",element,y_line_clicked_element);
     };
 
     /*OnClick event of the radio buttons in x-axis of bar chart*/
@@ -380,7 +452,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         x_bar_clicked_element = [];
         x_bar_clicked_element.push(element);
         regenerateBarViz();
-        // console.log("in check_x_line",element,x_bar_clicked_element);
     };
 
     /*OnClick event of the radio buttons in y-axis of bar chart*/
@@ -389,7 +460,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         y_bar_clicked_element = [];
         y_bar_clicked_element.push(element);
         regenerateBarViz();
-        // console.log("in check_y_line",element,y_line_clicked_element);
     };
 
     $scope.tab_change = function(element) {
@@ -436,7 +506,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         }
         pie_clicked_element = [];
         pie_clicked_element.push(element);
-        // console.log("in check_y_line",element,y_line_clicked_element);
     };
 
     /*OnClick event of the get visualization button of line chart*/
@@ -444,7 +513,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         $.each($scope.tweets[0],function(k,value){
             if($scope.x_line_tweets.indexOf(k)>=0 && x_line_clicked_element.indexOf(k)>=0){
                 x_checked_element = k
-                console.log("in on click", k)
             }
             if($scope.y_line_tweets.indexOf(k)>=0 && y_line_clicked_element.indexOf(k)>=0){
                 y_checked_element = k
@@ -453,10 +521,10 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
         /*Updating plotData so that new visualization can be loaded*/
         $scope.plotData  = make_2d_Data($scope.tweets, x_checked_element, y_checked_element);
-    }
+    };
 
-    var old_x_bar_clicked_element = []
-    var old_y_bar_clicked_element = []
+    var old_x_bar_clicked_element = [];
+    var old_y_bar_clicked_element = [];
     /*OnClick event of the get visualization button of bar chart*/
     var regenerateBarViz = function() {
         var make_call = false;
@@ -686,7 +754,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     };
     */
     $scope.dump=[];
-    console.log($scope.tweets);
     angular.forEach($scope.tweets,function(d,i){
         $scope.children={
             label:"Image",
@@ -696,7 +763,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             //url:d.profile_image_url_https,
             id: d.source_id,
             tweet: d.text
-        }
+        };
         $scope.dump.push($scope.children);
         $scope.dump.sort(function(a, b) {
             return b.population - a.population;
@@ -719,19 +786,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
             }};
     });
 
-    console.log($scope.collection);
-    //angular.forEach($scope.dump,function(d,i){
-    //    if(i<5){
-    //        $.each(json_all, function (index, value) {
-    //            if ($.inArray(value.id, arr) == -1) {
-    //                $scope.user.push(value.id);
-    //                $scope.collection.push(value);
-    //            }
-    //        });
-    //   // $scope.user.push(d)
-    //   }
-    //});
-
 
 
 
@@ -746,7 +800,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
 
     $scope.sensitivityIndex= calc_sense();
     $scope.gValue = parseInt($scope.sensitivityIndex);
-    console.log("Sensitivity", $scope.gValue);
 
     function calc_sense(){
         var positive = 0;
@@ -821,7 +874,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
      $scope.yData.push({x: x, y:y});
      }, 1000, 10);*/
     var openOverlay = function (olEl) {
-        console.log('adad');
         var overLay = $(olEl);
 
         if ($('#overlay-shade').length == 0)

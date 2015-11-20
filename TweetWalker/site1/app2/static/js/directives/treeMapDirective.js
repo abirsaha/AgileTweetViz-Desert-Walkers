@@ -1,6 +1,3 @@
-/**
- * Created by Abir on 11/6/15.
- */
 tweetApp.directive('treeMap', function ($compile, $window) {
     return {
         restrict: 'EA',
@@ -9,19 +6,6 @@ tweetApp.directive('treeMap', function ($compile, $window) {
             data: '='
         },
         link: function (scope, elem, attrs) {
-            //console.log("asasa",scope.data);
-            //var tree = {
-            //    name: "tree",
-            //    children: [
-            //        { name: "Word-wrapping comes for free in HTML", size: 16 },
-            //        { name: "animate makes things fun", size: 80 },
-            //        { name: "data data everywhere...", size: 52 },
-            //        { name: "display something beautiful", size: 36 },
-            //        { name: "flex your muscles", size: 98 },
-            //        { name: "physics is religion", size: 64 },
-            //        { name: "query and you get the answer", size: 21 },
-            //    ]
-            //};
 
             function onLoad() {
                 var width = parseInt(angular.element('#treeMap').css("width")),
@@ -29,7 +13,6 @@ tweetApp.directive('treeMap', function ($compile, $window) {
                     color = d3.scale.category20c(),
                     div = d3.select("#treeNode").append("div")
                         .style("position", "relative");
-                console.log(width, height);
                 var treemap = d3.layout.treemap()
                     .size([width, height])
                     .sticky(true)
@@ -38,7 +21,6 @@ tweetApp.directive('treeMap', function ($compile, $window) {
                     });
 
                 var mousemove = function(e,id,url,tweet) {
-                    console.log("insde");
 
 
                     var xPosition = e.pageX + 5;
@@ -87,7 +69,6 @@ tweetApp.directive('treeMap', function ($compile, $window) {
                         // compute font size based on sqrt(area)
                         return Math.max(20, 0.18 * Math.sqrt(d.area)) + 'px';
                     })
-                    // .text(function(d) { return d.children ? null : d.label; })
                     .append('img')
                     .attr('src', function (d) {
 
@@ -99,14 +80,12 @@ tweetApp.directive('treeMap', function ($compile, $window) {
                         //    // compute font size based on sqrt(area)
                         var id = d.screenname;
                         var width = angular.element(this).parent().parent().css("width");
-                        console.log("ImageWidth", width);
                         return width
                     })
                     .style("height", function (d, i) {
                         //    // compute font size based on sqrt(area)
                         var id = d.screenname;
                         var height = angular.element(this).parent().parent().css("height");
-                        console.log("ImageHeight", height);
                         return height;
                     })
                     $('.node').on("mousemove", function(e){

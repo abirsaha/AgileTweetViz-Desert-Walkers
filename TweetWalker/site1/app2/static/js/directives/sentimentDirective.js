@@ -1,8 +1,4 @@
-/**
- * Created by Abir on 10/30/15.
- */
-
-        tweetApp.directive('sentimentDirective', function() {
+ tweetApp.directive('sentimentDirective', function() {
             return {
                 // this directive can be used as an Element or an Attribute
                 restrict: 'EA',

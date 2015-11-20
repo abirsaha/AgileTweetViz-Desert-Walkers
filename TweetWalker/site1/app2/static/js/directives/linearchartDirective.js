@@ -18,12 +18,6 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             //looking for svg element in html
             var rawSvg=elem.find('svg');
 
-            //fetching data to plot here in chartData, it uses camel case
-            // for angularJS so we get plotData in chartData(or chart-data)
-            //setting parameters for axises
-            var exp = $parse(attrs.chartData);
-            var dataToPlot=exp(scope);
-
             //making d3.tip function for d3-tip
             var tip = d3.tip()
                 .attr('class', 'd3-tip')
@@ -40,12 +34,6 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
 
             //calling tip to append it to svg element
             svg.call(tip);
-
-            //dynamic rendering for chart for any change in values
-            scope.$watchCollection(exp, function(newVal, oldVal){
-                dataToPlot=newVal;
-                redrawLineChart();
-            });
 
             //checking for resize on window element if it happens then draw
             // the new graph using same aspect ratio call redrawLineChart()
@@ -138,7 +126,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(scope.retFemale),
-                        "stroke": "pink",
+                        "stroke": "red",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
@@ -163,7 +151,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 svg.append("svg:path")
                     .attr({
                         d: lineFun(scope.retPos),
-                        "stroke": "yellow",
+                        "stroke": "blue",
                         "stroke-width": 2,
                         "fill": "none",
                         "class": pathClass,
@@ -206,55 +194,6 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr("cy",function(d){return yScale(d.y)+margin.top})
                     .on('mouseover', tip.show)
                     .on('mouseout', tip.hide);
-
-                //svg.selectAll("dot")
-                //    .data(scope.retMale)
-                //    .enter()
-                //    .append("circle").attr("r",3)
-                //    .attr("cx", function(d){
-                //        return xScale(d.x)+margin.left})
-                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                //    .on('mouseover', tip.show)
-                //    .on('mouseout', tip.hide);
-                //svg.selectAll("dot")
-                //    .data(scope.retFemale)
-                //    .enter()
-                //    .append("circle").attr("r",3)
-                //    .attr("cx", function(d){
-                //        return xScale(d.x)+margin.left})
-                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                //    .on('mouseover', tip.show)
-                //    .on('mouseout', tip.hide);
-                //console.log("path is", svg.selectAll("dot"));
-
-                //svg.selectAll("dot")
-                //    .data(scope.retPos)
-                //    .enter()
-                //    .append("circle").attr("r",3)
-                //    .attr("cx", function(d){
-                //        return xScale(d.x)+margin.left})
-                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                //    .on('mouseover', tip.show)
-                //    .on('mouseout', tip.hide);
-                //svg.selectAll("dot")
-                //    .data(scope.retNeg)
-                //    .enter()
-                //    .append("circle").attr("r",3)
-                //    .attr("cx", function(d){
-                //        return xScale(d.x)+margin.left})
-                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                //    .on('mouseover', tip.show)
-                //    .on('mouseout', tip.hide);
-                //svg.selectAll("dot")
-                //    .data(scope.retNeu)
-                //    .enter()
-                //    .append("circle").attr("r",3)
-                //    .attr("cx", function(d){
-                //        return xScale(d.x)+margin.left})
-                //    .attr("cy",function(d){return yScale(d.y)+margin.top})
-                //    .on('mouseover', tip.show)
-                //    .on('mouseout', tip.hide);
-                //console.log("path is", svg.selectAll("dot"))
             }
 
             function redrawLineChart() {
@@ -290,6 +229,18 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                     .attr({
                         d: lineFun(scope.retFemale)
                     });
+                svg.selectAll("#posline")
+                    .attr({
+                        d: lineFun(scope.retPos)
+                    });
+                svg.selectAll("#negline")
+                    .attr({
+                        d: lineFun(scope.retNeg)
+                    });
+                svg.selectAll("#neuline")
+                    .attr({
+                        d: lineFun(scope.retNeu)
+                    });
             }
 
             scope.retTotal = [];
@@ -300,8 +251,6 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
             scope.retNeu = [];
             var line_data = function (data) {
 
-                //console.log("in make data");
-                //console.log("data is", data);
                 /* Sorting the JSON Data*/
 
                 data.sort(function (a, b) {
@@ -309,25 +258,10 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                 });
                 var total = [];
                 var y_val = 0;
-                //var gender_male = [];
-                //var gender_female = [];
                 angular.forEach(data, function (d,i) {
-                    //var y_val = d.retweet_count + d.value;
                     y_val = d.value;
                     this.push({"x": d.minutes, "y": y_val, "z": d.gender, "w": d.sentiment});
-                    //console.log("gender is", data.gender);
-                    //if (data.gender="male"){
-                    //    gender_male.push({"x": d.minutes, "y": y_val});
-                    //}
-                    //else if(data.gender = "female"){
-                    //    gender_female.push({"x": d.minutes, "y": y_val});
-                    //}
                 },total);
-
-
-                //console.log("values are male , female",gender_male);
-                //console.log("female are:",gender_female);
-                /* Returning the cumulative sum of y attribute corresponding to same x attribute*/
                 if (total.length != 0) {
                     var tempX = total[0].x;
                     var totalY = 0;

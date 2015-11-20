@@ -1,3 +1,7 @@
+html{
+    min-width: 1290px;
+}
+
 svg:active {
     cursor: move;
     cursor: -moz-grabbing;

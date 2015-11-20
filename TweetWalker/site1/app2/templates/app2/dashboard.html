@@ -414,45 +414,40 @@
                         <!--<seg7disp id="wid3" style="width:80%;position:relative;top:4px;margin-left:15px;"></seg7disp>-->
                         <div id="seg-7-disp" style="width:80%; height:80%; position:relative;top:4px;margin-left:5px;">
                             <div class="seven-segment" style="float:left;left:0;width: 25%; height: 70%;margin: 3%">
-                                <div class="a" style="width: 100%"></div>
-                                <div class="b" style="height: 48%;"></div>
-                                <div class="c" style="height: 48%;"></div>
-                                <div class="d" style="width: 100%"></div>
-                                <div class="e" style="height: 48%"></div>
-                                <div class="f" style="height: 48%"></div>
-                                <!--<div class="g">-->
-                                        <div class="gtop" style="width: 100%"></div>
-                                        <div class="gbottom"></div>
-                                <!--</div>-->
+                                <div class="a" id = "a1" style="opacity:0; width: 100%"></div>
+                                <div class="b" id = "b1" style="opacity:0; height: 48%;"></div>
+                                <div class="c" id = "c1" style="opacity:0; height: 48%;"></div>
+                                <div class="d" id = "d1" style="opacity:0; width: 100%"></div>
+                                <div class="e" id = "e1" style="opacity:0; height: 48%"></div>
+                                <div class="f" id = "f1" style="opacity:0; height: 48%"></div>
+                                <div class="gtop" id = "g11" style="opacity:0; width: 100%"></div>
+                                <div class="gbottom" id = "g12" style="opacity:0"></div>
                             </div>
                             <div class="seven-segment" style="float:left;position:relative;width: 25%;height: 70%;margin: 3%">
-                                <div class="a" style="width: 100%"></div>
-                                <div class="b" style="height: 48%;"></div>
-                                <div class="c" style="height: 48%;"></div>
-                                <div class="d" style="width: 100%"></div>
-                                <div class="e" style="height: 48%"></div>
-                                <div class="f" style="height: 48%"></div>
-                                <div class="gtop" style="width: 100%"></div>
-                                <div class="gbottom"></div>
-                                <!--<div class="g"></div>-->
+                                <div class="a" id = "a2" style="opacity:0; width: 100%"></div>
+                                <div class="b" id = "b2" style="opacity:0; height: 48%;"></div>
+                                <div class="c" id = "c2" style="opacity:0; height: 48%;"></div>
+                                <div class="d" id = "d2" style="opacity:0; width: 100%"></div>
+                                <div class="e" id = "e2" style="opacity:0; height: 48%"></div>
+                                <div class="f" id = "f2" style="opacity:0; height: 48%"></div>
+                                <div class="gtop" style="opacity:0; width: 100%" id = "g21"></div>
+                                <div class="gbottom" id = "g22" style="opacity:0"></div>
                             </div>
                             <div class="seven-segment" style="float: left;position: relative;width: 5%;height: 70%;margin: 1%">
                                 <div class="pt"> </div>
                             </div>
-                            <!--<div style="width: 10px; height: 10px; float:left"></div>-->
                             <div class="seven-segment" style="float:left;position:relative;width: 25%;height: 70%;margin: 3%">
-                                <div class="a" style="width: 100%"></div>
-                                <div class="b" style="height: 48%;"></div>
-                                <div class="c" style="height: 48%;"></div>
-                                <div class="d" style="width: 100%"></div>
-                                <div class="e" style="height: 48%"></div>
-                                <div class="f" style="height: 48%"></div>
-                                <div class="gtop" style="width: 100%"></div>
-                                <div class="gbottom"></div>
-                                <!--<div class="g"></div>-->
+                                <div class="a" id = "a3" style="opacity:0; width: 100%"></div>
+                                <div class="b" id = "b3" style="opacity:0; height: 48%;"></div>
+                                <div class="c" id = "c3" style="opacity:0; height: 48%;"></div>
+                                <div class="d" id = "d3" style="opacity:0; width: 100%"></div>
+                                <div class="e" id = "e3" style="opacity:0; height: 48%"></div>
+                                <div class="f" id = "f3" style="opacity:0; height: 48%"></div>
+                                <div class="gtop" id = "g31" style="opacity:0; width: 100%"></div>
+                                <div class="gbottom" id = "g32" style="opacity:0"></div>
                             </div>
                         </div>
-                        <div style="top: 50px"><p align="center">Impact Point of the searched query!!</p></div>
+                        <div style="top: 50px"><p align="center">Impact Factor</p></div>
                     </div>
                     <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:26px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
@@ -473,11 +468,9 @@
                         <li role="presentation"><a href="#pieChart" aria-controls="piechart" ng-click="tab_change('3D')" role="tab" data-toggle="tab">Pie
                             Chart</a></li>
                         <li role="presentation"><a href="#bubbleChart" aria-controls="bubblechart" role="tab"
-                                                   ng-click="tab_change('4D')" data-toggle="tab">Bubble Chart</a></li>
+                                                   ng-click="tab_change('4D')" data-toggle="tab">Circle Packing Chart</a></li>
                         <li role="presentation"><a href="#slideChart" aria-controls="slideChart" role="tab"
                                                    ng-click="tab_change('4D')" data-toggle="tab">Slide Chart</a></li>
-                        <li role="presentation"><a href="#circleChart" aria-controls="circleChart" role="tab"
-                                                   ng-click="tab_change('4D')" data-toggle="tab">Circle Chart</a></li>
                         <!--<li style="float: right"><a data-placement="left" data-toggle="popover" data-container="body" data-trigger="click"  type="button" data-html="true" href="#" id="login"><span title="Data Filter" class="glyphicon glyphicon-th" style="margin:3px 0 0 0"></span></a></li>-->
 
                     </ul>
@@ -507,7 +500,7 @@
 
                     <div id="2D" style="display:none; background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
-                        <input type="radio" id="total_line" name="line_met" onclick="check_x_line('total')"/>
+                        <input type="radio" checked=true id="total_line" name="line_met" onclick="check_x_line('total')"/>
                         <label>Total&nbsp;&nbsp;</label>
                         <input type="radio" id="gender_line" name="line_met" onclick="check_x_line('gender')"/>
                         <label>Gender&nbsp;&nbsp;</label>
@@ -541,30 +534,15 @@
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
-
-                                <!--
-                                <div id="linedim" style="position: relative;float: left;width:16%;background-color:white;border-radius: 50%;border: 2px solid royalblue" align="center">
-
-                                    <a data-placement="right" data-toggle="popover2d" data-container="body" data-trigger="focus"  type="button" data-html="true" ng-href="#" >
-                                        <span style="font-size: large"title="Data Filter">&nbsp;Change Metric</span>
-                                    </a>
-
-                                </div>
-                                -->
                                 <div style="position: relative;float: right;width:10%;border: 2px solid royalblue">
-                                    <div style="position: relative;background-color:green" align="right" ng-show="totalbool">Total</div>
-                                    <div style="position: relative;background-color:blue" align="right" ng-show="genderbool">Male</div>
-                                    <div style="position: relative;background-color:pink" align="right" ng-show="genderbool">Female</div>
-                                    <div style="position: relative;background-color:black" align="right" ng-show="sentibool">Negative</div>
-                                    <div style="position: relative;background-color:red" align="right" ng-show="sentibool">Neutral</div>
-                                    <div style="position: relative;background-color:yellow" align="right" ng-show="sentibool">Positive</div>
+                                    <div style="position: relative;background-color:green;color:white" align="right" ng-show="totalbool">Total</div>
+                                    <div style="position: relative;background-color:blue;color: white" align="right" ng-show="genderbool">Male</div>
+                                    <div style="position: relative;background-color:red;color: white;" align="right" ng-show="genderbool">Female</div>
+                                    <div style="position: relative;background-color:black; color:white" align="right" ng-show="sentibool">Negative</div>
+                                    <div style="position: relative;background-color:red; color:white" align="right" ng-show="sentibool">Neutral</div>
+                                    <div style="position: relative;background-color:blue; color:white" align="right" ng-show="sentibool">Positive</div>
                                 </div>
-                                <!--<div id="linemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue">-->
-                                    <!--<span style="font-size: large"title="Data Filter">&nbsp;M</span>-->
-                                <!--</div>-->
-
-                                <div linear-chart chart-data="plotData" yaxis-label="retweet_count"
-                                     xaxis-label="minutes"
+                                <div linear-chart
                                      type="regular" style="position: relative;top:30%;left:5%"></div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="pieChart">
@@ -584,10 +562,6 @@
                                      type="lang" id="bubble"
                                      style="position: relative;top:-20px;left:5%; height: 400px;width: 400px"></div>
 
-                            </div>
-                            <div role="tabpanel" class="tab-pane" id="circleChart">
-                                <div circle-chart style="position: relative;top:30%;left:15%; height: 100px;width: 100px"
-                                id="cchart"></div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="slideChart">
 
