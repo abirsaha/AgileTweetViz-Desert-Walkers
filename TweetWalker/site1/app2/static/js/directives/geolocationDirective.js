@@ -48,12 +48,28 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
                     .append("path")
                     .attr("d", path)
             });
+            
+            var ws;
+            var str = "ws://" + "localhost" + ":" + "8888" + "/ws";
+            ws = new WebSocket("ws://" + "localhost" + ":" + "8888" + "/ws");
+            //document.write(ws);
 
-            function shower() {
+
+            function shower(data) {
+                //console.log(data['latitude']);
+                //console.log(data['longitude']);
                 svg.append("circle")
                     .attr("r", 1)
                     .attr("class", "circlestyle")
-                    .attr("transform", function(d) {return "translate(" + projection(["-111","34"]) + ")";})
+                    .attr("transform", function(d) {
+                            //console.log(data);
+                            //return "translate(" + projection([num.toString(d['longitude']),num.toString(d['latitude'])]) + ")";
+                            var  longitude= (data['latitude'].toFixed(2)).toString();
+                            var latitude  = (data['longitude'].toFixed(2)).toString();
+                            
+                            return "translate(" + projection([latitude,longitude]) + ")";
+                        }
+                        )
                     .style("fill", "green")
                     .style("fill-opacity", 0.5)
                     .style("stroke", "red")
@@ -66,14 +82,20 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
                     .style("fill-opacity", 1e-6)
                     .style("stroke-opacity", 1e-6)
                     .remove()
-                setTimeout(shower, 200);
+                setTimeout(shower, 100);
             }
 
-            shower();
+            
 
             function redraw() {
                 svg.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
             }
+            ws.onmessage = function(evt) {
+                
+                shower($.parseJSON(evt.data));
+            //document.write("Message Received: " + evt.data)
+            };
+            shower();
         }
     }
 }]);
