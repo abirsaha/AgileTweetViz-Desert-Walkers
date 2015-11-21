@@ -473,7 +473,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         if(element == "1D") {
             document.getElementById(element).style.display = '';
             document.getElementById("1M").style.display = '';
-
             document.getElementById("2D").style.display = 'none';
             document.getElementById("3D").style.display = 'none';
         }
