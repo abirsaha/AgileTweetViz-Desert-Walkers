@@ -124,13 +124,20 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         angular.forEach($scope.tweets, function(d,i){
             sum += d.impact;
         });
-        sum = sum*100;
+        sum = sum*10;
+        console.log(sum)
         sum = sum - sum%1;
         show_seg((sum%10),3);
         sum = sum - sum%10;
         show_seg(((sum/10)%10),2);
         sum = sum - sum%100;
-        show_seg(((sum/100)%10),1);
+        sum = sum/100;
+        if(sum>=9){
+            show_seg(9,1)
+        }
+        else{
+            show_seg((sum%10),1);
+        }
     };
 
     disp_seg();
