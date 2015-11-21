@@ -296,12 +296,30 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
                             scope.retPos.push({"x": tempX, "y": posY});
                             scope.retNeg.push({"x": tempX, "y": negY});
                             scope.retNeu.push({"x": tempX, "y": neuY});
-                            totalY = 0;
-                            maleY = 0;
-                            femaleY = 0;
-                            posY = 0;
-                            negY = 0;
-                            neuY = 0;
+                            totalY = d.y;
+                            if (d.z == "male"){
+                                maleY = d.y;
+                                femaleY = 0;
+                            }
+                            else{
+                                femaleY = d.y;
+                                maleY = 0;
+                            }
+                            if (d.w == "1"){
+                                posY = d.y;
+                                negY = 0;
+                                neuY = 0;
+                            }
+                            else if (d.w == "2"){
+                                negY = d.y;
+                                posY = 0;
+                                neuY = 0;
+                            }
+                            else{
+                                neuY = d.y;
+                                posY = 0;
+                                negY = 0;
+                            }
                             tempX = d.x;
                         }
                         if(i==(total.length-1)){

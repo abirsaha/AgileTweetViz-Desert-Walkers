@@ -400,13 +400,9 @@
             <div class="col-md-8">
                 <div id="widgets" style="top: -20px;position: relative;">
 
-                    <div class="col" style="float:left;left:0;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+                    <div class="col" style="float:left;height:80%;left:0;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
                     <sentiment-directive id="gauge1" config="gauge" style="height:80%;width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
-                    </div>
-                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
-
-                        <sentiment-directive-directive id="gauge2" config="gauge" style="height:80%;width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive-directive>
                     </div>
 
                     <div class="col"  align = "center" style="float:left;position:relative;width: 20%; height: 90%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
@@ -447,11 +443,7 @@
                                 <div class="gbottom" id = "g32" style="opacity:0"></div>
                             </div>
                         </div>
-                        <div style="top: 100%"><p align="center" style="font-family: Arial; font-size: 200%; color: #16a085">Impact Factor</p></div>
-                    </div>
-                    <div class="col" style="float:left;position:relative;width: 20%;margin: 5px;margin-left:26px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
-
-                        <sentiment-directive id="gauge4" config="gauge" style="width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                        <div><p align="center" style="margin-top: 7%;font-family: Arial; font-size: 175%; color: #16a085">Impact Factor</p></div>
                     </div>
 
 
@@ -478,11 +470,11 @@
 
                     <div id="1D" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
-                        <input type="radio" id="gender_bar" name="bar_x_met" onclick="check_x_bar('gender')"/>
+                        <input type="radio" id="gender_bar" name="bar_x_met" ng-click="genbarchart('gender','x')"/>
                         <label>Gender&nbsp;&nbsp;</label>
-                        <input type="radio" id="language_bar" name="bar_x_met" onclick="check_x_bar('lang')"/>
+                        <input type="radio" id="language_bar" name="bar_x_met" ng-click="genbarchart('lang','x')"/>
                         <label>Language&nbsp;&nbsp;</label>
-                        <input type="radio" id="sentiment_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
+                        <input type="radio" id="sentiment_bar" name="bar_x_met" ng-click="genbarchart('sentiment','x')"/>
                         <label>Sentiment</label>
                         <!--
                         <input type="radio" id="total_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
@@ -491,11 +483,11 @@
                     </div>
                     <div id="1M" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
-                        <input type="radio" id="tweet_bar" name="bar_y_met" onclick="check_y_bar('tweet_count')"/>
+                        <input type="radio" id="tweet_bar" name="bar_y_met" ng-click="genbarchart('tweet_count','y')"/>
                         <label>Tweet&nbsp;&nbsp;</label>
-                        <input type="radio" id="retweet_bar" name="bar_y_met" onclick="check_y_bar('retweet_count')"/>
+                        <input type="radio" id="retweet_bar" name="bar_y_met" ng-click="genbarchart('retweet_count','y')"/>
                         <label>Retweet&nbsp;&nbsp;</label>
-                        <input type="radio" id="impact_bar" name="bar_y_met" onclick="check_y_bar('impact')"/>
+                        <input type="radio" id="impact_bar" name="bar_y_met" ng-click="genbarchart('impact','y')"/>
                         <label>ImpactFactor</label>
                     </div>
 
@@ -521,16 +513,11 @@
 
                     <!-- Tab panes -->
                     <div id="container1" style="margin:8px;">
-                        <div class="tab-content" id="viz">
+                        <div class="tab-content" align="center" id="viz">
                             <div role="tabpanel" class="tab-pane active" id="barChart">
-                                <div id="bardim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
-                                <br>
-                                <br>
-                                <div id="barmeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover1m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>
-
                                 <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count"
                                      xaxis-label="minutes" type="gender"
-                                     style="position: relative;top:-120px;left:0%; height: 400px;width: 400px"
+                                     style="position: relative;left:0%"
                                      id="gbarchart"></div>
                             </div>
 
