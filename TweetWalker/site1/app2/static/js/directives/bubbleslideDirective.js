@@ -64,7 +64,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
             }
             var totalcount = dict.children[0].Count + dict.children[1].Count;
             var width = $("#viz")[0].offsetWidth;
-            var w = $("#viz")[0].offsetWidth*0.68*0.95;
+            var w = $("#viz")[0].offsetWidth*0.8*0.95;
             var h = Math.ceil(w*0.7);
             var oR = 0;
             var nTop = 0;
@@ -79,14 +79,11 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                 .attr("width", width)
                 .attr("height",h)
                 .on("mouseleave", function() {return resetBubbles();});
-            //console.log(dict);
-           
-            var bubbleObj = svg.selectAll(".topBubble")
+            var bubbleObj = svg.selectAll(".topBubble")
                         .data(dict.children)
                         .enter().append("g")
                             .attr("id", function(d,i) {return "topBubbleAndText_" + i});
-                //console.log(root); 
-          
+            
             nTop = dict.children.length;
             oR = w/(1+3*nTop); 
             h = Math.ceil(w/nTop*2);
@@ -101,7 +98,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("cx", function(d, i) {return oR*(3*(1+i)-1);})
                     .attr("cy", (h+oR)/3)
                     .style("fill", function(d,i) { return colVals(i); }) // #1f77b4
-                    .style("opacity",0.3)
+                    .style("opacity",0.8)
                     .on("mouseover", function(d,i) {return activateBubble(d,i);});
                  
             bubbleObj.append("text")
@@ -130,7 +127,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("cx", function(d,i) {return (oR*(3*(iB+1)-1) + oR*1.5*Math.cos((i-1)*45/180*3.1415926));})
                     .attr("cy", function(d,i) {return ((h+oR)/3 +        oR*1.5*Math.sin((i-1)*45/180*3.1415926));})
                     .attr("cursor","pointer")
-                    .style("opacity",0.5)
+                    .style("opacity", 0.8)
                     .style("fill", "#eee")
                     .on("click", function(d,i) {
                         window.open(d.address);                
@@ -145,7 +142,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("class", "childBubbleText" + iB)
                     .attr("x", function(d,i) {return (oR*(3*(iB+1)-1) + oR*1.5*Math.cos((i-1)*45/180*3.1415926));})
                     .attr("y", function(d,i) {return ((h+oR)/3 +        oR*1.5*Math.sin((i-1)*45/180*3.1415926));})
-                    .style("opacity",0.5)
+                    .style("opacity", 1)
                     .attr("text-anchor", "middle")
                     .style("fill", function(d,i) { return colVals(iB); }) // #1f77b4
                     .attr("font-size", 6)
@@ -190,11 +187,11 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("x", function(d,i) {return (oR*(3*(k+1)-1) + oR*1.5*Math.cos((i-1)*45/180*3.1415926));})
                     .attr("y", function(d,i) {return ((h+oR)/3 + oR*1.5*Math.sin((i-1)*45/180*3.1415926));})
                     .attr("font-size", 6)
-                    .style("opacity",0.5);
+                    .style("opacity", 1);
      
                 t.selectAll(".childBubble" + k)
                     .attr("r",  function(d) {return oR/3.0*Math.sqrt(d.Count/dict.children[k].Count);})
-                    .style("opacity",0.5)
+                    .style("opacity", 1)
                     .attr("cx", function(d,i) {return (oR*(3*(k+1)-1) + oR*1.5*Math.cos((i-1)*45/180*3.1415926));})
                     .attr("cy", function(d,i) {return ((h+oR)/3 + oR*1.5*Math.sin((i-1)*45/180*3.1415926));});
                          
@@ -210,15 +207,15 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                 .attr("cx", function(d,ii){
                     if(i == ii) {
                         // Nothing to change
-                        return oR*(3*(1+ii)-1) - 0.6*oR*(ii-1);
+                        return oR*(3*(1+ii)-1) - 0.5*oR*(ii-1);
                         } else {
                             // Push away a little bit
                             if(ii < i){
                                 // left side
-                                return oR*0.6*(3*(1+ii)-1);
+                                return oR*0.5*(3*(1+ii)-1);
                             } else {
                                 // right side
-                                return oR*(nTop*3+1) - oR*0.6*(3*(nTop-ii)-1);
+                                return oR*(nTop*3+1) - oR*0.5*(3*(nTop-ii)-1);
                             }
                         }              
                     })
@@ -233,15 +230,15 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                 .attr("x", function(d,ii){
                     if(i == ii) {
                         // Nothing to change
-                        return oR*(3*(1+ii)-1) - 0.6*oR*(ii-1);
+                        return oR*(3*(1+ii)-1) - 0.5*oR*(ii-1);
                         } else {
                             // Push away a little bit
                             if(ii < i){
                                 // left side
-                                return oR*0.6*(3*(1+ii)-1);
+                                return oR*0.5*(3*(1+ii)-1);
                             } else {
                                 // right side
-                                return oR*(nTop*3+1) - oR*0.6*(3*(nTop-ii)-1);
+                                return oR*(nTop*3+1) - oR*0.5*(3*(nTop-ii)-1);
                             }
                         }              
                     })         

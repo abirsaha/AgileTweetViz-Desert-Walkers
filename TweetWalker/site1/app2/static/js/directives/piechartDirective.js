@@ -10,6 +10,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
         link: function (scope, elem, attrs) {
             var rawdata = scope.tweets;
             var svg, color, tip, arc, pie, g;
+            var totalcount = 0;
             var makedata = function(){
                 if (attrs.type == "lang") {
                     var dict = {};
@@ -17,9 +18,11 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         var obj = rawdata[i];
                         if (obj["lang"] in dict) {
                             dict[obj["lang"]]++;
+                            totalcount++;
                         }
                         else {
                             dict[obj["lang"]] = 1;
+                            totalcount++;
                         }
                     }
                     for (var key in dict) {
@@ -43,7 +46,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     var data = [];
                     for (key in dict) {
                         if (dict.hasOwnProperty(key)) {
-                            totalcount += dict[key];
                             data.push({"x": key, "y": dict[key]})
                         }
                     }
@@ -55,11 +57,11 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         var obj = rawdata[i];
                         if (obj["gender"] == "male" || obj["gender"] == "female")
                             dict[obj["gender"]]++;
+                            totalcount++;
                     }
                     var data = [];
                     for (key in dict) {
                         if (dict.hasOwnProperty(key)) {
-                            totalcount += dict[key];
                             data.push({"x": key, "y": dict[key]})
                         }
                     }
@@ -73,6 +75,9 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     .attr('class', 'd3-tip')
                     .html(function (d) {
                         var percentage = (d.data.y / totalcount) * 100;
+                        console.log(totalcount);
+                        console.log(d.data.x);
+                        console.log(d.data.y);
 
                         if (attrs.type == "lang") {
 
@@ -148,7 +153,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             var width = $("#viz")[0].offsetWidth,
                 height = $("#viz")[0].offsetHeight,
                 radius = Math.min(width, height) / 2;
-            var totalcount = 0;
             var data = makedata();
             drawChart();
             angular.element($window).on('resize',function(){
@@ -161,6 +165,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             });
             scope.$watchCollection('tweets', function(newVal, oldVal){
                 rawdata = newVal;
+                totalcount = 0;
                 makedata();
                 redrawChart();
             });
