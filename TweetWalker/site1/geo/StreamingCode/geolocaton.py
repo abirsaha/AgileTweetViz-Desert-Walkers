@@ -35,11 +35,6 @@ Messages are output to the terminal for debuggin purposes.
 class WSHandler(tornado.websocket.WebSocketHandler):
     def open(self):
         print 'new connection'
-      
-    def on_message(self, message):
-        print 'message received:  %s' % message
-        # Reverse Message and send it back
-        #print 'sending back message: %s' % message[::-1]
         while not q.empty():
             tweet = q.get()
             if tweet.has_key('user'):
@@ -59,8 +54,34 @@ class WSHandler(tornado.websocket.WebSocketHandler):
                                 self.write_message(data)
                             except:
                                 pass
+      
+    def on_message(self, message):
+        print 'message received:  %s' % message
+        # Reverse Message and send it back
+        #print 'sending back message: %s' % message[::-1]
+        """
+        while not q.empty():
+            tweet = q.get()
+            if tweet.has_key('user'):
+                if tweet['user'].has_key('time_zone'):
+                    if tweet['user']['time_zone'] is not None :
+                        words = re.findall(r'\w+', tweet['user']['time_zone'])
+                        #print words
+                        if  len(words) == 1:
+                            try:
+                                #print tweet['user']['time_zone']
+                                geolocator = Nominatim()
+                                location = geolocator.geocode(tweet['user']['time_zone'], timeout=None)
+                                #print((location.latitude, location.longitude))
+                                data={}
+                                data['latitude']=location.latitude
+                                data['longitude']=location.longitude
+                                self.write_message(data)
+                            except:
+                                pass
+          """
 
-            #self.write_message(message[::-1])
+        #self.write_message(message[::-1])
             
             
  
