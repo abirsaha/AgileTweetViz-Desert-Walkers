@@ -67,6 +67,34 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     }
                     return data;
                 }
+
+                else if (attrs.type == "sentiment") {
+                    dict = {"Positive": 0, "Negative": 0, "Neutral": 0};
+                    for (var i = 0; i < rawdata.length; i++) {
+                        var obj = rawdata[i];
+                        if (obj["sentiment"] == 1){
+                            dict["Positive"]++;
+                            totalcount++;
+                        }
+                        else if (obj["sentiment"] == 2){
+                            dict["Negative"]++;
+                            totalcount++;
+                        }
+                        else if (obj["sentiment"] == 0){
+                            dict["Neutral"]++;
+                            totalcount++;
+                        }
+
+                    }
+                    var data = [];
+                    for (key in dict) {
+                        if (dict.hasOwnProperty(key)) {
+                            if (!(dict[key] == 0))
+                                data.push({"x": key, "y": dict[key]})
+                        }
+                    }
+                    return data;
+                }
             };
             var setparam = function(){
                 var rawsvg = elem.find("svg");
@@ -75,9 +103,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     .attr('class', 'd3-tip')
                     .html(function (d) {
                         var percentage = (d.data.y / totalcount) * 100;
-                        console.log(totalcount);
-                        console.log(d.data.x);
-                        console.log(d.data.y);
 
                         if (attrs.type == "lang") {
 
@@ -89,6 +114,12 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                         }
                         else if (attrs.type == "gender") {
                             var txt = "<p>Gender: " + d.data.x + "<br>" +
+                                "Count: " + d.data.y + "<br>" +
+                                "Percentage: " + percentage.toPrecision(3) + "%<p>";
+                            return txt;
+                        }
+                        else if (attrs.type == "sentiment") {
+                            var txt = "<p>Sentiment: " + d.data.x + "<br>" +
                                 "Count: " + d.data.y + "<br>" +
                                 "Percentage: " + percentage.toPrecision(3) + "%<p>";
                             return txt;
