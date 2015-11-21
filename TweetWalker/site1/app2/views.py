@@ -27,7 +27,6 @@ def create_queue(string):
 def dashboard(request):
     print "in dashboard"
     if request.POST:
-        print "in dashboard post"
         if 'get_tweets_dashboard' in request.POST:
             string = request.POST['hashtag_dashboard']
             y = twitter_parser(string)
@@ -52,6 +51,8 @@ def landingpage(request):
                 string = request.POST['hashtagInput']
                 global x
                 x = twitter_parser(string)
+                if x == "error":
+                    return HttpResponseRedirect('')
             return HttpResponseRedirect('app2/dashboard')
         elif 'get_map' in request.POST:
             form = twitterForm(request.POST)
