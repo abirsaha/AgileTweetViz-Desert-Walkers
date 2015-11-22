@@ -100,7 +100,7 @@ def data_analysis(statuses):
         print "Time Zone: " + str(time_zone)
         print "Followers Count Range: " + str(follower_count)
         print "Retweet Count Range: " + str(retweet_count)
-		print "HashTag Count:" + str(hashtag_count)
+	print "HashTag Count:" + str(hashtag_count)
 
 
 def twitter_parser(string):
