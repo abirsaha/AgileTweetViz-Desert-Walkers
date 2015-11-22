@@ -91,15 +91,15 @@
                         // percentage
                         $('#' + element).prepend('<div id="' + element + 'Percentage' +'"></div>');
 
-                        $('#' + element).css('font-size', $('#' + element).width() / 10 + 'px');
+                        $('#' + element).css('font-size', $('#' + element).width() / 7 + 'px');
                         $('#' + element + 'Percentage').css('font-size', $('#' + element).width() / 4 + 'px');
 
                         $(window).resize(function() {
-                            $('#' + element).css('font-size', $('#' + element).width() / 10 + 'px');
+                            $('#' + element).css('font-size', $('#' + element).width() / 7 + 'px');
                             $('#' + element + 'Percentage').css('font-size', $('#' + element).width() / 4 + 'px');
                         });
 
-                        counter($('#' + element + 'Percentage'), 0, options.value);
+                        //counter($('#' + element + 'Percentage'), 0, options.value);
                     };
 
                     // new image - gauge's background (if it is set)
@@ -109,9 +109,9 @@
 
                      //adding text in the middle (if it is set)
                     if (options.text) {
-                        var text = paper.text(radius / 2, radius / 2, options.text)
+                        var text = paper.text(radius / 2, radius / 2, options.value +"%")
                             .attr({
-                                'font-size': radius / 12,
+                                'font-size': radius / 4,
                                 "stroke": options.textColor,
                                 "fill": options.textColor
                             });
@@ -165,7 +165,7 @@
                         if (options.name) {
                             var textName = options.element + 'Text';
                             $('#' + options.element).append('<div class="canvasText" style="text-align:center;font-size: 3em;" id="' + textName + '"></div>');
-                            gaugeText(textName, options.name, options.value);
+                            //gaugeText(textName, options.name, options.value);
                         }
 
                     });

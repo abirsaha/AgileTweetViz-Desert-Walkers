@@ -23,9 +23,19 @@ tweetApp.directive('treeMap', function ($compile, $window) {
                 var mousemove = function(e,id,url,tweet) {
 
 
-                    var xPosition = e.pageX + 5;
-                    var yPosition = e.pageY + 5;
+                    if(window.innerWidth - e.pageX <300){
+                        var xPosition = e.pageX - 300;
+                    }
+                    else{
+                        var xPosition = e.pageX +5;
 
+                    }
+                    if(window.innerHeight - e.pageY < 50){
+                        var yPosition = e.pageY - 100;
+                    }
+                    else{
+                        var yPosition = e.pageY + 5;
+                    }
 
                     d3.select("#tooltip")
                         .style("left", xPosition + "px")

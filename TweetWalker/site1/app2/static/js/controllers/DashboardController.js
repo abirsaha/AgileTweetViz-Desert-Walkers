@@ -1,8 +1,17 @@
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
 
     $scope.tweets = JSON.parse($window.data);
+    
     $scope.hashtagdb;
+    if(localStorage.getItem("searchString")!= null){
+        $scope.hashtagdb=localStorage.getItem("searchString");
+        //console.log($scope.hashtagdb);
+        //localStorage.removeItem("searchString");
+    };
 
+    angular.element('#submit_dashboard').on('click', function () {
+        localStorage.setItem("searchString",$scope.hashtagdb)
+    });
     $scope.disabled = true;
 
     $scope.$watch('hashtagdb',function(newVal){
@@ -883,7 +892,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.test=[{}]
 
     $.each($scope.dump, function (index, value) {
-        if(counter<5){
+        if(counter<10){
             if ($.inArray(value.url, $scope.user) == -1) {
                 $scope.user.push(value.url);
                 $scope.collection.push(value);

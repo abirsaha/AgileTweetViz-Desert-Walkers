@@ -132,7 +132,7 @@
         background: #FFF none repeat scroll 0% 0%;
         box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
         margin-bottom: 5px;
-        height: 450px;
+        height: 550px;
     }
 
 </style>
@@ -182,12 +182,12 @@
         {%verbatim%}
         <div class="col-sm-2">
 
-            <h3>TweetWalker</h3>
+            <h3><a href="/" style="color:rgb(255, 248, 220);text-decoration: none">TweetWalker</a></h3>
 
         </div>
         <div class="col-sm-6" style="margin-top:5px">
             <div class="input-group">
-                <input type="text" class="form-control" name="hashtag_dashboard" id="hashtag_dashboard" ng-model="hashtagdb"
+                <input type="text" class="form-control"  maxlength="10" name="hashtag_dashboard" id="hashtag_dashboard" ng-model="hashtagdb"
                        placeholder="# enter hashtag"/>
                 <span class="input-group-btn">
                     <button class="btn btn-default btn-primary" id="submit_dashboard" name="get_tweets_dashboard"
@@ -400,12 +400,14 @@
             <div class="col-md-8">
                 <div id="widgets" style="top: -20px;position: relative;">
 
-                    <div class="col" style="float:left;height:80%;left:0;width: 20%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+                    <div class="col" style="float:left;height:80%;left:0;width: 20%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
                     <sentiment-directive id="gauge1" config="gauge" style="height:80%;width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
+                        <div><p align="center" style="margin-top: 2%;font-family: Arial; font-size: 175%; color: #16a085">Positive Tweets</p></div>
+
                     </div>
 
-                    <div class="col"  align = "center" style="float:left;position:relative;width: 20%; height: 90%;margin: 5px;margin-left:25px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+                    <div class="col" style="float:left;height:80%;left:0;width: 20%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
                         <!--<seg7disp id="wid3" style="width:80%;position:relative;top:4px;margin-left:15px;"></seg7disp>-->
                         <div id="seg-7-disp" style="width:90%; height:70%; position:relative;top:4px;margin-left:5px;">
@@ -445,7 +447,9 @@
                         </div>
                         <div><p align="center" style="margin-top: 7%;font-family: Arial; font-size: 175%; color: #16a085">Impact Factor</p></div>
                     </div>
-
+                    <div class="col" style="float:left;height:80%;left:0;width: 45%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
+                        <div id="string" style="position:relative;top:30%;left:5%;float:left;font-size: 300%;color:#16a085"><p><img style="margin-right:40px;position: relative"src="/static/img/twittersmall.png"/># {{hashtagdb}}</p></div>
+                    </div>
 
 
                 </div>
