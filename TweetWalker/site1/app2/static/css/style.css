@@ -13,9 +13,9 @@ svg:active {
 }
 
 .mappath {
-    stroke: red;
+    stroke: black;
     stroke-width: 0.5px;
-    fill: grey;
+    fill: #262626;
 }
 
 .navbar{
