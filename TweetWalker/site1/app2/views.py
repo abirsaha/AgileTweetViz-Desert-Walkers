@@ -13,6 +13,10 @@ from forms import twitterForm
 from forms import indexForm
 from django.core.context_processors import csrf
 import simplejson as json
+import subprocess
+import sys
+import os
+import signal
 
 def create_queue(string):
     #setup rabbitMQ Connection
@@ -33,6 +37,8 @@ def dashboard(request):
             args = {}
             args.update(csrf(request))
             args['form'] = form
+            if len(y) < 3:
+                return HttpResponseRedirect('/')
             return render(request,'app2/dashboard.html', args)
     else:
         form = x
@@ -49,6 +55,15 @@ def landingpage(request):
                 string = request.POST['hashtagInput']
                 if request.POST.get('dashboard_type') is not None:
                     create_queue(string)
+                    p = subprocess.Popen(['ps', '-ef'], stdout=subprocess.PIPE)
+                    out, err = p.communicate()
+                    for line in out.splitlines():
+                        if 'fetch.py' in line:
+                            pid = (line.split(None, 1)[1])
+                            pid = pid.split(None,1)[0]
+                            print pid
+                            os.kill(int(pid), signal.SIGTERM) #or signal.SIGKILL
+                    pid = subprocess.Popen([sys.executable,"./geo/StreamingCode/fetch.py"])
                     return HttpResponseRedirect('geo/geomap')
                 global x
                 x = twitter_parser(string)
