@@ -57,14 +57,14 @@
     </div>
 </nav>
 
-<div id="geolocation" class="container" style="width:100%;">
+<div id="geolocation" class="container" style="width:100%; background-color: black">
     <script type='text/javascript'>
         var back = "{{form|escapejs}}";
         window.data = back
     </script>
     {%verbatim%}
     <div class="col-md-12" id = "geo">
-        <h3>World Map Visualization</h3>
+        <h3 style="color:white">World Map Visualization</h3>
         <div geo-chart></div>
     </div>
     {%endverbatim%}
