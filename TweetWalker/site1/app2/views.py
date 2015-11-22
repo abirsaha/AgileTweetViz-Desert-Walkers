@@ -49,19 +49,14 @@ def landingpage(request):
             form = twitterForm(request.POST)
             if form.is_valid():
                 string = request.POST['hashtagInput']
+                if request.POST.get('dashboard_type') is not None:
+                    create_queue(string)
+                    return HttpResponseRedirect('geo/geomap')
                 global x
                 x = twitter_parser(string)
                 if x == "error":
                     return HttpResponseRedirect('')
             return HttpResponseRedirect('app2/dashboard')
-        elif 'get_map' in request.POST:
-            form = twitterForm(request.POST)
-            if form.is_valid():
-                string = request.POST['hashtagInput']
-                #global x
-                #x = twitter_parser(string)
-                create_queue(string)
-            return HttpResponseRedirect('geo/geomap')
     else:
         form = twitterForm()
         args = {}

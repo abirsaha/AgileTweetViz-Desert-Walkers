@@ -120,7 +120,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
             }
 
     var margin = 50,
-    diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight);
+    diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight)/1.2;
     var color = d3.scale.category10();
     var pack = d3.layout.pack()
                         .padding(5)
