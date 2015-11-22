@@ -118,7 +118,7 @@ def twitter_parser(string):
     user_gender = Gender()
 
     statuses = search_results['statuses']
-    while len(statuses) < 600:
+    while len(statuses) < 1000:
         try:
             next_results = search_results['search_metadata']['next_results']
         except KeyError, e: # No more results when next_results doesn't exist

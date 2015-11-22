@@ -138,7 +138,6 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
                 sum = sum+300;
             }
         }
-        console.log(sum);
         sum = sum - sum%1;
         show_seg((sum%10),3);
         sum = sum - sum%10;
@@ -772,6 +771,94 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
         }
     };
     */
+    $scope.makedata = function(t, n){
+        var totalcount = 0;
+        rawdata=$scope.tweets;
+        if (t == "lang") {
+            var dict = {};
+            for (var i = 0; i < rawdata.length; i++) {
+                var obj = rawdata[i];
+                if (obj["lang"] in dict) {
+                    dict[obj["lang"]]++;
+                    totalcount++;
+                }
+                else {
+                    dict[obj["lang"]] = 1;
+                    totalcount++;
+                }
+            }
+            for (var key in dict) {
+                if (dict.hasOwnProperty(key)) {
+                    if (dict[key] < n) {
+                        if ("Other" in dict) {
+                            dict["Other"] += dict[key];
+                        }
+                        else {
+                            dict["Other"] = dict[key];
+                        }
+                        delete dict[key];
+                    }
+                    else if (key == "und") {
+                        dict["undetermined"] = dict[key]
+                        delete dict[key];
+                    }
+                }
+            }
+
+            var data = [];
+            for (key in dict) {
+                if (dict.hasOwnProperty(key)) {
+                    data.push({"x": key, "y": dict[key]})
+                }
+            }
+            return data;
+        }
+        else if (t == "gender") {
+            dict = {"male": 0, "female": 0};
+            for (var i = 0; i < rawdata.length; i++) {
+                var obj = rawdata[i];
+                if (obj["gender"] == "male" || obj["gender"] == "female")
+                    dict[obj["gender"]]++;
+                totalcount++;
+            }
+            var data = [];
+            for (key in dict) {
+                if (dict.hasOwnProperty(key)) {
+                    data.push({"x": key, "y": dict[key]})
+                }
+            }
+            return data;
+        }
+
+        else if (t == "sentiment") {
+            dict = {"Positive": 0, "Negative": 0, "Neutral": 0};
+            for (var i = 0; i < rawdata.length; i++) {
+                var obj = rawdata[i];
+                if (obj["sentiment"] == 1){
+                    dict["Positive"]++;
+                    totalcount++;
+                }
+                else if (obj["sentiment"] == 2){
+                    dict["Negative"]++;
+                    totalcount++;
+                }
+                else if (obj["sentiment"] == 0){
+                    dict["Neutral"]++;
+                    totalcount++;
+                }
+
+            }
+            var data = [];
+            for (key in dict) {
+                if (dict.hasOwnProperty(key)) {
+                    if (!(dict[key] == 0))
+                        data.push({"x": key, "y": dict[key]})
+                }
+            }
+            return data;
+        }
+    };
+
     $scope.dump=[];
     angular.forEach($scope.tweets,function(d,i){
         $scope.children={

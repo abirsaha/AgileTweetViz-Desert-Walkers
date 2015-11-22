@@ -3,7 +3,7 @@ tweetApp.directive('linearChart',['$parse', '$window', function($parse, $window)
         restrict:'EA',
         template:"<svg></svg>",
         link: function(scope, elem, attrs){
-            var margin = {top:10, right: 50, bottom: 25, left: 20};
+            var margin = {top:10, right: 50, bottom: 25, left: 50};
             var padding = 0;
             width = $("#viz")[0].offsetWidth,
                 height = $("#viz")[0].offsetHeight-123;

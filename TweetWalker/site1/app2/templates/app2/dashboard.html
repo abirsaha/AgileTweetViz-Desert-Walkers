@@ -470,11 +470,11 @@
 
                     <div id="1D" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
-                        <input type="radio" id="gender_bar" name="bar_x_met" ng-click="genbarchart('gender','x')"/>
+                        <input type="radio" id="gender_bar" name="bar_x_met" checked=true ng-click="filterbarchart('gender','x')"/>
                         <label>Gender&nbsp;&nbsp;</label>
-                        <input type="radio" id="language_bar" name="bar_x_met" ng-click="genbarchart('lang','x')"/>
+                        <input type="radio" id="language_bar" name="bar_x_met" ng-click="filterbarchart('lang','x')"/>
                         <label>Language&nbsp;&nbsp;</label>
-                        <input type="radio" id="sentiment_bar" name="bar_x_met" ng-click="genbarchart('sentiment','x')"/>
+                        <input type="radio" id="sentiment_bar" name="bar_x_met" ng-click="filterbarchart('sentiment','x')"/>
                         <label>Sentiment</label>
                         <!--
                         <input type="radio" id="total_bar" name="bar_x_met" onclick="check_x_bar('sentiment')"/>
@@ -483,11 +483,11 @@
                     </div>
                     <div id="1M" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
-                        <input type="radio" id="tweet_bar" name="bar_y_met" ng-click="genbarchart('tweet_count','y')"/>
+                        <input type="radio" id="tweet_bar" name="bar_y_met" checked=true ng-click="filterbarchart('tweet_count','y')"/>
                         <label>Tweet&nbsp;&nbsp;</label>
-                        <input type="radio" id="retweet_bar" name="bar_y_met" ng-click="genbarchart('retweet_count','y')"/>
+                        <input type="radio" id="retweet_bar" name="bar_y_met" ng-click="filterbarchart('retweet_count','y')"/>
                         <label>Retweet&nbsp;&nbsp;</label>
-                        <input type="radio" id="impact_bar" name="bar_y_met" ng-click="genbarchart('impact','y')"/>
+                        <input type="radio" id="impact_bar" name="bar_y_met" ng-click="filterbarchart('impact','y')"/>
                         <label>ImpactFactor</label>
                     </div>
 
@@ -514,11 +514,10 @@
                     <!-- Tab panes -->
                     <div id="container1" style="margin:8px;">
                         <div class="tab-content" align="center" id="viz">
-                            <div role="tabpanel" class="tab-pane active" id="barChart">
-                                <div bar-chart chart-data="data_m" data_f="data_f" yaxis-label="retweet count"
-                                     xaxis-label="minutes" type="gender"
-                                     style="position: relative;left:0%"
-                                     id="gbarchart"></div>
+                            <div role="tabpanel" class="tab-pane active" id="barChart" style="position: relative;left:0%; top: 0%">
+                                <div bar-chart
+                                     style="position: relative;left:0%; top: 0%"
+                                     id="brchart"></div>
                             </div>
 
                             <div role="tabpanel" class="tab-pane" id="lineChart">
@@ -531,7 +530,8 @@
                                     <div style="position: relative;background-color:blue; color:white" align="right" ng-show="sentibool">Positive</div>
                                 </div>
                                 <div linear-chart
-                                     type="regular" style="position: relative;top:30%;left:5%"></div>
+                                     style="position: relative;left:0%; top: 0%"
+                                     id="lnchart"></div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="pieChart">
                                 <div id="piedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>

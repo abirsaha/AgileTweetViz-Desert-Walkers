@@ -11,91 +11,6 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             var rawdata = scope.tweets;
             var svg, color, tip, arc, pie, g;
             var totalcount = 0;
-            var makedata = function(){
-                if (attrs.type == "lang") {
-                    var dict = {};
-                    for (var i = 0; i < rawdata.length; i++) {
-                        var obj = rawdata[i];
-                        if (obj["lang"] in dict) {
-                            dict[obj["lang"]]++;
-                            totalcount++;
-                        }
-                        else {
-                            dict[obj["lang"]] = 1;
-                            totalcount++;
-                        }
-                    }
-                    for (var key in dict) {
-                        if (dict.hasOwnProperty(key)) {
-                            if (dict[key] < 10) {
-                                if ("Other" in dict) {
-                                    dict["Other"] += dict[key];
-                                }
-                                else {
-                                    dict["Other"] = dict[key];
-                                }
-                                delete dict[key];
-                            }
-                            else if (key == "und") {
-                                dict["undetermined"] = dict[key]
-                                delete dict[key];
-                            }
-                        }
-                    }
-
-                    var data = [];
-                    for (key in dict) {
-                        if (dict.hasOwnProperty(key)) {
-                            data.push({"x": key, "y": dict[key]})
-                        }
-                    }
-                    return data;
-                }
-                else if (attrs.type == "gender") {
-                    dict = {"male": 0, "female": 0};
-                    for (var i = 0; i < rawdata.length; i++) {
-                        var obj = rawdata[i];
-                        if (obj["gender"] == "male" || obj["gender"] == "female")
-                            dict[obj["gender"]]++;
-                            totalcount++;
-                    }
-                    var data = [];
-                    for (key in dict) {
-                        if (dict.hasOwnProperty(key)) {
-                            data.push({"x": key, "y": dict[key]})
-                        }
-                    }
-                    return data;
-                }
-
-                else if (attrs.type == "sentiment") {
-                    dict = {"Positive": 0, "Negative": 0, "Neutral": 0};
-                    for (var i = 0; i < rawdata.length; i++) {
-                        var obj = rawdata[i];
-                        if (obj["sentiment"] == 1){
-                            dict["Positive"]++;
-                            totalcount++;
-                        }
-                        else if (obj["sentiment"] == 2){
-                            dict["Negative"]++;
-                            totalcount++;
-                        }
-                        else if (obj["sentiment"] == 0){
-                            dict["Neutral"]++;
-                            totalcount++;
-                        }
-
-                    }
-                    var data = [];
-                    for (key in dict) {
-                        if (dict.hasOwnProperty(key)) {
-                            if (!(dict[key] == 0))
-                                data.push({"x": key, "y": dict[key]})
-                        }
-                    }
-                    return data;
-                }
-            };
             var setparam = function(){
                 var rawsvg = elem.find("svg");
                 color = d3.scale.category20();
@@ -184,7 +99,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             var width = $("#viz")[0].offsetWidth,
                 height = $("#viz")[0].offsetHeight,
                 radius = Math.min(width, height) / 2;
-            var data = makedata();
+            var data = scope.makedata(attrs.type,10);
             drawChart();
             angular.element($window).on('resize',function(){
                 var the_chart = $("#viz"),
@@ -197,7 +112,7 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
             scope.$watchCollection('tweets', function(newVal, oldVal){
                 rawdata = newVal;
                 totalcount = 0;
-                makedata();
+                scope.makedata(attrs.type,10);
                 redrawChart();
             });
         }
