@@ -25,7 +25,6 @@ def create_queue(string):
                             routing_key='argument_queue',
                             body=string)
 def dashboard(request):
-    print "in dashboard"
     if request.POST:
         if 'get_tweets_dashboard' in request.POST:
             string = request.POST['hashtag_dashboard']
@@ -43,7 +42,6 @@ def dashboard(request):
         return render(request,'app2/dashboard.html', args)
 
 def landingpage(request):
-    print "in landingpage"
     if request.POST:
         if 'get_tweets' in request.POST:
             form = twitterForm(request.POST)
@@ -54,6 +52,8 @@ def landingpage(request):
                     return HttpResponseRedirect('geo/geomap')
                 global x
                 x = twitter_parser(string)
+                if len(x) < 3:
+                    return HttpResponseRedirect('')
                 if x == "error":
                     return HttpResponseRedirect('')
             return HttpResponseRedirect('app2/dashboard')

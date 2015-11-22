@@ -165,7 +165,6 @@ def twitter_parser(string):
             elif tweet['user'].has_key('screenname'):
                 data["screenname"] = tweet["user"]["screenname"]
         data["date"] = tweet["created_at"]
-        # data["value"] = tweet["user"]["statuses_count"]
         data["value"] = 1
         data["text"] = tweet["text"]
         if tweet["lang"] == "en" and len(tweet["text"]) > 2:
@@ -178,13 +177,9 @@ def twitter_parser(string):
             data["sentiment"] = 0
         date = tweet["created_at"].split()
         data["time"] = int(date[3].split(":")[0])
-        # data["year"] = date[len(date)-1]
-        # data["month"] = month[date[1]]
-        # data["day"] = date[2]
         data["minutes"] = int(date[3].split(":")[1])
         data["lang"] = tweet["lang"]
         data["gender"] = user_gender.get(data["screenname"])
-        #print(data["gender"])
         data["retweet_count"] = tweet["retweet_count"]
         data["profile_image_url"] = tweet["user"]["profile_image_url"]
         data["profile_image_url_https"] = tweet["user"]["profile_image_url_https"]

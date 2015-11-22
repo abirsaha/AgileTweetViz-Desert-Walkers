@@ -1,5 +1,5 @@
 tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($scope,$interval,$window) {
-    window.onbeforeunload = function() { return "You work will be lost."; };
+    window.onbeforeunload = function() { return "CAREFULL!!!\nYou work might be lost."; };
     $scope.tweets = JSON.parse($window.data);
     
     $scope.hashtagdb;

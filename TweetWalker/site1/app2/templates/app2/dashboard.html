@@ -448,7 +448,7 @@
                         <div><p align="center" style="margin-top: 11%;font-family: Arial; font-size: 175%; color: #16a085">Impact Factor</p></div>
                     </div>
                     <div class="col" style="float:left;height:80%;left:0;width: 45%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
-                        <div id="string" style="position:relative;top:30%;left:5%;float:left;font-size: 300%;color:#16a085"><p><img style="margin-right:2px;position: relative"src="/static/img/twittersmall.png"/># {{hashtagdb}}</p></div>
+                        <div id="string" style="position:relative;top:30%;left:5%;float:left;font-size: 300%;color:#16a085"><p><img style="margin-right:2px;position: relative"src="/static/img/twittersmall.png"/> {{hashtagdb}}</p></div>
                     </div>
 
 
@@ -511,13 +511,13 @@
                         <label>Gender&nbsp;&nbsp;</label>
                         <input type="radio" id="lang_pie" name="pie_met" ng-click="filterpie('lang')"/>
                         <label>Language&nbsp;&nbsp;</label>
-                        <input type="radio" id="sentiment_pie" name="pie_met" ng-click="filterpie('sentiment')"/>
+                        <input type="radio" checked=true id="sentiment_pie" name="pie_met" ng-click="filterpie('sentiment')"/>
                         <label>Sentiment</label>
                     </div>
 
                     <!-- Tab panes -->
                     <div id="container1" style="margin:8px;">
-                        <div class="tab-content" align="center" id="viz">
+                        <div class="tab-content" id="viz">
                             <div role="tabpanel" class="tab-pane active" id="barChart" style="position: relative;left:0%; top: 0%">
                                 <div bar-chart
                                      style="position: relative;left:0%; top: 0%"
