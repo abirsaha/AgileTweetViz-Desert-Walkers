@@ -100,6 +100,10 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                 height = $("#viz")[0].offsetHeight,
                 radius = Math.min(width, height) / 2;
             var data = scope.makedata(attrs.type,10);
+            var totalcount = 0;
+            angular.forEach(data, function(d){
+                    totalcount+= d.y;
+                });
             drawChart();
             angular.element($window).on('resize',function(){
                 var the_chart = $("#viz"),
@@ -109,12 +113,23 @@ tweetApp.directive('pieChart',['$parse', '$window', function($parse, $window){
                     radius = Math.min(width, height) / 2;
                 redrawChart();
             });
-            scope.$watchCollection('tweets', function(newVal, oldVal){
-                rawdata = newVal;
+            //scope.$watchCollection('tweets', function(newVal, oldVal){
+            //    rawdata = newVal;
+            //    totalcount = 0;
+            //    data = scope.makedata(attrs.type,10);
+            //    angular.forEach(data, function(d){
+            //        totalcount+= d.y;
+            //    });
+            //    drawChart();
+            //});
+            scope.filterpie = function(e){
                 totalcount = 0;
-                scope.makedata(attrs.type,10);
-                redrawChart();
-            });
+                data = scope.makedata(e,10);
+                angular.forEach(data, function(d){
+                    totalcount+= d.y;
+                });
+                drawChart();
+            }
         }
 
     }

@@ -277,7 +277,7 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     $scope.sentibool = false;
 
     window.check_x_line = function(e){
-        var margin = {top:10, right: 50, bottom: 25, left: 20};
+        var margin = {top:10, right: 50, bottom: 25, left: 50};
         var xScale = d3.scale.linear()
             .domain([$scope.retTotal[0].x, $scope.retTotal[$scope.retTotal.length-1].x])
             .range([0, $("#viz")[0].offsetWidth - margin.right -margin.left]);
