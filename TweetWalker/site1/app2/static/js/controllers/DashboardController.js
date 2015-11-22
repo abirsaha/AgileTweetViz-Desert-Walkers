@@ -14,9 +14,22 @@ tweetApp.controller('DashboardCtrl',['$scope','$interval','$window',function ($s
     });
     $scope.disabled = true;
 
+
+
     $scope.$watch('hashtagdb',function(newVal){
         if(newVal != "" && newVal != undefined){
             $scope.disabled = false;
+            if($scope.hashtagdb.length>12){
+                var stringLen = $scope.hashtagdb.length;
+                var fontSize = angular.element("#string").css("font-size");
+
+                angular.element("#string").css("font-size",'25px');
+
+            }else{
+                angular.element("#string").css("font-size",'42px');
+            }
+
+
 
         }
         else{
