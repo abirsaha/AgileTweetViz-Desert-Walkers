@@ -120,7 +120,7 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
             }
 
     var margin = 50,
-    diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight)/1.2;
+    diameter = Math.min($("#viz")[0].offsetWidth, $("#viz")[0].offsetHeight);
     var color = d3.scale.category10();
     var pack = d3.layout.pack()
                         .padding(5)
@@ -128,10 +128,10 @@ tweetApp.directive('bubbleChart', ['$parse', '$window', function($parse, $window
                         .value(function(d) { return d.size; });
     var rawsvg = elem.find("svg");
     var svg = d3.select(rawsvg[0])
-                .attr("width", diameter)
-                .attr("height", diameter)
+                .attr("width", $("#viz")[0].offsetWidth)
+                .attr("height", $("#viz")[0].offsetHeight)
                 .append("g")
-                .attr("transform", "translate(" + diameter / 2 + "," + diameter / 2 + ")");
+                .attr("transform", "translate(" + $("#viz")[0].offsetWidth / 2 + "," + $("#viz")[0].offsetHeight / 2 + ")");
 
       var focus = root,
           nodes = pack.nodes(root),

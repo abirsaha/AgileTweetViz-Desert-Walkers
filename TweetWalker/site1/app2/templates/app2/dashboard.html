@@ -402,7 +402,7 @@
                     <div class="col" style="float:left;height:80%;left:0;width: 20%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
 
                     <sentiment-directive id="gauge1" config="gauge" style="height:80%;width:80%;position:relative;top:4px;margin-left:15px;"></sentiment-directive>
-                        <div><p align="center" style="margin-top: 2%;font-family: Arial; font-size: 175%; color: #16a085">Positive Tweets</p></div>
+                        <div><p align="center" style="margin-top: 2%;font-family: Arial; font-size: 175%; color: #16a085">Positivity</p></div>
 
                     </div>
 
@@ -444,7 +444,7 @@
                                 <div class="gbottom" id = "g32" style="opacity:0"></div>
                             </div>
                         </div>
-                        <div><p align="center" style="margin-top: 11%;font-family: Arial; font-size: 175%; color: #16a085">Impact Factor</p></div>
+                        <div><p align="center" style="margin-top: 11%;font-family: Arial; font-size: 175%; color: #16a085">Impact</p></div>
                     </div>
                     <div class="col" style="float:left;height:80%;left:0;width: 45%;margin: 5px;margin-left:35px;margin-top:20px;box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);z-index: 9999;background-color: whitesmoke">
                         <div id="string" style="position:relative;top:30%;left:5%;float:left;font-size: 300%;color:#16a085"><p><img style="margin-right:2px;position: relative"src="/static/img/twittersmall.png"/> {{hashtagdb}}</p></div>
@@ -456,11 +456,11 @@
                 <!-- Nav tabs -->
                 <div class="card" >
                     <ul class="nav nav-tabs" role="tablist" style="background-color: #16a085;color: cornsilk;">
-                        <li role="presentation" class="active"><a href="#barChart" aria-controls="barchart" role="tab"
+                        <li role="presentation" class="active"><a href="#lineChart" aria-controls="linechart" ng-click="tab_change('2D')" role="tab" data-toggle="tab">Line
+                            Chart</a></li>
+                        <li role="presentation"><a href="#barChart" aria-controls="barchart" role="tab"
                                                                   ng-click="tab_change('1D')" data-toggle="tab">Bar Chart</a></li>
 
-                        <li role="presentation"><a href="#lineChart" aria-controls="linechart" ng-click="tab_change('2D')" role="tab" data-toggle="tab">Line
-                            Chart</a></li>
                         <li role="presentation"><a href="#pieChart" aria-controls="piechart" ng-click="tab_change('3D')" role="tab" data-toggle="tab">Pie
                             Chart</a></li>
                         <li role="presentation"><a href="#bubbleChart" aria-controls="bubblechart" role="tab"
@@ -471,7 +471,7 @@
 
                     </ul>
 
-                    <div id="1D" style="background-color: #16a085;color: cornsilk;">
+                    <div id="1D" style="display:none; background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
                         <input type="radio" id="gender_bar" name="bar_x_met" checked=true ng-click="filterbarchart('gender','x')"/>
                         <label>Gender&nbsp;&nbsp;</label>
@@ -484,7 +484,7 @@
                         <label>Total</label>
                         -->
                     </div>
-                    <div id="1M" style="background-color: #16a085;color: cornsilk;">
+                    <div id="1M" style="display:none; background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
                         <input type="radio" id="tweet_bar" name="bar_y_met" checked=true ng-click="filterbarchart('tweet_count','y')"/>
                         <label>Tweet&nbsp;&nbsp;</label>
@@ -494,7 +494,7 @@
                         <label>ImpactFactor</label>
                     </div>
 
-                    <div id="2D" style="display:none; background-color: #16a085;color: cornsilk;">
+                    <div id="2D" style="background-color: #16a085;color: cornsilk;">
                         <label>&nbsp;&nbsp;&nbsp;Change Metrics:&nbsp;&nbsp;</label>
                         <input type="radio" checked=true id="total_line" name="line_met" onclick="check_x_line('total')"/>
                         <label>Total&nbsp;&nbsp;</label>
@@ -517,13 +517,13 @@
                     <!-- Tab panes -->
                     <div id="container1" style="margin:8px;">
                         <div class="tab-content" id="viz">
-                            <div role="tabpanel" class="tab-pane active" id="barChart" style="position: relative;left:0%; top: 0%">
+                            <div role="tabpanel" class="tab-pane" id="barChart" style="position: relative;left:0%; top: 0%">
                                 <div bar-chart
                                      style="position: relative;left:0%; top: 0%"
                                      id="brchart"></div>
                             </div>
 
-                            <div role="tabpanel" class="tab-pane" id="lineChart">
+                            <div role="tabpanel" class="tab-pane active" id="lineChart">
                                 <div style="position: relative;float: right;width:10%;border: 2px solid royalblue">
                                     <div style="position: relative;background-color:green;color:white" align="right" ng-show="totalbool">Total</div>
                                     <div style="position: relative;background-color:blue;color: white" align="right" ng-show="genderbool">Male</div>
@@ -537,7 +537,7 @@
                                      id="lnchart"></div>
                             </div>
                             <div role="tabpanel" class="tab-pane" id="pieChart">
-                                <div id="piedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>
+                                <!--<div id="piedim" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3d" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;D</span></a></div>-->
                                 <br>
                                 <br>
                                 <!--<div id="piemeasure" style="position: relative;left: 97%;width:25px;background-color:white;border-radius: 50%;border: 2px solid royalblue"><a data-placement="left" data-toggle="popover3m" data-container="body" data-trigger="focus"  type="button" data-html="true" href="#" ><span style="font-size: large"title="Data Filter">&nbsp;M</span></a></div>-->

@@ -10,8 +10,8 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
             var padding = 0;
 
             // canvas resolution
-            var width = 800,
-                height = 600;
+            var width = 1000,
+                height = 1200;
 
             //getting d3 window in d3
             var d3 = $window.d3;
@@ -29,7 +29,7 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
             // projection-settings for mercator
             var projection = d3.geo.mercator()
                             .scale(100)
-                            .center([0, 30])
+                            .center([0, 50])
                             .precision(0);
 
             // group the svg layers
@@ -50,8 +50,8 @@ tweetApp.directive('geoChart',['$parse', '$window', function($parse, $window) {
             });
             
             var ws;
-            var str = "ws://" + "localhost" + ":" + "8888" + "/ws";
-            ws = new WebSocket("ws://" + "localhost" + ":" + "8888" + "/ws");
+            var str = "ws://" + "52.34.48.18" + ":" + "8888" + "/ws";
+            ws = new WebSocket(str);
             //document.write(ws);
 
 

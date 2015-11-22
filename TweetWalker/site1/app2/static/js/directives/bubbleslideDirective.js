@@ -113,7 +113,7 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .text(function(d) {return d.gender})     
                     .on("mouseover", function(d,i) {return activateBubble(d,i);});
                  
-                 
+            var color = ["gray", "green", "red"];
             for(var iB = 0; iB < nTop; iB++)
             {
                 var childBubbles = svg.selectAll(".childBubble" + iB)
@@ -128,10 +128,9 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("cy", function(d,i) {return ((h+oR)/3 +        oR*1.5*Math.sin((i-1)*45/180*3.1415926));})
                     .attr("cursor","pointer")
                     .style("opacity", 0.8)
-                    .style("fill", "#eee")
-                    .on("click", function(d,i) {
-                        window.open(d.address);                
-                    })
+                    .style("fill", function(d,i){
+                        return color[i];
+                    })
                     .on("mouseover", function(d,i) {
                         //window.alert("say something");
                     })
@@ -144,15 +143,12 @@ tweetApp.directive('slideChart',['$parse', '$window', function($parse, $window){
                     .attr("y", function(d,i) {return ((h+oR)/3 +        oR*1.5*Math.sin((i-1)*45/180*3.1415926));})
                     .style("opacity", 1)
                     .attr("text-anchor", "middle")
-                    .style("fill", function(d,i) { return colVals(iB); }) // #1f77b4
+                    .style("fill", function(d,i) { return color[i]; })
                     .attr("font-size", 6)
                     .attr("cursor","pointer")
                     .attr("dominant-baseline", "middle")
                     .attr("alignment-baseline", "middle")
-                    .text(function(d) {return d.Sentiment})     
-                    .on("click", function(d,i) {
-                    window.open(d.address);
-                    });
+                    .text(function(d) {return d.Sentiment})
                 }
 
             resetBubbles = function () {
