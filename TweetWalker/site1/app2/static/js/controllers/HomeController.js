@@ -79,7 +79,7 @@ tweetApp.controller('HomeCtrl', ['$scope','$http','$state','$location', function
 angular.element('#submit1').on('click', function () {
     openOverlay('#overlay-inAbox');
     if (typeof(Storage) !== "undefined") {
-        sessionStorage.setItem("searchString", $scope.hashtag);
+        localStorage.setItem("searchString", $scope.hashtag);
     }
 });
 /*
